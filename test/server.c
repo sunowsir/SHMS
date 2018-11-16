@@ -99,6 +99,46 @@ int main(int argc, char **argv) {
                     }
                     
                     printf("Received successfully and already saved.\n");
+                } else if (!strcmp(type, "LOG")) {
+                    char acc_word[10240] = "";
+                    int word_len = recv(son_sock, acc_word, 1024, 0);
+                    if (word_len == 0) {
+                        break;
+                    }
+                    char log_name[1000] = "";
+                    strcpy(log_name, "./");
+                    strcat(log_name, fromip);
+                    strcat(log_name, "/");
+                    int fname_len = strlen(acc_word);
+                    for (int i = strlen(acc_word) - 1; i >= 0;i--) {
+                        if (acc_word[i] == '\n') {
+                            break;
+                        }
+                        fname_len--;
+                    }
+                    int temp = strlen(log_name);
+                    for (int i = fname_len; i < strlen(acc_word); i++) {
+                        log_name[temp] = acc_word[i];
+                        temp++;
+                    }
+                    char log_info[10240] = "";
+                    strncpy(log_info, acc_word, fname_len);
+                    printf("%s >> %s\n", log_info, log_name);
+                    //printf("From:[%s] Message:%s\n", fromip, acc_word);
+                    
+                    // make directory.
+                    if (access(fromip, 0) == -1) {
+                        
+                        if (mkdir(fromip, S_IRWXU|S_IRWXG|S_IRWXO) == -1) {
+                            perror("Mkdir133");
+                            exit(1);
+                        }
+                    }
+                    
+                    FILE *fp = fopen(log_name, "a");
+                    fseek(fp, 0, SEEK_END);
+                    fwrite(log_info, sizeof(char), strlen(log_info), fp);
+                    fclose(fp);
                 } else {
                     char acc_word[10240] = "";
                     int word_len = recv(son_sock, acc_word, 1024, 0);
