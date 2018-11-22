@@ -69,7 +69,9 @@ void *getIP(void *None) {
         }
         
         int sockSon = accept(sockFd, (struct sockaddr *)&addrSon, &addrSonLen);
-        printf("have a servse already connect to Master!\n");
+        char IP[20] = {'0'};
+        sockGetFromIP(IP, (struct sockaddr_in *)&addrSon);
+        printf("Server %s already connect to Master!\n", IP);
         linkInsert(minLenList, sockSon, 0);
     }
     close(sockFd);
