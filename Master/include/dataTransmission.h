@@ -9,7 +9,11 @@
 #ifndef _DATATRANSMISSION_H
 #define _DATATRANSMISSION_H
 
+#include "./LinkList.h"
+#include "../../includeShare/Write_Pi_Log.h"
+#include "../../includeShare/Get_conf.h"
 #include "../../includeShare/needHead.h"
+#include "../../includeShare/PackageFrame.h"
 
 void *dataTransmission(void *);
 

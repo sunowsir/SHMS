@@ -5,7 +5,7 @@
 	> Created Time: 2018年09月23日 星期日 16时21分22秒
  ************************************************************************/
 
-#include "head.h"
+#include "../includeShare/needHead.h"
 
 int main (int argc, char **argv) {
 
@@ -13,6 +13,7 @@ int main (int argc, char **argv) {
     int Port;
     IP = argv[1];
     sscanf(argv[2], "%d", &Port);
+    /*
     while (1) {
         printf("TYPE:");
         scanf("%s", type);
@@ -22,6 +23,7 @@ int main (int argc, char **argv) {
             printf("TYPE ERROR !\n");
         }
     }
+    */
     
     // 创建sockaddr_in　结构体
     struct sockaddr_in  caddr;
@@ -48,7 +50,7 @@ int main (int argc, char **argv) {
         perror("Send");
         exit(1);
     }
-
+/*
     if (!strcmp(type, "STDIO")) {
         printf("TYPE:[STDOUT]\n");
         char word[10240] = "";
@@ -158,7 +160,7 @@ int main (int argc, char **argv) {
             }
         }
     }
-
+*/
     printf("Already Exit.\n");
 
     close(sock);

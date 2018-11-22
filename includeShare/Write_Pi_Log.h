@@ -11,6 +11,6 @@
 
 #include "./needHead.h"
 
-int Write_Pi_Log(char *, const char *, ...);
+int writePiLog(const char *, char * logInfo);
 
 #endif

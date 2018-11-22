@@ -12,8 +12,8 @@
 #include "../../includeShare/needHead.h"
 
 typedef struct LinkNode {
-    char *IP;
-    int Port;
+    // char *IP;
+    int sockFd;
     struct LinkNode *next;
 } LinkNode;
 
@@ -22,14 +22,18 @@ typedef struct LinkList {
     int length;
 } LinkList;
 
-LinkList *init();
+LinkList *linkInit();
 
-LinkNode *getNewNode(const char * /* IP */ , int /* Port */);
+LinkNode *linkGetNewNode(/* char *, */ int /* Port */);
 
-void insert(LinkList *, const char * /* IP */ , int /* Port */, int);
+void linkInsert(LinkList *, /* char *, */ int /* Port */, int);
 
-void erase(LinkList *, int);
+void linkErase(LinkList *, LinkNode *);
 
-void clear(LinkList *);
+/* return : success(0), false(1) */
+
+int linkSearch(LinkList *, /* const char * */ int);
+
+void linkClear(LinkList *);
 
 #endif

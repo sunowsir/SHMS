@@ -18,28 +18,35 @@ int masterConnect() {
         return 1;
     }
     int MaxNum = StrtoInt(threadNum);
-    pthread_t thread[MaxNum];
-    LinkList *list[MaxNum];
     free(threadNum);
 
-    getAllIP(list, MaxNum);  
+    LinkList *list[MaxNum];
 
     for (int i = 0; i < MaxNum; i++) {
-        
-        /* Create thread. */
-        
-        if (pthread_create(&thread[i], NULL, dataTransmission, (void *)&i)) {
+        list[i] = linkInit();
+    }
+    
+    /* 开启子线程，在子线程中开启socket服务，监控上线服务器，存储连接套接字。*/
+
+    pthread_t listenThread = listenGetIP(list, MaxNum);
+
+    /* 创建指定数量线程，将存储服务器信息的链表作为参数传递给dataTransmission函数。*/
+
+    pthread_t thread[MaxNum];
+    for (int i = 0; i < MaxNum; i++) {
+        if (pthread_create(&thread[i], NULL, dataTransmission, (void *)list[i])) {
             perror("pthread_create error");
             return 1;
         }
     }
-    
-    /*   */
-    
     for (int i = 0; i < MaxNum; i++) {
         pthread_join(thread[i], NULL);
     }
-    pthread_exit(NULL); 
     
+    pthread_join(listenThread, NULL);
+    pthread_exit(NULL); 
     return 0;
 }
+
+
+

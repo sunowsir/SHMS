@@ -8,57 +8,54 @@
 
 #include "./LinkList.h"
 
-LinkList *init() {
+LinkList *linkInit() {
     LinkList *p = (LinkList *)malloc(sizeof(LinkList));
     p->head.next = NULL;
     p->length = 0;
     return p;
 }
 
-LinkNode *getNewNode(const char *IP, int Port) {
+LinkNode *linkGetNewNode(/* char *IP, */int sockFd) {
     LinkNode *p = (LinkNode *)malloc(sizeof(LinkNode));
-    // p->IP = (char *)malloc(sizeof(char) * 20);
-    p->IP = strdup(IP);
-    p->Port = Port;
+    // p->IP = strdup(IP);
+    p->sockFd = sockFd;
     p->next = NULL;
     return p;
 }
 
-void insert(LinkList *l, const char *IP, int Port, int ind) {
-    /* 创建虚拟节点 */
+void linkInsert(LinkList *l, /* char *IP, */ int sockFd, int ind) {
     LinkNode *p = &(l->head);
-
-    /* 找到需要插入的位置的前一个节点 */
     while (ind--) {
         p = p->next;
         if (p == NULL) {
             return ;
         }
     }
-
-    /* 创建一个新的节点 */ 
-    LinkNode *insert_node = getNewNode(IP, Port);
-
-    /* 让新节点的next指向虚拟节点的下一个节点，更新头结点，让头结点的next指向链表头 */
+    LinkNode *insert_node = linkGetNewNode(sockFd);
     insert_node->next = p->next;
     p->next = insert_node;
-
-    /* 链表长度加1 */
     l->length += 1;
-
     return ;
 }
 
 // delete
-void erase(LinkList *l, int ind) {
+void linkErase(LinkList *l, LinkNode *needDelete) {
     LinkNode *p = &(l->head);
+    
+    while (p->next) {
+        if (p->next == needDelete) {
+            break;
+        }
+    }
+    
+    /*
     while(ind--) {
-        free(p->IP);
         p = p->next;
         if (p == NULL) {
             return ;
         }
     }
+    */
     if (p->next == NULL) {
         return ;
     }
@@ -69,7 +66,7 @@ void erase(LinkList *l, int ind) {
     return ;
 }
 
-void clear(LinkList *l) {
+void linkClear(LinkList *l) {
     if (l->head.next == NULL) {
         return ;
     }
@@ -81,6 +78,17 @@ void clear(LinkList *l) {
     }
     free(l);
     return ;
+}
+
+int search(LinkList *list, /* const char *IP */int sockFd) {
+    LinkNode *currentNode = list->head.next;
+    while (currentNode) {
+        if (/* !strcmp(currentNode->IP, IP) */ currentNode->sockFd == sockFd) {
+            return 0;
+        }
+        currentNode = currentNode->next;
+    }
+    return 1;
 }
 
 // void output(LinkList *l) {

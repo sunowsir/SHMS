@@ -44,12 +44,3 @@ char *getConf(const char *needVar, char *confPath) {
 
     return (!strcmp(varValue, "") ? NULL : varValue);
 }
-
-int main(int argc, char **argv) {
-    char path[] = "/home/sunowsir/1.Learning/4.project/2.Socket/test.conf";
-    char *var = argv[1];
-    char *ret = getConf(var, path);
-    printf("%s", ret);
-    free(ret);
-    return 0;
-}
