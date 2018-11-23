@@ -59,9 +59,10 @@ void *getIP(void *None) {
         LinkList *minLenList = arg.list[0];
         int nowConnectNum = arg.list[0]->length;
         for (int i = 1; i < arg.listNum; i++) {
-            // nowConnectNum += arg.list[i]->length;
+            nowConnectNum += arg.list[i]->length;
             minLenList = (arg.list[i]->length < minLenList->length ? arg.list[i] : minLenList);
         }
+        printf("Now connect total : %d\n", nowConnectNum);
 
         if (nowConnectNum >= connectMax) {
             sleep(1);
@@ -69,10 +70,13 @@ void *getIP(void *None) {
         }
         
         int sockSon = accept(sockFd, (struct sockaddr *)&addrSon, &addrSonLen);
+        if (sockSon < 0) {
+            break;
+        }
         char IP[20] = {'0'};
         sockGetFromIP(IP, (struct sockaddr_in *)&addrSon);
         printf("Server %s already connect to Master!\n", IP);
-        linkInsert(minLenList, sockSon, 0);
+        linkInsert(minLenList, sockSon);
     }
     close(sockFd);
     return NULL;

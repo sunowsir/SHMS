@@ -26,7 +26,7 @@ LinkList *linkInit();
 
 LinkNode *linkGetNewNode(/* char *, */ int /* Port */);
 
-void linkInsert(LinkList *, /* char *, */ int /* Port */, int);
+void linkInsert(LinkList *, /* char *, */ int /* Port */);
 
 void linkErase(LinkList *, LinkNode *);
 

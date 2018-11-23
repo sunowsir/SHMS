@@ -24,4 +24,19 @@
 
 #define MAXBUFF 1024
 
+#define CPU_INFO 100
+#define DISK_INFO 101
+#define MALIPS_INFO 102
+#define MEM_INFO 103
+#define SYS_INFO 104
+#define USER_INFO 105
+#define CLOSE_NOW 106
+
+#define CPU_WARN 200
+#define DISK_WARN 201
+#define MALIPS_WARN 202
+#define MEM_WARN 203
+#define SYS_WARN 204
+#define USER_WARN 205
+
 #endif

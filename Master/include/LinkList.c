@@ -23,14 +23,13 @@ LinkNode *linkGetNewNode(/* char *IP, */int sockFd) {
     return p;
 }
 
-void linkInsert(LinkList *l, /* char *IP, */ int sockFd, int ind) {
+void linkInsert(LinkList *l, /* char *IP, */ int sockFd) {
     LinkNode *p = &(l->head);
-    while (ind--) {
+    
+    while (p->next) {
         p = p->next;
-        if (p == NULL) {
-            return ;
-        }
     }
+    
     LinkNode *insert_node = linkGetNewNode(sockFd);
     insert_node->next = p->next;
     p->next = insert_node;
