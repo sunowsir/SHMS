@@ -6,7 +6,7 @@
 * Created Time: 2018年11月14日 星期三 17时35分43秒
 */
 
-#include "./dataTransmission.h" 
+#include "../include/dataTransmission.h" 
 
 int recvData(int sockFd) {
     int recvRet = 1;
@@ -15,7 +15,7 @@ int recvData(int sockFd) {
         for (int i = 0; i < 6; i++) {
             tag_info += i;
             if (send(sockFd, &tag_info, sizeof(int), 0) < 0) {
-                perror("send INFO error");
+                perror("recvData : send INFO error");
                 return 1;
             }
             
@@ -24,7 +24,7 @@ int recvData(int sockFd) {
             Package *pack = PackageInit();
             recvRet = recv(sockFd, pack, sizeof(Package), 0);
             if(recvRet == -1) {
-                perror("recvData error");
+                perror("recvData : recv Package error");
                 return 1;
             } else if (recvRet == 0) {
                 break;
@@ -36,7 +36,7 @@ int recvData(int sockFd) {
             char *data = (char *)calloc(sizeof(char), (pack->dataSize));
             recvRet = recv(sockFd, data, pack->dataSize, 0);
             if (recvRet == -1) {
-                perror("recvData error");
+                perror("recvData : recv data error");
                 return 1;
             } else if (recvRet == 0) {
                 break;

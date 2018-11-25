@@ -9,6 +9,7 @@
 #ifndef _MAINSERVER_H
 #define _MAINSERVER_H
 
+#include "./heartBeat.h"
 #include "../../includeShare/needHead.h"
 
 /* return : success(0), false(1). */

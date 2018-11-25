@@ -9,7 +9,7 @@
 #ifndef _LINKLIST_H
 #define _LINKLIST_H
 
-#include "../../includeShare/needHead.h"
+#include "../../Share/include/needHead.h"
 
 typedef struct LinkNode {
     // char *IP;

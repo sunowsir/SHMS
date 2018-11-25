@@ -10,10 +10,10 @@
 #define _DATATRANSMISSION_H
 
 #include "./LinkList.h"
-#include "../../includeShare/Write_Pi_Log.h"
-#include "../../includeShare/Get_conf.h"
-#include "../../includeShare/needHead.h"
-#include "../../includeShare/PackageFrame.h"
+#include "../../Share/include/Write_Pi_Log.h"
+#include "../../Share/include/Get_conf.h"
+#include "../../Share/include/needHead.h"
+#include "../../Share/include/PackageFrame.h"
 
 void *dataTransmission(void *);
 

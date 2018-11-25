@@ -5,7 +5,7 @@
 	> Created Time: 2018年09月30日 星期日 10时26分19秒
  ************************************************************************/
 
-#include "Get_conf.h"
+#include "../include/Get_conf.h"
 
 char *getConf(const char *needVar, char *confPath) {
     FILE *fp = fopen(confPath, "r");

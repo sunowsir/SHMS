@@ -6,7 +6,7 @@
  * Created Time: 2018年11月20日 星期二 20时36分20秒
  */
 
-#include "./PackageFrame.h"
+#include "../include/PackageFrame.h"
 
 Package *PackageInit() {
     Package *p = (Package *)malloc(sizeof(Package));

@@ -10,11 +10,11 @@
 #define _MAINMASTER_H
 
 #include "./LinkList.h"
-#include "./lisenGetIP.h"
+#include "./CreateConnect.h"
 #include "./dataTransmission.h"
-#include "../../includeShare/needHead.h"
-#include "../../includeShare/Get_conf.h"
-#include "../../includeShare/StrtoInt.h"
+#include "../../Share/include/needHead.h"
+#include "../../Share/include/Get_conf.h"
+#include "../../Share/include/StrtoInt.h"
 
 int masterConnect();
 

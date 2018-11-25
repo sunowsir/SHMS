@@ -5,7 +5,7 @@
 	> Created Time: 2018年09月30日 星期日 16时36分33秒
  ************************************************************************/
 
-#include "./Write_Pi_Log.h"
+#include "../include/Write_Pi_Log.h"
 
 int writePiLog(const char *logPath, char *logInfo) {
     FILE *fp = fopen(logPath, "a");

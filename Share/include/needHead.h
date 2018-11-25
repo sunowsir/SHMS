@@ -9,6 +9,7 @@
 #ifndef _NEEDHEAD_H
 #define _NEEDHEAD_H
 
+#include <time.h>
 #include <wait.h>
 #include <errno.h>
 #include <stdio.h>

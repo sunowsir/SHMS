@@ -6,7 +6,7 @@
 * Created Time: 2018年11月13日 星期二 23时15分14秒
 */
 
-#include "./StrtoInt.h" 
+#include "../include/StrtoInt.h" 
 
 int StrtoInt(char *str) {
     if (!strcmp(str, "")) {

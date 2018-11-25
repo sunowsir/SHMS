@@ -6,7 +6,7 @@
 * Created Time: 2018年11月16日 星期五 16时37分43秒
 */
 
-#include "./lisenGetIP.h"
+#include "../include/CreateConnect.h"
 
 typedef struct args {
     LinkList **list;
@@ -14,7 +14,7 @@ typedef struct args {
 } Args;
 Args arg;
 
-void *getIP(void *None) {
+void *startListen(void *None) {
     printf("running getIP():\n");
     
     /* 从配置文件中获取本机IP  */
@@ -82,13 +82,13 @@ void *getIP(void *None) {
     return NULL;
 }
 
-pthread_t listenGetIP(LinkList **list, int num) {
+pthread_t CreateConnect(LinkList **list, int num) {
     printf("runing listenGetIP():\n");
     pthread_t thread;
     arg.list = list;
     arg.listNum = num;
 
-    if (pthread_create(&thread, NULL, (void *)getIP, NULL)) {
+    if (pthread_create(&thread, NULL, (void *)startListen, NULL)) {
         perror("listenGetIP : \033[1;31mcreate thread error\033[0m");
         return 1;
     }

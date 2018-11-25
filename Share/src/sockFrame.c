@@ -6,7 +6,7 @@
 * Created Time: 2018年11月16日 星期五 16时13分57秒
 */
 
-#include "sockFrame.h"
+#include "../include/sockFrame.h"
 
 int sockServer(char *IP, int Port) {
     /* 创建 sockaddr_in 结构体 */
@@ -22,12 +22,12 @@ int sockServer(char *IP, int Port) {
 
     if (bind(sockFd, (struct sockaddr*)&saddr, sizeof(saddr)) < 0) {
         perror("sock Frame(sockServer) : \033[1;31mBind error\033[0m");
-        return 1;
+        return -1;
     }
 
     if (listen(sockFd, 20) < 0) {
         perror("sock Frame(sockServer) : \033[1;31mListen error\033[0m");
-        return 1;
+        return -1;
     }
     return sockFd;
 }
@@ -47,12 +47,12 @@ int sockClient(char *IP, int Port) {
     
     if(inet_pton(AF_INET, IP, &caddr.sin_addr) <= 0) {
         perror("sock Frame(sockClient) : \033[1;31mInet_pton error\033[0m");
-        return 1;
+        return -1;
     }
 
     if (connect(sockFd, (struct sockaddr*)&caddr, sizeof(caddr)) < 0) {
         perror("sock Frame(sockClient) : \033[1;31mConnect error\033[0m");
-        return 1;
+        return -1;
     }
     return sockFd;
 }
@@ -60,8 +60,20 @@ int sockClient(char *IP, int Port) {
 int sockGetFromIP(char *fromIP, struct sockaddr_in *sonaddr) {
     if (inet_ntop(AF_INET, (void *)&(sonaddr->sin_addr), fromIP, 16) == NULL) {
         perror("sock Frame(sockGetFromIP) : \033[1;31minet_ntop error\033[0m");
-        return 1;
+        return -1;
     }
     return 0;
 }
+
+int recData(int sock, char **buf, int bufLen) {
+    int status = recv(sock, *buf, bufLen, 0);
+    return (status == 0 ? 1 : 0);
+}
+
+
+int sendData(int sock, char *buf) {
+    int bufLen = (int)strlen(buf);
+    return (send(sock, buf, bufLen, 0) < 0 ? 1 : 0);
+}
+
 

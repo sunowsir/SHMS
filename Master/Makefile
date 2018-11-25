@@ -1,45 +1,61 @@
 CC=gcc
-
 CFLAGS=-g -Wall -o 
 
-BUILDDIR=./Build/
+NOW_DIR=$(shell pwd)/
+FATHER_DIR=$(shell echo `cd ../ && pwd`)
+BUILD_DIR=${NOW_DIR}/Build/
+HEAD_DIR=${NOW_DIR}/include/
+CODE_DIR=${NOW_DIR}/src/
+SHARE_HEAD_DIR=${FATHER_DIR}/Share/include/
+SHARE_CODE_DIR=${FATHER_DIR}/Share/src/
 
-Master_RELY=${BUILDDIR}PackageFrame.o  ${BUILDDIR}Write_Pi_Log.o  ${BUILDDIR}sockFrame.o  ${BUILDDIR}Get_conf.o ${BUILDDIR}StrtoInt.o  ${BUILDDIR}LinkList.o  ${BUILDDIR}listenGetIP.o  ${BUILDDIR}dataTransmission.o  ${BUILDDIR}masterConnect.o  ${BUILDDIR}mainMaster.o 
+MASTER_RELY = ${BUILD_DIR}PackageFrame.o \
+			${BUILD_DIR}Write_Pi_Log.o \
+			${BUILD_DIR}sockFrame.o \
+			${BUILD_DIR}Get_conf.o \
+			${BUILD_DIR}StrtoInt.o \
+			${BUILD_DIR}LinkList.o \
+			${BUILD_DIR}CreateConnect.o \
+			${BUILD_DIR}dataTransmission.o \
+			${BUILD_DIR}masterConnect.o \
+			${BUILD_DIR}mainMaster.o 
 
 .PHONY: clean
 
-Master : ${Master_RELY}
-	${CC} ${CFLAGS} Master ${Master_RELY} -lpthread
+Master : ${MASTER_RELY}
+	${CC} ${CFLAGS} Master ${MASTER_RELY} -lpthread
 
-${BUILDDIR}mainMaster.o : ./mainMaster.c ./include/mainMaster.h 
-	${CC} -c ${CFLAGS} ${BUILDDIR}mainMaster.o mainMaster.c
+${BUILD_DIR}mainMaster.o : ${NOW_DIR}mainMaster.c ${HEAD_DIR}mainMaster.h 
+	${CC} -c ${CFLAGS} ${BUILD_DIR}mainMaster.o ${NOW_DIR}mainMaster.c
 
-${BUILDDIR}masterConnect.o : ./include/masterConnect.c ./include/mainMaster.h
-	${CC} -c ${CFLAGS} ${BUILDDIR}masterConnect.o ./include/masterConnect.c -lpthread
+${BUILD_DIR}masterConnect.o : ${CODE_DIR}masterConnect.c ${HEAD_DIR}mainMaster.h
+	${CC} -c ${CFLAGS} ${BUILD_DIR}masterConnect.o ${CODE_DIR}masterConnect.c -lpthread
 
-${BUILDDIR}listenGetIP.o : include/lisenGetIP.c include/lisenGetIP.h 
-	${CC} -c ${CFLAGS} ${BUILDDIR}listenGetIP.o ./include/lisenGetIP.c -lpthread
+${BUILD_DIR}CreateConnect.o : ${CODE_DIR}CreateConnect.c ${HEAD_DIR}CreateConnect.h 
+	${CC} -c ${CFLAGS} ${BUILD_DIR}CreateConnect.o ${CODE_DIR}CreateConnect.c -lpthread
 
-${BUILDDIR}dataTransmission.o : ./include/dataTransmission.c ./include/dataTransmission.h 
-	${CC} -c ${CFLAGS} ${BUILDDIR}dataTransmission.o ./include/dataTransmission.c 
+${BUILD_DIR}dataTransmission.o : ${CODE_DIR}dataTransmission.c ${HEAD_DIR}dataTransmission.h 
+	${CC} -c ${CFLAGS} ${BUILD_DIR}dataTransmission.o ${CODE_DIR}dataTransmission.c 
 
-${BUILDDIR}LinkList.o : ./include/LinkList.c ./include/LinkList.h
-	${CC} -c ${CFLAGS} ${BUILDDIR}LinkList.o ./include/LinkList.c 
+${BUILD_DIR}LinkList.o : ${CODE_DIR}LinkList.c ${HEAD_DIR}LinkList.h
+	${CC} -c ${CFLAGS} ${BUILD_DIR}LinkList.o ${CODE_DIR}LinkList.c 
 
-${BUILDDIR}Get_conf.o : ../includeShare/Get_conf.c ../includeShare/Get_conf.h
-	${CC} -c ${CFLAGS} ${BUILDDIR}Get_conf.o ../includeShare/Get_conf.c 
+${BUILD_DIR}Get_conf.o : ${SHARE_CODE_DIR}Get_conf.c ${SHARE_HEAD_DIR}Get_conf.h
+	${CC} -c ${CFLAGS} ${BUILD_DIR}Get_conf.o ${SHARE_CODE_DIR}Get_conf.c 
 
-${BUILDDIR}StrtoInt.o : ../includeShare/StrtoInt.c ../includeShare/StrtoInt.h
-	${CC} -c ${CFLAGS} ${BUILDDIR}StrtoInt.o ../includeShare/StrtoInt.c 
+${BUILD_DIR}StrtoInt.o : ${SHARE_CODE_DIR}StrtoInt.c ${SHARE_HEAD_DIR}StrtoInt.h
+	${CC} -c ${CFLAGS} ${BUILD_DIR}StrtoInt.o ${SHARE_CODE_DIR}StrtoInt.c 
 
-${BUILDDIR}sockFrame.o : ../includeShare/sockFrame.c ../includeShare/sockFrame.h
-	${CC} -c ${CFLAGS} ${BUILDDIR}sockFrame.o ../includeShare/sockFrame.c 
+${BUILD_DIR}sockFrame.o : ${SHARE_CODE_DIR}sockFrame.c ${SHARE_HEAD_DIR}sockFrame.h
+	${CC} -c ${CFLAGS} ${BUILD_DIR}sockFrame.o ${SHARE_CODE_DIR}sockFrame.c 
 
-${BUILDDIR}Write_Pi_Log.o : ../includeShare/Write_Pi_Log.c ../includeShare/Write_Pi_Log.h
-	${CC} -c ${CFLAGS} ${BUILDDIR}Write_Pi_Log.o ../includeShare/Write_Pi_Log.c
+${BUILD_DIR}Write_Pi_Log.o : ${SHARE_CODE_DIR}Write_Pi_Log.c ${SHARE_HEAD_DIR}Write_Pi_Log.h
+	${CC} -c ${CFLAGS} ${BUILD_DIR}Write_Pi_Log.o ${SHARE_CODE_DIR}Write_Pi_Log.c
 
-${BUILDDIR}PackageFrame.o : ../includeShare/PackageFrame.c ../includeShare/PackageFrame.h
-	${CC} -c ${CFLAGS} ${BUILDDIR}PackageFrame.o ../includeShare/PackageFrame.c
+${BUILD_DIR}PackageFrame.o : ${SHARE_CODE_DIR}PackageFrame.c ${SHARE_HEAD_DIR}PackageFrame.h
+	${CC} -c ${CFLAGS} ${BUILD_DIR}PackageFrame.o ${SHARE_CODE_DIR}PackageFrame.c
 
 clean : 
-	rm -rf Master ${Master_RELY}
+	rm -rf Master ${MASTER_RELY}
+
+
