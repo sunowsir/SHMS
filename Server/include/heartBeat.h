@@ -10,10 +10,10 @@
 #define _HEARTBEAT_H
 
 #include "./dataTransmission.h"
-#include "../../includeShare/StrtoInt.h"
-#include "../../includeShare/Get_conf.h"
-#include "../../includeShare/needHead.h"
-#include "../../includeShare/sockFrame.h"
+#include "../../Share/include/StrtoInt.h"
+#include "../../Share/include/Get_conf.h"
+#include "../../Share/include/needHead.h"
+#include "../../Share/include/sockFrame.h"
 
 int heartBeat();
 
