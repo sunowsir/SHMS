@@ -14,6 +14,8 @@
 
 /* The space pointed to by the character pointer returned by this function needs to call ‘free’ release. If the fetch fails, it returns ‘NULL’.  */
 
+/* return : success(data string), false(NULL) */
+
 char *getScriptRunInfo(int /* Signifier */);
 
 #endif

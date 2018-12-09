@@ -29,6 +29,9 @@ int masterConnect() {
     /* 开启子线程，在子线程中开启socket服务，监控上线服务器，存储连接套接字。*/
     
     pthread_t listenThread = CreateConnect(list, MaxNum);
+    if (listenThread  == -1)  {
+        exit(1);
+    }
     
     /* 创建指定数量线程，将存储服务器信息的链表作为参数传递给dataTransmission函数。*/
     

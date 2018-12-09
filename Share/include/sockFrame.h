@@ -18,14 +18,14 @@ int sockServer(char * /* IP */ , int /* Port */ );
 int sockClient(char * /* IP */ ,int /* Port */);
 
 int sockGetFromIP(char * /* save IP */, struct sockaddr_in *);
-
-/* return : success(0), false(1) */
-
-int recData(int /* sock */ , char ** /* buf */ , int /* bufLen */ );
-
-/* return : success(1), false(0). */
-
-int sendData(int /* sock */ , char * /* buf */ );
-
+// 
+// /* return : success(0), false(1) */
+// 
+// int sockRecData(int /* sock */ , char * /* buf */ , int /* bufLen */ );
+// 
+// /* return : success(0), false(1). */
+// 
+// int sockSendData(int /* sock */ , char * /* buf */ );
+// 
 #endif
 

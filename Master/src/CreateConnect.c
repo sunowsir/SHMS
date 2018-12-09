@@ -90,7 +90,7 @@ pthread_t CreateConnect(LinkList **list, int num) {
 
     if (pthread_create(&thread, NULL, (void *)startListen, NULL)) {
         perror("listenGetIP : \033[1;31mcreate thread error\033[0m");
-        return 1;
+        return -1;
     }
 
     return thread;

@@ -15,8 +15,9 @@
 #include "../../Share/include/needHead.h"
 #include "../../Share/include/sockFrame.h"
 
-/* return : success(0), false(1).  */
+/* return : success(0), false(-1).  */
 
 pthread_t CreateConnect(LinkList **, int);
 
 #endif
+

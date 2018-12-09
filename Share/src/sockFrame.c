@@ -65,15 +65,16 @@ int sockGetFromIP(char *fromIP, struct sockaddr_in *sonaddr) {
     return 0;
 }
 
-int recData(int sock, char **buf, int bufLen) {
-    int status = recv(sock, *buf, bufLen, 0);
+/*
+int sockRecData(int sock, char *buf, int bufLen) {
+    int status = recv(sock, buf, bufLen, 0);
     return (status == 0 ? 1 : 0);
 }
 
 
-int sendData(int sock, char *buf) {
+int sockSendData(int sock, char *buf) {
     int bufLen = (int)strlen(buf);
     return (send(sock, buf, bufLen, 0) < 0 ? 1 : 0);
 }
 
-
+*/
