@@ -9,6 +9,7 @@
 #ifndef _GETSCRIPTRUNINFO_H
 #define _GETSCRIPTRUNINFO_H
 
+#include "./getInfo.h"
 #include "../../Share/include/needHead.h"
 #include "../../Share/include/Get_conf.h"
 

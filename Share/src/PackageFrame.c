@@ -22,6 +22,7 @@ Package *PackageCreate(char *IP, int dataType, int dataSize) {
     pack->dataType = dataType;
     // pack->IP = strdup(IP);
     strcpy(pack->IP, IP);
+    free(IP);
     return pack;
 }    
 

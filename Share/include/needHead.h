@@ -10,6 +10,7 @@
 #define _NEEDHEAD_H
 
 #include <time.h>
+#include <math.h>
 #include <wait.h>
 #include <errno.h>
 #include <stdio.h>
@@ -23,7 +24,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
-#define MAXBUFF 1024
+#define MAXBUFF 4096
 
 #define CPU_INFO 100
 #define DISK_INFO 101

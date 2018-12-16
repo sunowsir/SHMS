@@ -9,12 +9,15 @@
 #ifndef _MAINSERVER_H
 #define _MAINSERVER_H
 
+#include "./getInfo.h"
 #include "./heartBeat.h"
-#include "../../includeShare/needHead.h"
+#include "../../Share/include/needHead.h"
 
-/* return : success(0), false(1). */
+/* return : success(0), false(-1). */
 
 int ServerConnect();
+
+void *getInfo();
 
 #endif
 

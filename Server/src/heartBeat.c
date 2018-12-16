@@ -10,26 +10,42 @@
 
 void sleepSometime() {
     srand(time(0));
-    sleep ((double)(rand() % 50) / (double)(rand() % 45));
+    
+    /* 从配置文件中读取master最大连接数 */
+    
+    char *strMasterMaxConnectNum = getConf("MasterMaxConnectNum", "./server.conf");
+    if (strMasterMaxConnectNum == NULL) {
+        printf("server.conf \033[1;31merror\033[0m : don't have MasterMaxConnectNum\n");
+    }
+    int MasterMaxConnectNum = StrtoInt(strMasterMaxConnectNum);
+    free(strMasterMaxConnectNum);
+    
+    double sleepTime=fabs((double)(rand() % MasterMaxConnectNum) / 100.0);
+    sleep (sleepTime);
     return ;
 }
 
-int heartBeat() {
+void *heartBeat() {
     /* 读取配置文件获取Master端IP和sock端口 */
     
     char *MasterIP = getConf("MasterIP", "./server.conf");
     if (MasterIP == NULL) {
         printf("server.conf \033[1;31merror\033[0m : don't have MasterIP\n");
+        exit(1);
     }
     
     char *strMasterPort = getConf("MasterPort", "./server.conf");
     if (strMasterPort == NULL) {
         printf("server.conf \033[1;31merror\033[0m : don't have MasterPort\n");
+        exit(1);
     }
     int MasterPort = StrtoInt(strMasterPort);
     free(strMasterPort);
     
     while (1) {
+        /* sleep sometime. */
+        sleepSometime();
+        
         /* 请求连接 */
         
         int sockFd = sockClient(MasterIP, MasterPort);
@@ -40,6 +56,7 @@ int heartBeat() {
             }
             
             /* 通知Master数据传输结束关闭连接 */
+            /* 发送结束码CLOSE_NOW */
             
             int sendClose = CLOSE_NOW;
             if (send(sockFd, &sendClose, sizeof(int), 0) < 0) {
@@ -49,9 +66,8 @@ int heartBeat() {
             }
             close(sockFd);
         }
-        sleepSometime();
     }
-    return 0;
+    return NULL;
 }
 
 

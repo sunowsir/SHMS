@@ -38,7 +38,7 @@ int masterConnect() {
     pthread_t thread[MaxNum];
     for (int i = 0; i < MaxNum; i++) {
         if (pthread_create(&thread[i], NULL, dataTransmission, (void *)list[i])) {
-            perror("pthread_create error");
+            perror("pthread_create dataTransmission");
             return 1;
         }
     }

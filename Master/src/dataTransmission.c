@@ -52,6 +52,27 @@ int recvData(int sockFd) {
             strcpy(logpath, logPath);
             strcpy(logpath, "/");
             strcpy(logpath, pack->IP);
+            strcpy(logPath, "/");
+            switch (pack->dataType) {
+                case 100 : {
+                    strcpy(logPath, "cpu.log");
+                } break;
+                case 101 : {
+                    strcpy(logPath, "disk.log");
+                } break;
+                case 102 : {
+                    strcpy(logPath, "malips.log");
+                } break;
+                case 103 : {
+                    strcpy(logPath, "mem.log");
+                } break;
+                case 104 : {
+                    strcpy(logPath, "sys.log");
+                } break;
+                case 105 : {
+                    strcpy(logPath, "user.log");
+                } break;
+            }
             free(logPath);
             if (writePiLog(logpath, data) == 1) {
                 free(data);
@@ -80,7 +101,6 @@ void *dataTransmission(void *arg) {
     LinkNode *currentNode = list->head.next;
     
     while (1) {
-        // sleep(1.0 + (double)list->length / 1000.0);
         if (list->length == 0) {
             continue;
         }

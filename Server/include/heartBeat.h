@@ -15,7 +15,7 @@
 #include "../../Share/include/needHead.h"
 #include "../../Share/include/sockFrame.h"
 
-int heartBeat();
+void *heartBeat();
 
 #endif
 
