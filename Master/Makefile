@@ -18,9 +18,8 @@ MASTER_RELY = ${BUILD_DIR}PackageFrame.o \
 			${BUILD_DIR}CreateConnect.o \
 			${BUILD_DIR}dataTransmission.o \
 			${BUILD_DIR}masterConnect.o \
+			${BUILD_DIR}getWarningInfo.o \
 			${BUILD_DIR}mainMaster.o 
-
-.PHONY: clean
 
 Master : ${MASTER_RELY}
 	${CC} ${CFLAGS} Master ${MASTER_RELY} -lpthread
@@ -30,6 +29,9 @@ ${BUILD_DIR}mainMaster.o : ${NOW_DIR}mainMaster.c ${HEAD_DIR}mainMaster.h
 
 ${BUILD_DIR}masterConnect.o : ${CODE_DIR}masterConnect.c ${HEAD_DIR}mainMaster.h
 	${CC} -c ${CFLAGS} ${BUILD_DIR}masterConnect.o ${CODE_DIR}masterConnect.c -lpthread
+
+${BUILD_DIR}getWarningInfo.o : ${CODE_DIR}getWarningInfo.c ${HEAD_DIR}getWarningInfo.h
+	${CC} -c ${CFLAGS} ${BUILD_DIR}getWarningInfo.o ${CODE_DIR}getWarningInfo.c -lpthread
 
 ${BUILD_DIR}CreateConnect.o : ${CODE_DIR}CreateConnect.c ${HEAD_DIR}CreateConnect.h 
 	${CC} -c ${CFLAGS} ${BUILD_DIR}CreateConnect.o ${CODE_DIR}CreateConnect.c -lpthread
@@ -54,6 +56,8 @@ ${BUILD_DIR}Write_Pi_Log.o : ${SHARE_CODE_DIR}Write_Pi_Log.c ${SHARE_HEAD_DIR}Wr
 
 ${BUILD_DIR}PackageFrame.o : ${SHARE_CODE_DIR}PackageFrame.c ${SHARE_HEAD_DIR}PackageFrame.h
 	${CC} -c ${CFLAGS} ${BUILD_DIR}PackageFrame.o ${SHARE_CODE_DIR}PackageFrame.c
+
+.PHONY: clean
 
 clean : 
 	rm -rf Master ${MASTER_RELY}

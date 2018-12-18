@@ -5,6 +5,16 @@
 logPath="${1}/ | tr -s '/'";
 scriptPath="$(dirname ${0})";
 
+echo "run_Script_save.sh: logPath(${logPath})"
+exit 0
+
+mkdir ${logPath}cpu/
+mkdir ${logPath}mem/
+mkdir ${logPath}disk/
+mkdir ${logPath}sys/
+mkdir ${logPath}user/
+mkdir ${logPath}malips/
+
 while true;
 do
     cpuLogPath="$(echo "${logPath}cpu/cpu.log" | tr -s '/')";

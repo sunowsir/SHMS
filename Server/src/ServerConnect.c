@@ -11,6 +11,7 @@
 int ServerConnect() {
     /* 运行六个脚本采集数据保存到日志 */
     pthread_t threadGetInfo;
+    printf("ServerConnect(): will run getInfo()\n");
     if (pthread_create(&threadGetInfo, NULL, getInfo, NULL)) {
         perror("pthread_create getInfo");
         return -1;
@@ -18,6 +19,7 @@ int ServerConnect() {
     
     /* 心跳发送数据 */
     pthread_t threadheart;
+    printf("ServerConnect(): will run heartBeat()\n");
     if (pthread_create(&threadheart, NULL, heartBeat, NULL)) {
         perror("pthread_create heartBeat");
         return -1;

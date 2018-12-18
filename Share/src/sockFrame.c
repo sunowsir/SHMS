@@ -34,6 +34,7 @@ int sockServer(char *IP, int Port) {
 
 
 int sockClient(char *IP, int Port) {
+    
     /* 创建sockaddr_in　结构体 */
     struct sockaddr_in  caddr;
 
@@ -45,7 +46,7 @@ int sockClient(char *IP, int Port) {
     /* 创建新的socket */
     int sockFd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
     
-    if(inet_pton(AF_INET, IP, &caddr.sin_addr) <= 0) {
+    if(inet_pton(AF_INET, IP, &caddr.sin_addr) < 0) {
         perror("sock Frame(sockClient) : \033[1;31mInet_pton error\033[0m");
         return -1;
     }

@@ -20,9 +20,8 @@ SERVER_RELY = ${BUILD_DIR}/PackageFrame.o \
 			${BUILD_DIR}/heartBeat.o \
 			${BUILD_DIR}/getScriptRunInfo.o \
 			${BUILD_DIR}/getInfo.o \
+			${BUILD_DIR}/runScriptAndSave.o \
 			${BUILD_DIR}/mainServer.o 
-
-.PHONY: clean
 
 Server : ${SERVER_RELY}
 	${CC} ${CFLAGS} Server ${SERVER_RELY} -lpthread
@@ -38,6 +37,9 @@ ${BUILD_DIR}/getScriptRunInfo.o : ${CODE_DIR}/getScriptRunInfo.c ${HEAD_DIR}/get
 
 ${BUILD_DIR}/ServerConnect.o : ${CODE_DIR}/ServerConnect.c ${HEAD_DIR}/mainServer.h
 	${CC} -c ${CFLAGS} ${BUILD_DIR}/ServerConnect.o ${CODE_DIR}/ServerConnect.c -lpthread
+
+${BUILD_DIR}/runScriptAndSave.o : ${CODE_DIR}/runScriptAndSave.c ${HEAD_DIR}/runScriptAndSave.h
+	${CC} -c ${CFLAGS} ${BUILD_DIR}/runScriptAndSave.o ${CODE_DIR}/runScriptAndSave.c -lpthread
 
 ${BUILD_DIR}/getInfo.o : ${CODE_DIR}/getInfo.c ${HEAD_DIR}/getInfo.h 
 	${CC} -c ${CFLAGS} ${BUILD_DIR}/getInfo.o ${CODE_DIR}/getInfo.c -lpthread
@@ -63,6 +65,9 @@ ${BUILD_DIR}/Write_Pi_Log.o : ${SHARE_CODE_DIR}/Write_Pi_Log.c ${SHARE_HEAD_DIR}
 ${BUILD_DIR}/PackageFrame.o : ${SHARE_CODE_DIR}/PackageFrame.c ${SHARE_HEAD_DIR}/PackageFrame.h
 	${CC} -c ${CFLAGS} ${BUILD_DIR}/PackageFrame.o ${SHARE_CODE_DIR}/PackageFrame.c
 
+.PHONY: clean
+
 clean : 
 	rm -rf Server ${SERVER_RELY}
+
 

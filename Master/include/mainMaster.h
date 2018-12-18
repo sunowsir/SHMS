@@ -11,6 +11,7 @@
 
 #include "./LinkList.h"
 #include "./CreateConnect.h"
+#include "./getWarningInfo.h"
 #include "./dataTransmission.h"
 #include "../../Share/include/needHead.h"
 #include "../../Share/include/Get_conf.h"

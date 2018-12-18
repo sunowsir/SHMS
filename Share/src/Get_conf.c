@@ -39,8 +39,15 @@ char *getConf(const char *needVar, char *confPath) {
             strcpy(varValue, strtok(NULL, "="));
         }
     }
-
+    
+    if (varValue[(int)strlen(varValue) - 1] == ' ' || varValue[(int)strlen(varValue) - 1] == '\n' ) {
+        varValue[(int)strlen(varValue) - 1] = '\0';
+    }
+    
     fclose(fp);
 
     return (!strcmp(varValue, "") ? NULL : varValue);
 }
+
+
+

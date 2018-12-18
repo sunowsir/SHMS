@@ -32,6 +32,12 @@ int masterConnect() {
     if (listenThread  == -1)  {
         exit(1);
     }
+
+    pthread_t warningThread;
+    if (pthread_create(&warningThread, NULL, getWarningInfo, NULL)) {
+        perror("masterConnect.c create thread getWarningInfo:");
+        return 1;
+    }
     
     /* 创建指定数量线程，将存储服务器信息的链表作为参数传递给dataTransmission函数。*/
     
@@ -42,11 +48,13 @@ int masterConnect() {
             return 1;
         }
     }
+    
     for (int i = 0; i < MaxNum; i++) {
         pthread_join(thread[i], NULL);
     }
-    
     pthread_join(listenThread, NULL);
+    pthread_join(warningThread, NULL);
+    
     pthread_exit(NULL); 
     return 0;
 }

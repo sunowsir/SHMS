@@ -17,7 +17,7 @@ int dataTransmission(int sockFd) {
         int recvRet, dataType;
         recvRet = recv(sockFd, &dataType, sizeof(int), 0);
         if (recvRet == -1) {
-            perror("dataTransmission.c : recvRet");
+            perror("dataTransmission.c (recvRet)");
             return -1;
         }
         
@@ -37,18 +37,20 @@ int dataTransmission(int sockFd) {
         
         pack = PackageCreate(localIP, dataType, dataSize);
         if (send(sockFd, pack, sizeof(Package), 0) < 0) {
-            perror("dataTransmission.c : send Package");
+            perror("dataTransmission.c (send Package)");
             return -1;
         }
         
         sleep(0.01);
         
         /* 发送字符串 */
-        if (send(sockFd, sendData, sizeof(char), 0) < 0)  {
-            perror("dataTransmission.c : send Data");
+        if (send(sockFd, sendData, sizeof(char) * (int)strlen(sendData), 0) < 0)  {
+            perror("dataTransmission.c (send Data)");
             return -1;
         }
-        free(sendData);
+        if (sendData != NULL) {
+            free(sendData);
+        }
     }
 
     return 0;

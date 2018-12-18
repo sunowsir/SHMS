@@ -19,8 +19,8 @@ char *getScriptRunInfo(int Signifier) {
         printf("server.conf \033[31;merror\033[0m don't have logPath.\n");
         return NULL;
     }
-    if (logPath[(int)strlen(logPath) - 1] != '/') {
-        logPath = addTailChar(logPath);
+    if (logPath[(int)strlen(logPath) - 1] == '/') {
+        logPath[(int)strlen(logPath) - 1] = '\0';
     }
     
     /* 从配置文件中获取脚本所在位置  */
@@ -30,52 +30,54 @@ char *getScriptRunInfo(int Signifier) {
         printf("server.conf \033[31;merror\033[0m don't have ScriptPath.\n");
         return NULL;
     }
-    if (ScriptPath[(int)strlen(ScriptPath) - 1] != '/') {
-        ScriptPath = addTailChar(ScriptPath);
+    if (ScriptPath[(int)strlen(ScriptPath) - 1] == '/') {
+        ScriptPath[(int)strlen(ScriptPath) - 1] = '\0';
     }
     
     /* 生成执行命令 */
     
-    strcpy(ScriptPath, "getLogHeadInfo.sh");
+    char Cmd[MAXBUFF] = {'0'};
     char tempData[MAXBUFF];
-    strcpy(ScriptPath, " ");
     switch (Signifier) {
         case 100 : {
-            strcpy(logPath, "cpu/");
-            
+            strcpy(logPath + (int)strlen(logPath), "/cpu.log");
         } break;
         case 101 : {
-            strcpy(logPath, "disk/");
-            
+            strcpy(logPath + (int)strlen(logPath), "/disk.log");
         } break;
         case 102 : {
-            strcpy(logPath, "malips/");
-            
+            strcpy(logPath + (int)strlen(logPath), "/malips.log");
         } break;
         case 103 : {
-            strcpy(logPath, "mem/");
-            
+            strcpy(logPath + (int)strlen(logPath), "/mem.log");
         } break;
         case 104 : {
-            strcpy(logPath, "sys/");
-            
+            strcpy(logPath + (int)strlen(logPath), "/sys.log");
         } break;
         case 105 : {
-            strcpy(logPath, "user/");
-            
+            strcpy(logPath + (int)strlen(logPath), "/user.log");
         } break;
     }
-    strcpy(ScriptPath, logPath);
+    strcpy(Cmd, ScriptPath);
+    strcpy(Cmd + (int)strlen(Cmd), "/getLogHeadInfo.sh ");
+    strcpy(Cmd + (int)strlen(Cmd), logPath);
     
     /* 调用脚本执行命令 */
     
-    FILE *fp = popen(ScriptPath, "r");
+    FILE *fp = popen(Cmd, "r");
     fgets(tempData, sizeof(tempData), fp);
     pclose(fp);
-    free(logPath);
-    free(ScriptPath);
+    if (logPath != NULL) {
+        free(logPath);
+    }
+    if (ScriptPath != NULL) {
+        free(ScriptPath);
+    }
+
+    /* 将获得的数据返回 */
     
     char *retData = (char *)malloc(sizeof(char) * (int)strlen(tempData));
     strcpy(retData, tempData);
     return retData;
-} 
+}
+

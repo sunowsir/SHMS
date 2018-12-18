@@ -10,6 +10,7 @@
 #define _GETINFO_H
 
 #include "./sendWarningInfo.h"
+#include "./runScriptAndSave.h"
 #include "../../Share/include/needHead.h"
 
 char *addTailChar(char *);

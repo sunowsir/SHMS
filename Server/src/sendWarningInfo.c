@@ -23,7 +23,9 @@ int sendWarningInfo(char *sendInfo) {
         return -1;
     }
     int MasterWPort = StrtoInt(strMasterWPort);
-    free(strMasterWPort);
+    if (strMasterWPort != NULL) {
+        free(strMasterWPort);
+    }
     int WsockFd = sockClient(MasterIP, MasterWPort);
     if (send(WsockFd, sendInfo, sizeof(char) * (int)strlen(sendInfo), 0) < 0) {
         perror("sendWarningInfo()");

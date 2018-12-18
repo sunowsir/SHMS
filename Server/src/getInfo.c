@@ -8,62 +8,59 @@
 
 #include "../include/getInfo.h"
 
-
-char *addTailChar(char *string)  {
-    char *temp = (char *)malloc(sizeof(char) * ((int)strlen(string)));
-    strcpy(temp, string);
-    free(string);
-    char *retStr = (char *)malloc(sizeof(char) * ((int)strlen(temp) + 1));
-    strcpy(retStr, temp);
-    strcpy(retStr, "/");
-    free(temp);
-    return retStr;
-}
-
 void *getInfo() {
     /* 从配置文件中获取日志文件所在位置 */
     
+    printf("getInfo(): 从配置文件中获取logPath\n");
+
     char *logPath = getConf("logPath", "./server.conf");
     if (logPath == NULL) {
         printf("server.conf \033[31;merror\033[0m don't have logPath.\n");
         return NULL;
     }
-    if (logPath[(int)strlen(logPath) - 1] != '/') {
-        logPath = addTailChar(logPath);
+    if (logPath[(int)strlen(logPath) - 1] == '/') {
+        logPath[(int)strlen(logPath) - 1] = '\0';
     }
     
     /* 从配置文件中获取脚本所在位置  */
+
+    printf("getInfo(): 从配置文件中获取ScriptPath\n");
     
     char *ScriptPath = getConf("ScriptPath", "./server.conf");
     if (ScriptPath == NULL) {
         printf("server.conf \033[31;merror\033[0m don't have ScriptPath.\n");
         return NULL;
     }
-    if (ScriptPath[(int)strlen(ScriptPath) - 1] != '/') {
-        ScriptPath = addTailChar(ScriptPath);
+    if (ScriptPath[(int)strlen(ScriptPath) - 1] == '/') {
+        ScriptPath[(int)strlen(ScriptPath) - 1] = '\0';
     }
     
-    /* 生成命令 */
-    
-    char Cmd[MAXBUFF] = {'0'};
-    strcpy(Cmd, ScriptPath);
-    strcpy(Cmd, "run_Script_save.sh ");
-    strcpy(Cmd, logPath);
-    
-    /* 调用脚本执行命令 */
-    
-    FILE *fp = popen(Cmd, "r");
-    char warning[MAXBUFF] = {'0'};
-    while (strcmp(warning, "ERROR")) {
-        /* 获取警报信息 */
-        fgets(warning, sizeof(warning), fp);
-        if (sendWarningInfo(warning)) {
-            printf("sendWarningInfo \033[1;31merror\033[0m\n");
+    for (int i = 100; i <= 105; i++) {
+        int sleepTime;
+        if (i == 100 || i == 103) {
+            sleepTime = 5;
+        } else if (i == 101 || i == 104 || i == 105) {
+            sleepTime = 60;
+        } else if (i == 102) {
+            sleepTime = 30;
+        }
+        if (monitorHealth(ScriptPath, logPath, i, sleepTime)) {
+            perror("monitorHealth()");
+            if (logPath != NULL) {
+                free(logPath);
+            }
+            if (ScriptPath != NULL) {
+                free(ScriptPath);
+            }
+            return NULL;
         }
     }
-    pclose(fp);
-    free(logPath);
-    free(ScriptPath);
+    if (logPath != NULL) {
+        free(logPath);
+    }
+    if (ScriptPath != NULL) {
+        free(ScriptPath);
+    }
     
     return NULL;
 }
