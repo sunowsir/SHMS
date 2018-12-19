@@ -12,7 +12,7 @@
 #include "../../Share/include/needHead.h"
 
 typedef struct LinkNode {
-    // char *IP;
+    char *IP;
     int sockFd;
     struct LinkNode *next;
 } LinkNode;
@@ -24,9 +24,9 @@ typedef struct LinkList {
 
 LinkList *linkInit();
 
-LinkNode *linkGetNewNode(/* char *, */ int /* Port */);
+LinkNode *linkGetNewNode(char *, int /* Port */);
 
-void linkInsert(LinkList *, /* char *, */ int /* Port */);
+void linkInsert(LinkList *, char *, int /* Port */);
 
 void linkErase(LinkList *, LinkNode *);
 

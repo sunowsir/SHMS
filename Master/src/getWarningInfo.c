@@ -60,11 +60,12 @@ void *getWarningInfo() {
         }
         char *logpath = (char *)malloc(sizeof(char) * ((int)strlen(logPath) + (int)strlen(IP) + 1 + 5 /* 多开5个防止溢出 */ ));
         strcpy(logpath, logPath);
-        strcpy(logpath, "/");
-        strcpy(logpath, IP);
-        strcpy(logPath, "/warning.log");
+        strcat(logpath, "/");
+        strcat(logpath, IP);
+        strcat(logPath, "/warning.log");
         free(logPath);
         if (writePiLog(logpath, warning) == 1) {
+            printf("getWarningInfo.c: writePiLog error\n");
             return NULL;
         }
         

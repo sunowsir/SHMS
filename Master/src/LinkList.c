@@ -15,22 +15,22 @@ LinkList *linkInit() {
     return p;
 }
 
-LinkNode *linkGetNewNode(/* char *IP, */int sockFd) {
+LinkNode *linkGetNewNode(char *IP, int sockFd) {
     LinkNode *p = (LinkNode *)malloc(sizeof(LinkNode));
-    // p->IP = strdup(IP);
+    p->IP = strdup(IP);
     p->sockFd = sockFd;
     p->next = NULL;
     return p;
 }
 
-void linkInsert(LinkList *l, /* char *IP, */ int sockFd) {
+void linkInsert(LinkList *l, char *IP, int sockFd) {
     LinkNode *p = &(l->head);
     
     while (p->next) {
         p = p->next;
     }
     
-    LinkNode *insert_node = linkGetNewNode(sockFd);
+    LinkNode *insert_node = linkGetNewNode(IP, sockFd);
     insert_node->next = p->next;
     p->next = insert_node;
     l->length += 1;

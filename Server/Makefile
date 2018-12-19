@@ -19,7 +19,6 @@ SERVER_RELY = ${BUILD_DIR}/PackageFrame.o \
 			${BUILD_DIR}/sendWarningInfo.o \
 			${BUILD_DIR}/heartBeat.o \
 			${BUILD_DIR}/getScriptRunInfo.o \
-			${BUILD_DIR}/getInfo.o \
 			${BUILD_DIR}/runScriptAndSave.o \
 			${BUILD_DIR}/mainServer.o 
 
@@ -40,9 +39,6 @@ ${BUILD_DIR}/ServerConnect.o : ${CODE_DIR}/ServerConnect.c ${HEAD_DIR}/mainServe
 
 ${BUILD_DIR}/runScriptAndSave.o : ${CODE_DIR}/runScriptAndSave.c ${HEAD_DIR}/runScriptAndSave.h
 	${CC} -c ${CFLAGS} ${BUILD_DIR}/runScriptAndSave.o ${CODE_DIR}/runScriptAndSave.c -lpthread
-
-${BUILD_DIR}/getInfo.o : ${CODE_DIR}/getInfo.c ${HEAD_DIR}/getInfo.h 
-	${CC} -c ${CFLAGS} ${BUILD_DIR}/getInfo.o ${CODE_DIR}/getInfo.c -lpthread
 
 ${BUILD_DIR}/dataTransmission.o : ${CODE_DIR}/dataTransmission.c ${HEAD_DIR}/dataTransmission.h 
 	${CC} -c ${CFLAGS} ${BUILD_DIR}/dataTransmission.o ${CODE_DIR}/dataTransmission.c 

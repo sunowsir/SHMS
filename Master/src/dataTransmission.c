@@ -8,86 +8,104 @@
 
 #include "../include/dataTransmission.h" 
 
-int recvData(int sockFd) {
-    int recvRet = 1;
-    while (1) {
-        int tag_info = 100;
-        for (int i = 0; i < 6; i++) {
-            tag_info += i;
-            if (send(sockFd, &tag_info, sizeof(int), 0) < 0) {
-                perror("recvData : send INFO error");
-                return 1;
-            }
-            
-            /* receive package. */
-            
-            Package *pack = PackageInit();
-            recvRet = recv(sockFd, pack, sizeof(Package), 0);
-            if(recvRet == -1) {
-                perror("recvData : recv Package error");
-                return 1;
-            } else if (recvRet == 0) {
-                break;
-            }
-            PackageClear(pack);
-            
-            /* receive data. */
-            
-            char *data = (char *)calloc(sizeof(char), (pack->dataSize));
-            recvRet = recv(sockFd, data, pack->dataSize, 0);
-            if (recvRet == -1) {
-                perror("recvData : recv data error");
-                return 1;
-            } else if (recvRet == 0) {
-                break;
-            }
-            char *logPath = getConf("logPath", "./master.conf");
-            if (logPath == NULL) {
-                printf("\033[1;31mmaster.conf error : don't have logPath.\033[0m\n");
-            }
-            if (logPath[(int)strlen(logPath) - 1] == '/') {
-                logPath[(int)strlen(logPath) - 1] = '\0';
-            }
-            char *logpath = (char *)malloc(sizeof(char) * ((int)strlen(logPath) + (int)strlen(pack->IP) + 1 + 5 /* 多开5个防止溢出 */ ));
-            strcpy(logpath, logPath);
-            strcpy(logpath, "/");
-            strcpy(logpath, pack->IP);
-            strcpy(logPath, "/");
-            switch (pack->dataType) {
-                case 100 : {
-                    strcpy(logPath, "cpu.log");
-                } break;
-                case 101 : {
-                    strcpy(logPath, "disk.log");
-                } break;
-                case 102 : {
-                    strcpy(logPath, "malips.log");
-                } break;
-                case 103 : {
-                    strcpy(logPath, "mem.log");
-                } break;
-                case 104 : {
-                    strcpy(logPath, "sys.log");
-                } break;
-                case 105 : {
-                    strcpy(logPath, "user.log");
-                } break;
-            }
-            free(logPath);
-            if (writePiLog(logpath, data) == 1) {
-                free(data);
-                return 1;
-            }
-            free(data);
-        }
-        int closeTag;
-        recvRet = recv(sockFd, &closeTag, sizeof(int), 0);
-        if (recvRet == -1) {
-            perror("recvData : recv closeTag error");
+int recvData(int sockFd, char *IP) {
+    printf("recvData()\n");
+    
+    printf("=====\n");
+    for (int i = 0; i < 6; i++) {
+        printf("\n");
+        
+        int dataType = 100 + i;
+        
+        if (send(sockFd, &dataType, sizeof(int), 0) < 0) {
+            perror("recvData (send INFO)");
             return 1;
         }
-        if (closeTag == CLOSE_NOW) {
+        
+        printf("recvData(): send dataType(%d)\n", dataType);
+        
+        /* receive dataSize. */
+        
+        int dataSize = 0;
+        int recvRet = 1;
+        recvRet = recv(sockFd, &dataSize, sizeof(int), 0);
+        if(recvRet == -1) {
+            perror("recvData (recv dataSize)");
+            return 1;
+        } else if (recvRet == 0) {
             break;
+        }
+        
+        printf("recvData(): receive dataSize(%d)\n", dataSize);
+        
+        /* receive data. */
+        
+        char *data = (char *)calloc(sizeof(char), (dataSize + 10));
+        recvRet = recv(sockFd, data, sizeof(char) * (dataSize + 5), 0);
+        if (recvRet == -1) {
+            perror("recvData (recv data)");
+            return 1;
+        } else if (!strcmp(data, "NULL")) {
+            printf("recvData(): receive data is NULL\n");
+            free(data);
+            continue;
+        }
+        printf("recvData(): receive data: {%s}\n", data);
+        
+        /* get logPath. */
+        
+        char *logPath = getConf("logPath", "./master.conf");
+        if (logPath == NULL) {
+            printf("\033[1;31mmaster.conf error : don't have logPath.\033[0m\n");
+        }
+        if (logPath[(int)strlen(logPath) - 1] == '/') {
+            logPath[(int)strlen(logPath) - 1] = '\0';
+        }
+        
+        char logpath[MAXBUFF] = {'0'};
+        free(logPath);
+        strcpy(logpath, logPath);
+        strcat(logpath, "/");
+        strcat(logpath, IP);
+        strcat(logPath, "/");
+        
+        printf("recvData(): mkdir\n");
+        
+        char Cmd[MAXBUFF] = {'0'};
+        strcpy(Cmd, "mkdir ");
+        strcat(Cmd, logpath);
+        strcat(Cmd, " 2> /dev/null");
+        if (system(Cmd) == -1) {
+            perror("recvData(): mkdir log directory");
+            return 1;
+        }
+        
+        switch (dataType) {
+            case 100 : {
+                strcat(logpath, "/cpu.log");
+            } break;
+            case 101 : {
+                strcat(logpath, "/disk.log");
+            } break;
+            case 102 : {
+                strcat(logpath, "/malips.log");
+            } break;
+            case 103 : {
+                strcat(logpath, "/mem.log");
+            } break;
+            case 104 : {
+                strcat(logpath, "/sys.log");
+            } break;
+            case 105 : {
+                strcat(logpath, "/user.log");
+            } break;
+        }
+        if (writePiLog(logpath, data) == 1) {
+            free(data);
+            return 1;
+        }
+        if (data != NULL) {
+            free(data);
         }
     }
     return 0;
@@ -107,9 +125,11 @@ void *dataTransmission(void *arg) {
         
         /* 读取套接字sockFd，进行数据传输 */
         
-        if (recvData(currentNode->sockFd) == 1) {
+        if (recvData(currentNode->sockFd, currentNode->IP) == 1) {
             printf("\033[1;31mrecvData error!\033[0m");
         }
+        
+        /* 断开连接 */
         
         printf("Have a connect already close!\n");
         close(currentNode->sockFd);

@@ -40,44 +40,49 @@ char *getScriptRunInfo(int Signifier) {
     char tempData[MAXBUFF];
     switch (Signifier) {
         case 100 : {
-            strcpy(logPath + (int)strlen(logPath), "/cpu.log");
+            strcat(logPath, "/cpu.log");
         } break;
         case 101 : {
-            strcpy(logPath + (int)strlen(logPath), "/disk.log");
+            strcat(logPath, "/disk.log");
         } break;
         case 102 : {
-            strcpy(logPath + (int)strlen(logPath), "/malips.log");
+            strcat(logPath, "/malips.log");
         } break;
         case 103 : {
-            strcpy(logPath + (int)strlen(logPath), "/mem.log");
+            strcat(logPath, "/mem.log");
         } break;
         case 104 : {
-            strcpy(logPath + (int)strlen(logPath), "/sys.log");
+            strcat(logPath, "/sys.log");
         } break;
         case 105 : {
-            strcpy(logPath + (int)strlen(logPath), "/user.log");
+            strcat(logPath, "/user.log");
         } break;
     }
     strcpy(Cmd, ScriptPath);
-    strcpy(Cmd + (int)strlen(Cmd), "/getLogHeadInfo.sh ");
-    strcpy(Cmd + (int)strlen(Cmd), logPath);
+    strcat(Cmd, "/getLogHeadInfo.sh ");
+    strcat(Cmd, logPath);
     
-    /* 调用脚本执行命令 */
-    
-    FILE *fp = popen(Cmd, "r");
-    fgets(tempData, sizeof(tempData), fp);
-    pclose(fp);
     if (logPath != NULL) {
         free(logPath);
     }
     if (ScriptPath != NULL) {
         free(ScriptPath);
     }
+    
+    /* 调用脚本执行命令 */
+    
+    FILE *fp = popen(Cmd, "r");
+    fgets(tempData, sizeof(tempData), fp);
+    pclose(fp);
 
     /* 将获得的数据返回 */
-    
-    char *retData = (char *)malloc(sizeof(char) * (int)strlen(tempData));
+
+    if (tempData == NULL || (int)strlen(tempData) == 0 || (((int)strlen(tempData) == 1) && (tempData[0] == '\n'))) {
+        return NULL;
+    }
+    char *retData = (char *)calloc(sizeof(char), (int)strlen(tempData));
     strcpy(retData, tempData);
     return retData;
 }
+
 

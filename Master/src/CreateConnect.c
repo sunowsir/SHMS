@@ -76,7 +76,7 @@ void *startListen(void *None) {
         char IP[20] = {'0'};
         sockGetFromIP(IP, (struct sockaddr_in *)&addrSon);
         printf("Server %s already connect to Master!\n", IP);
-        linkInsert(minLenList, sockSon);
+        linkInsert(minLenList, IP, sockSon);
     }
     close(sockFd);
     return NULL;

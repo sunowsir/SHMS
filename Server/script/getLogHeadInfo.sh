@@ -21,14 +21,20 @@ function getString() {
 }
 
 function main() {
-    getString ${1};
+    logFile=${1};
+    while [[ ! -e ${logFile} ]];
+    do
+        sleep 0.5;
+    done
+    
+    getString ${logFile};
     if [[ ${?} -eq -1 ]];
     then
         echo "ERROR";
         return 1;
     fi
     
-    echo -n "${retStr}";
+    echo "${retStr}";
     return 0;
 }
 

@@ -15,6 +15,6 @@
 
 /* return : success(0), false(-1)  */
 
-int monitorHealth(char * /* script path and name */, char * /* log file path and name */ , int /* type */, int /* sleep time */ );
+void *monitorHealth(void *arg);
 
 #endif

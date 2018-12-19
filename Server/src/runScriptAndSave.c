@@ -8,10 +8,7 @@
 
 #include "../include/runScriptAndSave.h"
 
-char *ScriptFile, *logFile;
-int sleepTime, monitorWarning;
-
-void *RunAndSave() {
+int RunAndSave(char *logFile, char *ScriptFile, int sleepTime, int monitorWarning) {
     FILE *fp = fopen(logFile, "a");
     while (1) {
         char Cmd[MAXBUFF] = {'0'};
@@ -23,8 +20,8 @@ void *RunAndSave() {
             
             /* 直接执行shell命令：xxx.sh >> xxx/xxx.log  */
             
-            strcpy(Cmd + (int)strlen(Cmd), " >> ");
-            strcpy(Cmd + (int)strlen(Cmd), logFile);
+            strcat(Cmd, " >> ");
+            strcat(Cmd, logFile);
             
             FILE *pfp = popen(Cmd, "w");
             pclose(pfp);
@@ -52,6 +49,7 @@ void *RunAndSave() {
             if (strstr(runRes, "warning") != NULL) {
                 if (sendWarningInfo(runRes)) {
                     printf("sendWarningInfo \033[1;31merror\033[0m\n");
+                    return -1;
                 }
             }
         }
@@ -59,54 +57,84 @@ void *RunAndSave() {
     }
     fclose(fp);
     
-    return NULL;
+    return 0;
 }
 
 
-int monitorHealth(char *script, char *logfile, int type, int sleeptime) {
-    logFile = logfile;
-    ScriptFile = script;
-    sleepTime = sleeptime;
-    monitorWarning = 0;
+void *monitorHealth(void *arg) {
+    char *ScriptFile, *logFile;
+    int sleepTime, monitorWarning;
+
+    /* 从配置文件中获取日志文件所在位置 */
     
-    switch (type) {
+    char *logPath = getConf("logPath", "./server.conf");
+    if (logPath == NULL) {
+        printf("server.conf \033[31;merror\033[0m don't have logPath.\n");
+        return NULL;
+    }
+    if (logPath[(int)strlen(logPath) - 1] == '/') {
+        logPath[(int)strlen(logPath) - 1] = '\0';
+    }
+    
+    /* 从配置文件中获取脚本所在位置  */
+
+    char *ScriptPath = getConf("ScriptPath", "./server.conf");
+    if (ScriptPath == NULL) {
+        printf("server.conf \033[31;merror\033[0m don't have ScriptPath.\n");
+        return NULL;
+    }
+    if (ScriptPath[(int)strlen(ScriptPath) - 1] == '/') {
+        ScriptPath[(int)strlen(ScriptPath) - 1] = '\0';
+    }
+    
+    logFile = (char *)calloc(sizeof(char), ((int)strlen(logPath) + 30));
+    ScriptFile = (char *)calloc(sizeof(char), ((int)strlen(ScriptPath) + 30));
+    
+    strcpy(logFile, logPath);
+    strcpy(ScriptFile, ScriptPath);
+    monitorWarning = 0;
+
+    int dataType = *((int *)arg);
+    printf("\033[1;32mrunScriptAndSave.c: dataType(%d)\033[0m\n", dataType);
+    switch (dataType) {
         case 100 : {
-            strcpy(logFile + (int)strlen(logFile), "/cpu.log");
-            strcpy(ScriptFile + (int)strlen(ScriptFile), "/CPU_info.sh");
+            sleepTime = 5;
+            strcat(logFile, "/cpu.log");
+            strcat(ScriptFile, "/CPU_info.sh");
         } break;
         case 101 : {
-            strcpy(logFile + (int)strlen(logFile), "/disk.log");
-            strcpy(ScriptFile + (int)strlen(ScriptFile), "/Disk_info.sh");
+            sleepTime = 60;
+            strcat(logFile, "/disk.log");
+            strcat(ScriptFile, "/Disk_info.sh");
         } break;
         case 102 : {
-            strcpy(logFile + (int)strlen(logFile), "/malips.log");
-            strcpy(ScriptFile + (int)strlen(ScriptFile), "/Malicious_ps_info.sh");
+            sleepTime = 30;
+            strcat(logFile, "/malips.log");
+            strcat(ScriptFile, "/Malicious_ps_info.sh");
         } break;
         case 103 : {
-            strcpy(logFile + (int)strlen(logFile), "/mem.log");
-            strcpy(ScriptFile + (int)strlen(ScriptFile), "/Mem_info.sh");
+            sleepTime = 5;
+            strcat(logFile, "/mem.log");
+            strcat(ScriptFile, "/Mem_info.sh");
         } break;
         case 104 : {
+            sleepTime = 60;
             monitorWarning = 1;
-            strcpy(logFile + (int)strlen(logFile), "/sys.log");
-            strcpy(ScriptFile + (int)strlen(ScriptFile), "/Sys_info.sh");
+            strcat(logFile, "/sys.log");
+            strcat(ScriptFile, "/Sys_info.sh");
         } break;
         case 105 : {
-            strcpy(logFile + (int)strlen(logFile), "/user.log");
-            strcpy(ScriptFile + (int)strlen(ScriptFile), "/User_info.sh");
+            sleepTime = 60;
+            strcat(logFile, "/user.log");
+            strcat(ScriptFile, "/User_info.sh");
         } break;
     }
     
-    pthread_t RAS_pthread;
-    if (pthread_create(&RAS_pthread, NULL, RunAndSave, NULL)) {
-        perror("monitorHealth(): pthread create RunAndSave");
-        return -1;
+    if (RunAndSave(logFile, ScriptFile, sleepTime, monitorWarning) == -1) {
+        return NULL;
     }
     
-    pthread_join(RAS_pthread, NULL);
-    pthread_exit(NULL);
-    
-    return 0;
+    return NULL;
 }
 
 

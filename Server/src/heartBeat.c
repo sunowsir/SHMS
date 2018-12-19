@@ -47,6 +47,13 @@ void *heartBeat() {
     if (strMasterPort != NULL) {
         free(strMasterPort);
     }
+
+    char IP[15] = {'0'};
+    int Port = MasterPort;
+    strcpy(IP, MasterIP);
+    if (MasterIP != NULL) {
+        free(MasterIP);
+    }
     
     printf("heartBeat(): will go to while true.\n");
     
@@ -59,27 +66,25 @@ void *heartBeat() {
 
         printf("heartBeat(): will request connection.\n");
         
-        int sockFd = sockClient(MasterIP, MasterPort);
-        if (MasterIP != NULL) {
-            free(MasterIP);
-        }
+        int sockFd = sockClient(IP, Port);
         if (sockFd != -1) {
             printf("heartBeat(): will run dataTransmission()\n");
             if (dataTransmission(sockFd) == -1) {
-                printf("dataTransmission \033[1;31merror\033[0m\n");
-            }
-            
-            /* 通知Master数据传输结束关闭连接 */
-            /* 发送结束码CLOSE_NOW */
-
-            printf("heartBeat(): will send CLOSE_NOW\n");
-            
-            int sendClose = CLOSE_NOW;
-            if (send(sockFd, &sendClose, sizeof(int), 0) < 0) {
-                perror("heartBeat.c send CLOSE_NOW \033[1;31merror\033[0m: ");
                 close(sockFd);
-                exit(1);
+                return NULL;
             }
+            // 
+            // /* 通知Master数据传输结束关闭连接 */
+            // /* 发送结束码CLOSE_NOW */
+
+            // printf("heartBeat(): will send CLOSE_NOW\n");
+            // 
+            // int sendClose = CLOSE_NOW;
+            // if (send(sockFd, &sendClose, sizeof(int), 0) < 0) {
+            //     perror("heartBeat.c send CLOSE_NOW \033[1;31merror\033[0m: ");
+            //     close(sockFd);
+            //     return NULL;
+            // }
             close(sockFd);
         }
     }

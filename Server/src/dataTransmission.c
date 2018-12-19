@@ -21,29 +21,27 @@ int dataTransmission(int sockFd) {
             return -1;
         }
         
+        printf("recv dataType : %d --- \n", dataType);
+        
         /* 获取即将发送的字符串 */
         
-        int dataSize = 0;
         char *sendData = getScriptRunInfo(dataType);
-        
-        /* 根据需要字符串长度定义Package，发送Package */
-        Package *pack = PackageInit();
-        /* 从配置文件中读取本机IP */
-        char *localIP = getConf("localIP", "./server.conf");
-        if (localIP == NULL) {
-            printf("server.conf \033[31;merror\033[0m don't have localIP.\n");
-            return -1;
+        if (sendData == NULL) {
+            printf("dataType(%d) data is NULL\n", dataType);
+            sendData = strdup("NULL");
         }
         
-        pack = PackageCreate(localIP, dataType, dataSize);
-        if (send(sockFd, pack, sizeof(Package), 0) < 0) {
-            perror("dataTransmission.c (send Package)");
+        printf("dataTransmission.c : send dataSize\n");
+        
+        int dataSize = (int)strlen(sendData);
+        if (send(sockFd, &dataSize, sizeof(int), 0) < 0) {
+            perror("dataTransmission.c (send dataSize)");
             return -1;
         }
-        
-        sleep(0.01);
         
         /* 发送字符串 */
+        printf("send data : <%s>\n", sendData);
+        
         if (send(sockFd, sendData, sizeof(char) * (int)strlen(sendData), 0) < 0)  {
             perror("dataTransmission.c (send Data)");
             return -1;
@@ -51,6 +49,8 @@ int dataTransmission(int sockFd) {
         if (sendData != NULL) {
             free(sendData);
         }
+        
+        sleep(1);
     }
 
     return 0;

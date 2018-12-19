@@ -10,12 +10,18 @@
 
 int ServerConnect() {
     /* 运行六个脚本采集数据保存到日志 */
-    pthread_t threadGetInfo;
+    pthread_t threadGetInfo[6];
+    int dataType[6] = {100, 101, 102, 103, 104, 105};
+
     printf("ServerConnect(): will run getInfo()\n");
-    if (pthread_create(&threadGetInfo, NULL, getInfo, NULL)) {
-        perror("pthread_create getInfo");
-        return -1;
+    
+    for (int i = 0; i < 6; i++) {
+        if (pthread_create(&threadGetInfo[i], NULL, monitorHealth, &dataType[i])) {
+            perror("pthread_create getInfo");
+            return -1;
+        }
     }
+    
     
     /* 心跳发送数据 */
     pthread_t threadheart;
@@ -26,7 +32,10 @@ int ServerConnect() {
     }
 
     pthread_join(threadheart, NULL);
-    pthread_join(threadGetInfo, NULL);
+    for (int i = 0; i < 6; i++) {
+        pthread_join(threadGetInfo[i], NULL);
+    }
+    
     pthread_exit(NULL);
     return 0;
 }
