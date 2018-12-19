@@ -9,7 +9,6 @@
 #include "../include/runScriptAndSave.h"
 
 int RunAndSave(char *logFile, char *ScriptFile, int sleepTime, int monitorWarning) {
-    FILE *fp = fopen(logFile, "a");
     while (1) {
         char Cmd[MAXBUFF] = {'0'};
         strcpy(Cmd, ScriptFile);
@@ -40,22 +39,22 @@ int RunAndSave(char *logFile, char *ScriptFile, int sleepTime, int monitorWarnin
             
             /* 将脚本运行结果写入日志文件 */
             
-            FILE *lfp = fopen(logFile, "a");
-            fscanf(lfp, "%s", runRes);
-            fclose(lfp);
+            if (writePiLog(logFile, runRes) == -1) {
+                perror("RunAndSave()(writePiLog)");
+                break;
+            }
             
             /* 判断脚本运行结果中是否有警报信息 */
             
             if (strstr(runRes, "warning") != NULL) {
                 if (sendWarningInfo(runRes)) {
                     printf("sendWarningInfo \033[1;31merror\033[0m\n");
-                    return -1;
+                    break;
                 }
             }
         }
         sleep(sleepTime);
     }
-    fclose(fp);
     
     return 0;
 }
@@ -95,7 +94,6 @@ void *monitorHealth(void *arg) {
     monitorWarning = 0;
 
     int dataType = *((int *)arg);
-    printf("\033[1;32mrunScriptAndSave.c: dataType(%d)\033[0m\n", dataType);
     switch (dataType) {
         case 100 : {
             sleepTime = 5;
@@ -129,6 +127,8 @@ void *monitorHealth(void *arg) {
             strcat(ScriptFile, "/User_info.sh");
         } break;
     }
+    
+    printf("%s >> %s\n", ScriptFile, logFile);
     
     if (RunAndSave(logFile, ScriptFile, sleepTime, monitorWarning) == -1) {
         return NULL;

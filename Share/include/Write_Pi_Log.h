@@ -11,6 +11,8 @@
 
 #include "./needHead.h"
 
+/* return : success(0), false(-1)  */
+
 int writePiLog(const char *, char * logInfo);
 
 #endif

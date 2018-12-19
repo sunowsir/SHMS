@@ -12,6 +12,7 @@
 #include "./sendWarningInfo.h"
 #include "../../Share/include/needHead.h"
 #include "../../Share/include/Get_conf.h"
+#include "../../Share/include/Write_Pi_Log.h"
 
 /* return : success(0), false(-1)  */
 
