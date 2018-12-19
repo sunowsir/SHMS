@@ -47,19 +47,13 @@ void linkErase(LinkList *l, LinkNode *needDelete) {
         }
     }
     
-    /*
-    while(ind--) {
-        p = p->next;
-        if (p == NULL) {
-            return ;
-        }
-    }
-    */
     if (p->next == NULL) {
         return ;
     }
     LinkNode *delete_node = p->next;
     p->next = p->next->next;
+    free(delete_node->IP);
+    close(delete_node->sockFd);
     free(delete_node);
     l->length -= 1;
     return ;
@@ -73,6 +67,8 @@ void linkClear(LinkList *l) {
     while (now_node) {
         free_node = now_node;
         now_node = now_node->next;
+        close(free_node->sockFd);
+        free(free_node->IP);
         free(free_node);
     }
     free(l);

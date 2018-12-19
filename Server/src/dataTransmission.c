@@ -10,6 +10,7 @@
 
 int dataTransmission(int sockFd) {
     /* 传输6个脚本的数据 */
+    printf("===Send data===\n");
 
     for (int i = 0; i < 6; i++) {
         /* 通过接收标识码调用getScriptRunInfo.c获取一段指定长度的字符串  */
@@ -21,7 +22,7 @@ int dataTransmission(int sockFd) {
             return -1;
         }
         
-        printf("recv dataType : %d --- \n", dataType);
+        printf("recv dataType : %d\n", dataType);
         
         /* 获取即将发送的字符串 */
         
@@ -30,10 +31,11 @@ int dataTransmission(int sockFd) {
             printf("dataType(%d) data is NULL\n", dataType);
             sendData = strdup("NULL");
         }
-        
-        printf("dataTransmission.c : send dataSize\n");
+
+        /* 发送字符串长度 */
         
         int dataSize = (int)strlen(sendData);
+        printf("Send dataSize: %d\n", dataSize);
         if (send(sockFd, &dataSize, sizeof(int), 0) < 0) {
             perror("dataTransmission.c (send dataSize)");
             return -1;
@@ -52,6 +54,7 @@ int dataTransmission(int sockFd) {
         
         sleep(1);
     }
-
+    printf("\n");
+    
     return 0;
 }

@@ -9,9 +9,8 @@
 #include "../include/dataTransmission.h" 
 
 int recvData(int sockFd, char *IP) {
-    printf("recvData()\n");
+    printf("===recvData===\n");
     
-    printf("=====\n");
     for (int i = 0; i < 6; i++) {
         printf("\n");
         
@@ -22,7 +21,7 @@ int recvData(int sockFd, char *IP) {
             return 1;
         }
         
-        printf("recvData(): send dataType(%d)\n", dataType);
+        printf("Send dataType(%d)\n", dataType);
         
         /* receive dataSize. */
         
@@ -36,7 +35,7 @@ int recvData(int sockFd, char *IP) {
             break;
         }
         
-        printf("recvData(): receive dataSize(%d)\n", dataSize);
+        printf("Receive dataSize(%d)\n", dataSize);
         
         /* receive data. */
         
@@ -50,7 +49,7 @@ int recvData(int sockFd, char *IP) {
             free(data);
             continue;
         }
-        printf("recvData(): receive data: {%s}\n", data);
+        printf("Receive data: {%s}\n", data);
         
         /* get logPath. */
         
@@ -100,43 +99,46 @@ int recvData(int sockFd, char *IP) {
                 strcat(logpath, "/user.log");
             } break;
         }
+        
+        /* 将数据写入日志文件 */
+        printf("Write data to log file\n");
+        
         if (writePiLog(logpath, data) == 1) {
             free(data);
             return 1;
         }
+        
         if (data != NULL) {
             free(data);
         }
     }
+    printf("\n");
     return 0;
 }
 
 void *dataTransmission(void *arg) {
-    printf("runing dataTransmission.c\n");
     LinkList *list = (LinkList *)arg;
 
-    while (list->head.next == NULL);
+    while (list->head.next == NULL) sleep(1);
     LinkNode *currentNode = list->head.next;
     
     while (1) {
-        if (list->length == 0) {
-            continue;
-        }
+        while (list->length == 0) sleep(1);
         
         /* 读取套接字sockFd，进行数据传输 */
         
         if (recvData(currentNode->sockFd, currentNode->IP) == 1) {
             printf("\033[1;31mrecvData error!\033[0m");
+            break;
         }
         
         /* 断开连接 */
         
         printf("Have a connect already close!\n");
-        close(currentNode->sockFd);
         linkErase(list, currentNode);
         
         if (currentNode->next == NULL) {
-            while (list->head.next == NULL);
+            while (list->head.next == NULL) sleep(1);
             currentNode = list->head.next;
         } else {
             currentNode = currentNode->next;

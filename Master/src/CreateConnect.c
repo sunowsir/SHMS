@@ -15,14 +15,13 @@ typedef struct args {
 Args arg;
 
 void *startListen(void *None) {
-    printf("running getIP():\n");
     
     /* 从配置文件中获取本机IP  */
     
     char *localIP = getConf("localIP", "./master.conf");
     if (localIP == NULL) {
         printf("\033[1;31mmaster.conf error : don't have localIP.\033[0m\n");
-        exit(1);
+        return NULL;
     }
 
     /* 从配置文件中获取本机监听开启哪个端口 */
@@ -30,7 +29,8 @@ void *startListen(void *None) {
     char *strLocalPort = getConf("localPort", "./master.conf");
     if (strLocalPort == NULL) {
         printf("\033[1;31mmaster.conf error : don't have localPort.\033[0m\n");
-        exit(1);
+        free(localIP);
+        return NULL;
     }
     int localPort = StrtoInt(strLocalPort);
     free(strLocalPort);
@@ -40,7 +40,8 @@ void *startListen(void *None) {
     char *strConnectMax = getConf("connectMax", "./master.conf");
     if (strConnectMax == NULL) {
         printf("\033[1;31mmaster.conf error : don't have connectMax.\033[0m\n");
-        exit(1);
+        free(localIP);
+        return NULL;
     }
     int connectMax = StrtoInt(strConnectMax);
     free(strConnectMax);
@@ -69,6 +70,8 @@ void *startListen(void *None) {
             continue;
         }
         
+        /* 调用accept接受连入 */
+        
         int sockSon = accept(sockFd, (struct sockaddr *)&addrSon, &addrSonLen);
         if (sockSon < 0) {
             break;
@@ -76,6 +79,9 @@ void *startListen(void *None) {
         char IP[20] = {'0'};
         sockGetFromIP(IP, (struct sockaddr_in *)&addrSon);
         printf("Server %s already connect to Master!\n", IP);
+        
+        /* 将新建连接插入链表 */
+        
         linkInsert(minLenList, IP, sockSon);
     }
     close(sockFd);
@@ -83,7 +89,6 @@ void *startListen(void *None) {
 }
 
 pthread_t CreateConnect(LinkList **list, int num) {
-    printf("runing listenGetIP():\n");
     pthread_t thread;
     arg.list = list;
     arg.listNum = num;
@@ -95,3 +100,6 @@ pthread_t CreateConnect(LinkList **list, int num) {
 
     return thread;
 }
+
+
+

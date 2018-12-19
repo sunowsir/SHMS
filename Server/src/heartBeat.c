@@ -8,46 +8,47 @@
 
 #include "../include/heartBeat.h"
 
+int MasterMaxConnectNum;
+
 void sleepSometime() {
     srand(time(0));
     
-    /* 从配置文件中读取master最大连接数 */
-    
-    char *strMasterMaxConnectNum = getConf("MasterMaxConnectNum", "./server.conf");
-    if (strMasterMaxConnectNum == NULL) {
-        printf("server.conf \033[1;31merror\033[0m : don't have MasterMaxConnectNum\n");
-    }
-    int MasterMaxConnectNum = StrtoInt(strMasterMaxConnectNum);
-    if (strMasterMaxConnectNum != NULL) {
-        free(strMasterMaxConnectNum);
-    }
-    
-    double sleepTime=fabs((double)(rand() % MasterMaxConnectNum) / 100.0);
+    double sleepTime=fabs((double)(rand() % MasterMaxConnectNum) / 100.0) + 1;
     sleep (sleepTime);
     return ;
 }
 
 void *heartBeat() {
+    /* 从配置文件中读取master最大连接数 */
+    
+    char *strMasterMaxConnectNum = getConf("MasterMaxConnectNum", "./server.conf");
+    if (strMasterMaxConnectNum == NULL) {
+        printf("server.conf \033[1;31merror\033[0m : don't have MasterMaxConnectNum\n");
+        return NULL;
+    }
+    MasterMaxConnectNum = StrtoInt(strMasterMaxConnectNum);
+    if (strMasterMaxConnectNum != NULL) {
+        free(strMasterMaxConnectNum);
+    }
+    
     /* 读取配置文件获取Master端IP和sock端口 */
-
-    printf("heartBeat(): get Master IP and sock Port.\n");
     
     char *MasterIP = getConf("MasterIP", "./server.conf");
     if (MasterIP == NULL) {
         printf("server.conf \033[1;31merror\033[0m : don't have MasterIP\n");
-        exit(1);
+        return NULL;
     }
     
     char *strMasterPort = getConf("MasterPort", "./server.conf");
     if (strMasterPort == NULL) {
         printf("server.conf \033[1;31merror\033[0m : don't have MasterPort\n");
-        exit(1);
+        return NULL;
     }
     int MasterPort = StrtoInt(strMasterPort);
     if (strMasterPort != NULL) {
         free(strMasterPort);
     }
-
+    
     char IP[15] = {'0'};
     int Port = MasterPort;
     strcpy(IP, MasterIP);
@@ -55,40 +56,28 @@ void *heartBeat() {
         free(MasterIP);
     }
     
-    printf("heartBeat(): will go to while true.\n");
-    
     while (1) {
-        printf("heartBeat(): will sleep sometime.\n");
         /* sleep sometime. */
         sleepSometime();
         
         /* 请求连接 */
-
-        printf("heartBeat(): will request connection.\n");
         
         int sockFd = sockClient(IP, Port);
         if (sockFd != -1) {
-            printf("heartBeat(): will run dataTransmission()\n");
+            printf("Connect %s:%d success.\n", IP, Port);
             if (dataTransmission(sockFd) == -1) {
                 close(sockFd);
                 return NULL;
             }
-            // 
-            // /* 通知Master数据传输结束关闭连接 */
-            // /* 发送结束码CLOSE_NOW */
-
-            // printf("heartBeat(): will send CLOSE_NOW\n");
-            // 
-            // int sendClose = CLOSE_NOW;
-            // if (send(sockFd, &sendClose, sizeof(int), 0) < 0) {
-            //     perror("heartBeat.c send CLOSE_NOW \033[1;31merror\033[0m: ");
-            //     close(sockFd);
-            //     return NULL;
-            // }
             close(sockFd);
+            printf("Disconnect %s:%d.\n", IP, Port);
+        } else {
+            printf("Connect %s:%d false.\n", IP, Port);
         }
+        printf("\n");
     }
     return NULL;
 }
+
 
 
