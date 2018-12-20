@@ -65,15 +65,12 @@ void *heartBeat() {
         int sockFd = sockClient(IP, Port);
         if (sockFd != -1) {
             printf("Connect %s:%d success.\n", IP, Port);
-            if (dataTransmission(sockFd) == -1) {
-                close(sockFd);
-                return NULL;
-            }
-            close(sockFd);
+            dataTransmission(sockFd);
             printf("Disconnect %s:%d.\n", IP, Port);
         } else {
             printf("Connect %s:%d false.\n", IP, Port);
         }
+        close(sockFd);
         printf("\n");
     }
     return NULL;

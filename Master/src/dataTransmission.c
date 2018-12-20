@@ -8,7 +8,7 @@
 
 #include "../include/dataTransmission.h" 
 
-int recvData(int sockFd, char *IP) {
+int recvData(int sockFd, char *logPath) {
     printf("===recvData===\n");
     
     for (int i = 0; i < 6; i++) {
@@ -36,6 +36,8 @@ int recvData(int sockFd, char *IP) {
         } else if (dataSize <= 0) {
             printf("dataSize num error\n");
             return -1;
+        } else if (dataSize == CLOSE_NOW) {
+            return 0;
         }
         
         printf("Receive dataSize(%d)\n", dataSize);
@@ -54,59 +56,32 @@ int recvData(int sockFd, char *IP) {
         }
         printf("Receive data: {%s}\n", data);
         
-        /* get logPath. */
-        
-        char *logPath = getConf("logPath", "./master.conf");
-        if (logPath == NULL) {
-            printf("\033[1;31mmaster.conf error : don't have logPath.\033[0m\n");
-        }
-        if (logPath[(int)strlen(logPath) - 1] == '/') {
-            logPath[(int)strlen(logPath) - 1] = '\0';
-        }
-        
-        char logpath[MAXBUFF] = {'0'};
-        free(logPath);
-        strcpy(logpath, logPath);
-        strcat(logpath, "/");
-        strcat(logpath, IP);
-        strcat(logPath, "/");
-        
-        printf("recvData(): mkdir\n");
-        
-        char Cmd[MAXBUFF] = {'0'};
-        strcpy(Cmd, "mkdir ");
-        strcat(Cmd, logpath);
-        strcat(Cmd, " 2> /dev/null");
-        if (system(Cmd) == -1) {
-            perror("recvData(): mkdir log directory");
-            return -1;
-        }
         
         switch (dataType) {
             case 100 : {
-                strcat(logpath, "/cpu.log");
+                strcat(logPath, "/cpu.log");
             } break;
             case 101 : {
-                strcat(logpath, "/disk.log");
+                strcat(logPath, "/disk.log");
             } break;
             case 102 : {
-                strcat(logpath, "/malips.log");
+                strcat(logPath, "/malips.log");
             } break;
             case 103 : {
-                strcat(logpath, "/mem.log");
+                strcat(logPath, "/mem.log");
             } break;
             case 104 : {
-                strcat(logpath, "/sys.log");
+                strcat(logPath, "/sys.log");
             } break;
             case 105 : {
-                strcat(logpath, "/user.log");
+                strcat(logPath, "/user.log");
             } break;
         }
         
         /* 将数据写入日志文件 */
         printf("Write data to log file\n");
         
-        if (writePiLog(logpath, data) == 1) {
+        if (writePiLog(logPath, data) == 1) {
             free(data);
             return -1;
         }
@@ -120,6 +95,18 @@ int recvData(int sockFd, char *IP) {
 }
 
 void *dataTransmission(void *arg) {
+    /* get logPath. */
+    
+    char *logPath = getConf("logPath", "./master.conf");
+    if (logPath == NULL) {
+        printf("\033[1;31mmaster.conf error : don't have logPath.\033[0m\n");
+    }
+    if (logPath[(int)strlen(logPath) - 1] == '/') {
+        logPath[(int)strlen(logPath) - 1] = '\0';
+    }
+    char logpath[MAXBUFF] = {'0'};
+    free(logPath);
+    
     LinkList *list = (LinkList *)arg;
 
     while (list->head.next == NULL) sleep(1);
@@ -128,9 +115,25 @@ void *dataTransmission(void *arg) {
     while (1) {
         while (list->length == 0) sleep(1);
         
+        strcpy(logpath, logPath);
+        strcat(logpath, "/");
+        strcat(logpath, currentNode->IP);
+        strcat(logPath, "/");
+        
+        printf("mkdir %s/\n", currentNode->IP);
+        
+        char Cmd[MAXBUFF] = {'0'};
+        strcpy(Cmd, "mkdir ");
+        strcat(Cmd, logPath);
+        strcat(Cmd, " 2> /dev/null");
+        if (system(Cmd) == -1) {
+            perror("recvData() (mkdir log directory)");
+            break;
+        }
+        
         /* 读取套接字sockFd，进行数据传输 */
         
-        if (recvData(currentNode->sockFd, currentNode->IP) == -1) {
+        if (recvData(currentNode->sockFd, logpath) == -1) {
             printf("\033[1;31mrecvData error!\033[0m");
             break;
         }

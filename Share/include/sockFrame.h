@@ -18,6 +18,8 @@ int sockServer(char * /* IP */ , int /* Port */ );
 int sockClient(char * /* IP */ ,int /* Port */);
 
 int sockGetFromIP(char * /* save IP */, struct sockaddr_in *);
+
+int sendClose(int);
 // 
 // /* return : success(0), false(1) */
 // 

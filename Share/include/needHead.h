@@ -33,6 +33,7 @@
 #define SYS_INFO 104
 #define USER_INFO 105
 #define DATANULL 106
+#define CLOSE_NOW 107
 
 #define CPU_WARN 200
 #define DISK_WARN 201

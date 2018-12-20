@@ -20,6 +20,9 @@ int dataTransmission(int sockFd) {
         if (recvRet == -1) {
             perror("dataTransmission.c (recvRet)");
             return -1;
+        } else if (dataType < 100 || dataType > 105) {
+            sendClose(sockFd);
+            return 0;
         }
         
         printf("recv dataType : %d\n", dataType);

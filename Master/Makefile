@@ -9,7 +9,7 @@ CODE_DIR=${NOW_DIR}/src/
 SHARE_HEAD_DIR=${FATHER_DIR}/Share/include/
 SHARE_CODE_DIR=${FATHER_DIR}/Share/src/
 
-MASTER_RELY = ${BUILD_DIR}PackageFrame.o \
+MASTER_RELY = \
 			${BUILD_DIR}Write_Pi_Log.o \
 			${BUILD_DIR}sockFrame.o \
 			${BUILD_DIR}Get_conf.o \
@@ -53,9 +53,6 @@ ${BUILD_DIR}sockFrame.o : ${SHARE_CODE_DIR}sockFrame.c ${SHARE_HEAD_DIR}sockFram
 
 ${BUILD_DIR}Write_Pi_Log.o : ${SHARE_CODE_DIR}Write_Pi_Log.c ${SHARE_HEAD_DIR}Write_Pi_Log.h
 	${CC} -c ${CFLAGS} ${BUILD_DIR}Write_Pi_Log.o ${SHARE_CODE_DIR}Write_Pi_Log.c
-
-${BUILD_DIR}PackageFrame.o : ${SHARE_CODE_DIR}PackageFrame.c ${SHARE_HEAD_DIR}PackageFrame.h
-	${CC} -c ${CFLAGS} ${BUILD_DIR}PackageFrame.o ${SHARE_CODE_DIR}PackageFrame.c
 
 .PHONY: clean
 

@@ -71,4 +71,12 @@ int sockGetFromIP(char *fromIP, struct sockaddr_in *sonaddr) {
 }
 
 
+int sendClose(int sockFd) {
+    int sendTag = CLOSE_NOW;
+    if (send(sockFd, &sendTag, sizeof(int), 0) < 0) {
+        perror("sendClose");
+        return -1;
+    }
+    return 0;
+}
 

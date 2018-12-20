@@ -13,7 +13,6 @@
 #include "../../Share/include/Write_Pi_Log.h"
 #include "../../Share/include/Get_conf.h"
 #include "../../Share/include/needHead.h"
-#include "../../Share/include/PackageFrame.h"
 
 void *dataTransmission(void *);
 
