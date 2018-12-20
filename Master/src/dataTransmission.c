@@ -97,6 +97,8 @@ int recvData(int sockFd, char *logPath) {
 }
 
 void *dataTransmission(void *arg) {
+    signal(SIGPIPE, SIG_IGN);
+    
     /* get logPath. */
     
     char *templogPath = getConf("logPath", "./master.conf");

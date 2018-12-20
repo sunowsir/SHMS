@@ -9,6 +9,8 @@
 #include "../include/getWarningInfo.h"
 
 void *getWarningInfo() { 
+    signal(SIGPIPE, SIG_IGN);
+    
     /* 从配置文件中获取本机IP  */
     
     char *localIP = getConf("localIP", "./master.conf");

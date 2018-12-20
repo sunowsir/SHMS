@@ -9,6 +9,8 @@
 #include "../include/dataTransmission.h"
 
 int dataTransmission(int sockFd) {
+    signal(SIGPIPE, SIG_IGN);
+    
     /* 传输6个脚本的数据 */
     printf("===Send data===\n");
 
@@ -30,11 +32,13 @@ int dataTransmission(int sockFd) {
         
         /* 获取即将发送的字符串 */
         
+        signal(SIGPIPE, SIG_DFL);
         char *sendData = getScriptRunInfo(dataType);
         if (sendData == NULL) {
             printf("getScriptRunInfo() \033[1;31mrun error\033[0m\n");
             return -1;
         }
+        signal(SIGPIPE, SIG_IGN);
         
         /* 发送字符串长度 */
         

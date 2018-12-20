@@ -9,6 +9,8 @@
 #include "../include/sendWarningInfo.h"
 
 int sendWarningInfo(char *sendInfo) {
+    signal(SIGPIPE, SIG_IGN);
+    
     /* 读取配置文件获取Master端IP和sock紧急端口 */
     
     char *MasterIP = getConf("MasterIP", "./server.conf");

@@ -7,7 +7,7 @@ os_v=`cat /etc/issue | awk '{printf("%s_%s", $1, $2);}'`
 # 内核版本
 ker_v=`uname -r`
 # 运行时间和负载信息
-run_and_load=`uptime -p | tr -s " " "\n" | awk '{printf("_%s", $1)}'``cat /proc/loadavg | awk '{ printf(" %s %s %s", $1, $2, $3); }'`
+run_and_load="$(uptime -p | tr -s " " "\n" | awk '{printf("_%s", $1)}')$(cat /proc/loadavg | awk '{ printf(" %s %s %s", $1, $2, $3); }')";
 
 # 负载信息
 #load_info=`uptime | awk '{printf ("%s %s %s", $(NF - 2), $(NF - 1), $NF)}' | tr -s "," " "`
@@ -22,9 +22,13 @@ mem_total=`free -m | sed -n "2p" | awk '{printf("%s", $2)}'`
 # 磁盘占用百分比
 per_disk_used=`echo "$disk_total $disk_used" | awk '{printf("%d", $2/$1 * 100);}'`
 # 内存占用百分比
-per_memo=`free -m | sed -n "2p" | awk '{printf("%d", $3/$2 * 100);}'`
+per_memo="$(free -m | sed -n "2p" | awk '{printf("%d", $3/$2 * 100);}')";
 # CPU温度
-cpu_temp=`cat /sys/class/thermal/thermal_zone0/temp | awk '{printf("%d", $1 / 1000);}'`
+cpu_temp="$(cat /sys/class/thermal/thermal_zone0/temp | awk '
+{
+    printf("%d", $1 / 1000);
+}
+')";
 
 # 磁盘报警级别
 

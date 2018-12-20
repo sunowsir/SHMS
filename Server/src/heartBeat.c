@@ -19,6 +19,7 @@ void sleepSometime() {
 }
 
 void *heartBeat() {
+    
     /* 从配置文件中读取master最大连接数 */
     
     char *strMasterMaxConnectNum = getConf("MasterMaxConnectNum", "./server.conf");
