@@ -11,7 +11,8 @@ int writePiLog(const char *logFile, char *logInfo) {
     FILE *fp = fopen(logFile, "a");
 
     if (fp == NULL)  {
-        perror("Write_Pi_Log(): open file error");
+        printf("logFile:%s, ", logFile);
+        perror("Write_Pi_Log(): ");
         return -1;
     }
     if (fseek(fp, 0, SEEK_END) < 0) {

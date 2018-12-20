@@ -30,7 +30,7 @@ int sendWarningInfo(char *sendInfo) {
     if (send(WsockFd, sendInfo, sizeof(char) * (int)strlen(sendInfo), 0) < 0) {
         perror("sendWarningInfo()");
         close(WsockFd);
-        exit(1);
+        return -1;
     }
     
     close(WsockFd);

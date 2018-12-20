@@ -56,32 +56,34 @@ int recvData(int sockFd, char *logPath) {
         }
         printf("Receive data: {%s}\n", data);
         
+        char logFile[MAXBUFF] = {'0'};
+        strcpy(logFile, logPath);
         
         switch (dataType) {
             case 100 : {
-                strcat(logPath, "/cpu.log");
+                strcat(logFile, "/cpu.log");
             } break;
             case 101 : {
-                strcat(logPath, "/disk.log");
+                strcat(logFile, "/disk.log");
             } break;
             case 102 : {
-                strcat(logPath, "/malips.log");
+                strcat(logFile, "/malips.log");
             } break;
             case 103 : {
-                strcat(logPath, "/mem.log");
+                strcat(logFile, "/mem.log");
             } break;
             case 104 : {
-                strcat(logPath, "/sys.log");
+                strcat(logFile, "/sys.log");
             } break;
             case 105 : {
-                strcat(logPath, "/user.log");
+                strcat(logFile, "/user.log");
             } break;
         }
         
         /* 将数据写入日志文件 */
         printf("Write data to log file\n");
         
-        if (writePiLog(logPath, data) == 1) {
+        if (writePiLog(logFile, data) == 1) {
             free(data);
             return -1;
         }
@@ -97,15 +99,16 @@ int recvData(int sockFd, char *logPath) {
 void *dataTransmission(void *arg) {
     /* get logPath. */
     
-    char *logPath = getConf("logPath", "./master.conf");
-    if (logPath == NULL) {
+    char *templogPath = getConf("logPath", "./master.conf");
+    if (templogPath == NULL) {
         printf("\033[1;31mmaster.conf error : don't have logPath.\033[0m\n");
     }
-    if (logPath[(int)strlen(logPath) - 1] == '/') {
-        logPath[(int)strlen(logPath) - 1] = '\0';
+    if (templogPath[(int)strlen(templogPath) - 1] == '/') {
+        templogPath[(int)strlen(templogPath) - 1] = '\0';
     }
-    char logpath[MAXBUFF] = {'0'};
-    free(logPath);
+    char logPath[MAXBUFF] = {'0'};
+    strcpy(logPath, templogPath);
+    free(templogPath);
     
     LinkList *list = (LinkList *)arg;
 
@@ -115,16 +118,17 @@ void *dataTransmission(void *arg) {
     while (1) {
         while (list->length == 0) sleep(1);
         
+        char logpath[MAXBUFF] = {'0'};
         strcpy(logpath, logPath);
+        
         strcat(logpath, "/");
         strcat(logpath, currentNode->IP);
-        strcat(logPath, "/");
         
-        printf("mkdir %s/\n", currentNode->IP);
+        printf("mkdir(%s)\n", logpath);
         
         char Cmd[MAXBUFF] = {'0'};
         strcpy(Cmd, "mkdir ");
-        strcat(Cmd, logPath);
+        strcat(Cmd, logpath);
         strcat(Cmd, " 2> /dev/null");
         if (system(Cmd) == -1) {
             perror("recvData() (mkdir log directory)");

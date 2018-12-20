@@ -66,6 +66,7 @@ void *heartBeat() {
         if (sockFd != -1) {
             printf("Connect %s:%d success.\n", IP, Port);
             dataTransmission(sockFd);
+            printf("\033[1;32mData sent to complete\033[0m\n");
             printf("Disconnect %s:%d.\n", IP, Port);
         } else {
             printf("Connect %s:%d false.\n", IP, Port);

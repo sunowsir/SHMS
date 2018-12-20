@@ -45,8 +45,10 @@ char *getConf(const char *needVar, char *confPath) {
     }
     
     fclose(fp);
+    char *retStr=strdup(varValue);
+    free(varValue);
 
-    return (!strcmp(varValue, "") ? NULL : varValue);
+    return (!strcmp(retStr, "") ? NULL : retStr);
 }
 
 

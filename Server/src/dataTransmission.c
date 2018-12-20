@@ -21,6 +21,7 @@ int dataTransmission(int sockFd) {
             perror("dataTransmission.c (recvRet)");
             return -1;
         } else if (dataType < 100 || dataType > 105) {
+            printf("dataType \033[1;31merror\033[0m\n");
             sendClose(sockFd);
             return 0;
         }
@@ -44,6 +45,8 @@ int dataTransmission(int sockFd) {
             return -1;
         }
         
+        printf("\033[1;32mAlready send dataSize\033[0m\n");
+        
         /* 发送字符串 */
         printf("send data : <%s>\n", sendData);
         
@@ -54,6 +57,8 @@ int dataTransmission(int sockFd) {
         if (sendData != NULL) {
             free(sendData);
         }
+        
+        printf("\033[1;32mAlready send data\033[0m\n");
         
         sleep(1);
     }

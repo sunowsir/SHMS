@@ -83,12 +83,15 @@ char *getScriptRunInfo(int Signifier) {
     /* 将获得的数据返回 */
 
     char *retData = NULL;
-    if (tempData == NULL || (int)strlen(tempData) == 0 || (((int)strlen(tempData) == 1) && (tempData[0] == '\n'))) {
-        retData = strdup("NULL");
-    }
     // char *retData = (char *)calloc(sizeof(char), (int)strlen(tempData));
     // strcpy(retData, tempData);
     retData = strdup(tempData);
+    if (retData == NULL || (int)strlen(retData) == 0 || (((int)strlen(retData) == 1) && (retData[0] == '\n'))) {
+        if (retData != NULL) {
+            free(retData);
+        }
+        retData = strdup("NULL");
+    }
     
     return retData;
 }
