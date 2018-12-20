@@ -28,13 +28,13 @@ int dataTransmission(int sockFd) {
         
         char *sendData = getScriptRunInfo(dataType);
         if (sendData == NULL) {
-            printf("dataType(%d) data is NULL\n", dataType);
-            sendData = strdup("NULL");
+            printf("getScriptRunInfo() \033[1;31mrun error\033[0m\n");
+            return -1;
         }
-
+        
         /* 发送字符串长度 */
         
-        int dataSize = (int)strlen(sendData);
+        int dataSize = (int)strlen(sendData) + 5;
         printf("Send dataSize: %d\n", dataSize);
         if (send(sockFd, &dataSize, sizeof(int), 0) < 0) {
             perror("dataTransmission.c (send dataSize)");
