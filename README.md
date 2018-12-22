@@ -2,6 +2,7 @@
 
 * 安装：
     * 进入目录：cd ./Server/(服务器端)或cd ./Master(监控端)
+    * 编辑配置文件：./Server/server.conf（服务器端配置文件）、./Master/master.conf（监控端配置文件）
     * 清空编译文件：make clean
     * 编译链接生成可执行程序：make 
     * 安装到系统服务（使用systemd）：sudo make install
