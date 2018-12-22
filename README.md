@@ -5,7 +5,7 @@
     * 编辑配置文件：./Server/server.conf（服务器端配置文件）、./Master/master.conf（监控端配置文件）
     * 清空编译文件：make clean
     * 编译链接生成可执行程序：make 
-    * 安装到系统服务（使用systemd）：sudo make install
+    * 添加到系统服务（使用systemd）：sudo make install
     * 服务器端：
         1. 查看服务状态：sudo systemctl status SHMS-Server.service
         2. 启动服务：sudo systemctl start SHMS-Server.service
