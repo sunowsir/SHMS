@@ -22,7 +22,7 @@ void *heartBeat() {
     
     /* 从配置文件中读取master最大连接数 */
     
-    char *strMasterMaxConnectNum = getConf("MasterMaxConnectNum", "./server.conf");
+    char *strMasterMaxConnectNum = getConf("MasterMaxConnectNum", CONF_SERVER);
     if (strMasterMaxConnectNum == NULL) {
         printf("server.conf \033[1;31merror\033[0m : don't have MasterMaxConnectNum\n");
         return NULL;
@@ -34,13 +34,13 @@ void *heartBeat() {
     
     /* 读取配置文件获取Master端IP和sock端口 */
     
-    char *MasterIP = getConf("MasterIP", "./server.conf");
+    char *MasterIP = getConf("MasterIP", CONF_SERVER);
     if (MasterIP == NULL) {
         printf("server.conf \033[1;31merror\033[0m : don't have MasterIP\n");
         return NULL;
     }
     
-    char *strMasterPort = getConf("MasterPort", "./server.conf");
+    char *strMasterPort = getConf("MasterPort", CONF_SERVER);
     if (strMasterPort == NULL) {
         printf("server.conf \033[1;31merror\033[0m : don't have MasterPort\n");
         return NULL;

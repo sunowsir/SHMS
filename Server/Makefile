@@ -58,7 +58,27 @@ ${BUILD_DIR}/sockFrame.o : ${SHARE_CODE_DIR}/sockFrame.c ${SHARE_HEAD_DIR}/sockF
 ${BUILD_DIR}/Write_Pi_Log.o : ${SHARE_CODE_DIR}/Write_Pi_Log.c ${SHARE_HEAD_DIR}/Write_Pi_Log.h
 	${CC} -c ${CFLAGS} ${BUILD_DIR}/Write_Pi_Log.o ${SHARE_CODE_DIR}/Write_Pi_Log.c
 
-.PHONY: clean
+.PHONY: clean install uninstall
+
+install : 
+	mkdir /opt/SHMS-server/ 
+	mkdir /etc/SHMS-server/
+	touch /etc/SHMS-server/server.pid
+	cp ./Server /opt/SHMS-server/ 
+	cp ./server.conf /etc/SHMS-server/
+	cp ./SHMS-server.init /opt/SHMS-server/ 
+	cp ./SHMS-Server.service /usr/lib/systemd/system/
+	chmod 755 /opt/SHMS-server/SHMS-server.init 
+	chmod 754 /usr/lib/systemd/system/SHMS-Server.service
+	systemctl daemon-reload
+	systemctl enable SHMS-Server.service
+	systemctl start SHMS-Server.service 
+
+uninstall :
+	systemctl stop SHMS-Server.service
+	rm -rf /usr/lib/systemd/system/SHMS-Server.service
+	rm -rf /opt/SHMS-server/
+	rm -rf /etc/SHMS-server
 
 clean : 
 	rm -rf Server ${SERVER_RELY}

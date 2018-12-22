@@ -1,0 +1,16 @@
+[Unit]
+Description=SHMS-Server -- Server side of server health monitoring system
+Documentation=https://github.com/sunowsir/Simple-Socket
+After=
+ 
+[Service]
+Type=foking
+PIDFile=/etc/SHMS-server/server.pid
+ExecStart=/opt/SHMS-server/SHMS-server.init start
+ExecReload=/opt/SHMS-server/SHMS-server.init.sh restart
+ExecStop=/opt/SHMS-server/SHMS-server.init stop
+PrivateTmp=true
+ 
+[Install]
+WantedBy=multi-user.target
+

@@ -13,13 +13,13 @@ int sendWarningInfo(char *sendInfo) {
     
     /* 读取配置文件获取Master端IP和sock紧急端口 */
     
-    char *MasterIP = getConf("MasterIP", "./server.conf");
+    char *MasterIP = getConf("MasterIP", CONF_SERVER);
     if (MasterIP == NULL) {
         printf("server.conf \033[1;31merror\033[0m : don't have MasterIP\n");
         return -1;
     }
     
-    char *strMasterWPort = getConf("MasterWPort", "./server.conf");
+    char *strMasterWPort = getConf("MasterWPort", CONF_SERVER);
     if (strMasterWPort == NULL) {
         printf("server.conf \033[1;31merror\033[0m : don't have MasterWPort\n");
         return -1;

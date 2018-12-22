@@ -9,8 +9,28 @@
 #include "./include/mainServer.h"
 
 int main() {
-    if (ServerConnect()) {
-        printf("ServerConnect \033[1;31merror\033[0m\n");
+    pid_t serverPID = fork();
+    if (serverPID < 0) {
+        perror("main(Fork)");
+        return -1;
+    }
+    else if (serverPID == 0) {
+        if (ServerConnect()) {
+            printf("ServerConnect \033[1;31merror\033[0m\n");
+        }
+    } else {
+        const char PIDFile[] = "/etc/SHMS-server/server.pid";
+        FILE *fp = fopen(PIDFile, "w");
+        if (fp == NULL) {
+            perror("main(open PIDFile)");
+            return -1;
+        }
+        if (fprintf(fp, "%d", serverPID) < 0) {
+            fclose(fp);
+            perror("main(write pid to PIDFile)");
+            return -1;
+        }
+        fclose(fp);
     }
     return 0;
 }

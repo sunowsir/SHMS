@@ -13,7 +13,7 @@ void *getWarningInfo() {
     
     /* 从配置文件中获取本机IP  */
     
-    char *localIP = getConf("localIP", "./master.conf");
+    char *localIP = getConf("localIP", CONF_MASTER);
     if (localIP == NULL) {
         printf("\033[1;31mmaster.conf error : don't have localIP.\033[0m\n");
         exit(1);
@@ -21,7 +21,7 @@ void *getWarningInfo() {
 
     /* 从配置文件中获取本机紧急监听开启哪个端口 */
     
-    char *strLocalWPort = getConf("localWPort", "./master.conf");
+    char *strLocalWPort = getConf("localWPort", CONF_MASTER);
     if (strLocalWPort == NULL) {
         printf("\033[1;31mmaster.conf error : don't have locaWPort.\033[0m\n");
         exit(1);
@@ -53,7 +53,7 @@ void *getWarningInfo() {
             continue;
         }
         
-        char *logPath = getConf("logPath", "./master.conf");
+        char *logPath = getConf("logPath", CONF_MASTER);
         if (logPath == NULL) {
             printf("\033[1;31mmaster.conf error : don't have logPath.\033[0m\n");
         }

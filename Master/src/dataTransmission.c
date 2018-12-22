@@ -101,7 +101,7 @@ void *dataTransmission(void *arg) {
     
     /* get logPath. */
     
-    char *templogPath = getConf("logPath", "./master.conf");
+    char *templogPath = getConf("logPath", CONF_MASTER);
     if (templogPath == NULL) {
         printf("\033[1;31mmaster.conf error : don't have logPath.\033[0m\n");
     }

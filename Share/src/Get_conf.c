@@ -7,11 +7,12 @@
 
 #include "../include/Get_conf.h"
 
-char *getConf(const char *needVar, char *confPath) {
+char *getConf(const char *needVar, const char *confPath) {
     FILE *fp = fopen(confPath, "r");
 
     if (fp == NULL) {
-        perror("Get_conf.c : Get_conf->(12) 'fopen' ");
+        printf("confPath:(%s)\n", confPath);
+        perror("Get_conf.c (Get_conf->(12) 'fopen') ");
         return NULL;
     }
 

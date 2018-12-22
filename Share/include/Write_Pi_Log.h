@@ -13,6 +13,6 @@
 
 /* return : success(0), false(-1)  */
 
-int writePiLog(const char *, char * logInfo);
+int writePiLog(const char *, char *);
 
 #endif

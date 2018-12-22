@@ -12,7 +12,7 @@ int masterConnect() {
 
     /* Get threadNum from master.conf */
 
-    char *threadNum = getConf("threadNum", "./master.conf");
+    char *threadNum = getConf("threadNum", CONF_MASTER);
     if (threadNum == NULL) {
         printf("master.conf error : don't have threadNum.\n");
         return 1;

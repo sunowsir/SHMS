@@ -12,7 +12,7 @@
 #include "./needHead.h"
 
 /* The space pointed to by the pointer returned by this function needs to call free to release. */
-char *getConf(const char * /* the name of need varialbe */ , char * /* path and file name. */);
+char *getConf(const char * /* the name of need varialbe */ , const char * /* path and file name. */);
 
 #endif
 

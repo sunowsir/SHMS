@@ -1,0 +1,17 @@
+#! /bin/bash
+
+pid="$(cat /etc/SHMS-server/server.pid)";
+
+case ${1} in 
+    "start")
+        /opt/SHMS-server/Server
+    ;;
+    "stop")
+        kill ${pid};
+    ;;
+    "restart")
+        kill ${pid};
+        sleep 1;
+        /opt/SHMS-server/Server
+    ;;
+esac

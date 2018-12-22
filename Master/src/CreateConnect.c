@@ -18,7 +18,7 @@ void *startListen(void *None) {
     
     /* 从配置文件中获取本机IP  */
     
-    char *localIP = getConf("localIP", "./master.conf");
+    char *localIP = getConf("localIP", CONF_MASTER);
     if (localIP == NULL) {
         printf("\033[1;31mmaster.conf error : don't have localIP.\033[0m\n");
         return NULL;
@@ -26,7 +26,7 @@ void *startListen(void *None) {
 
     /* 从配置文件中获取本机监听开启哪个端口 */
     
-    char *strLocalPort = getConf("localPort", "./master.conf");
+    char *strLocalPort = getConf("localPort", CONF_MASTER);
     if (strLocalPort == NULL) {
         printf("\033[1;31mmaster.conf error : don't have localPort.\033[0m\n");
         free(localIP);
@@ -37,7 +37,7 @@ void *startListen(void *None) {
 
     /* 从配置文件中获取连接上限 */
     
-    char *strConnectMax = getConf("connectMax", "./master.conf");
+    char *strConnectMax = getConf("connectMax", CONF_MASTER);
     if (strConnectMax == NULL) {
         printf("\033[1;31mmaster.conf error : don't have connectMax.\033[0m\n");
         free(localIP);

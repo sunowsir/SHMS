@@ -66,7 +66,7 @@ void *monitorHealth(void *arg) {
 
     /* 从配置文件中获取日志文件所在位置 */
     
-    char *logPath = getConf("logPath", "./server.conf");
+    char *logPath = getConf("logPath", CONF_SERVER);
     if (logPath == NULL) {
         printf("server.conf \033[31;merror\033[0m don't have logPath.\n");
         return NULL;
@@ -77,7 +77,7 @@ void *monitorHealth(void *arg) {
     
     /* 从配置文件中获取脚本所在位置  */
 
-    char *ScriptPath = getConf("ScriptPath", "./server.conf");
+    char *ScriptPath = getConf("ScriptPath", CONF_SERVER);
     if (ScriptPath == NULL) {
         printf("server.conf \033[31;merror\033[0m don't have ScriptPath.\n");
         return NULL;
