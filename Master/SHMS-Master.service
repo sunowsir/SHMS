@@ -1,0 +1,17 @@
+[Unit]
+Description=SHMS-Master -- Monitoring terminal of server health monitoring system.
+Documentation=https://github.com/sunowsir/Simple-Socket
+After=
+ 
+[Service]
+Type=foking
+PIDFile=/etc/SHMS-master/master.pid
+ExecStart=/opt/SHMS-master/SHMS-master.init start
+ExecReload=/opt/SHMS-master/SHMS-master.init.sh restart
+ExecStop=/opt/SHMS-master/SHMS-master.init stop
+PrivateTmp=true
+ 
+[Install]
+WantedBy=multi-user.target
+
+

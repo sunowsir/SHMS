@@ -75,10 +75,10 @@ install :
 	systemctl start SHMS-Server.service 
 
 uninstall :
+	rm -rf /opt/SHMS-server/
+	rm -rf /etc/SHMS-server/
 	systemctl stop SHMS-Server.service
 	rm -rf /usr/lib/systemd/system/SHMS-Server.service
-	rm -rf /opt/SHMS-server/
-	rm -rf /etc/SHMS-server
 
 clean : 
 	rm -rf Server ${SERVER_RELY}

@@ -1,5 +1,5 @@
 [Unit]
-Description=SHMS-Server -- Server side of server health monitoring system
+Description=SHMS-Server -- Server side of server health monitoring system.
 Documentation=https://github.com/sunowsir/Simple-Socket
 After=
  

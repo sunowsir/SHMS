@@ -18,3 +18,6 @@ BEGIN{
         printf("%s %s %s %s %s %s\n", nowtime, $11, $2, $1, $3, $4);
     } 
 }'
+
+
+

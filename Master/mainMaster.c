@@ -9,9 +9,29 @@
 #include "./include/mainMaster.h"
 
 int main() {
-    if (masterConnect()) {
-        perror("masterConnect error!");
-        exit(1);
+    pid_t masterPID = fork();
+    if (masterPID < 0) {
+        perror("main(Fork)");
+        return 1;
+    } else if (masterPID == 0) {
+        if (masterConnect()) {
+            perror("masterConnect error!");
+            return 1;
+        }
+    } else {
+        const char PIDFile[] = "/etc/SHMS-master/master.pid";
+        FILE *fp = fopen(PIDFile, "w");
+        if (fp == NULL) {
+            perror("main(open PIDFile)");
+            return 1;
+        }
+        if (fprintf(fp, "%d", masterPID) < 0) {
+            fclose(fp);
+            perror("main(write pid to PIDFile)");
+            return 1;
+        }
+        fclose(fp);
+
     }
     return 0;
 }

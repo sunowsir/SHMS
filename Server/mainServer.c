@@ -12,7 +12,7 @@ int main() {
     pid_t serverPID = fork();
     if (serverPID < 0) {
         perror("main(Fork)");
-        return -1;
+        return 1;
     }
     else if (serverPID == 0) {
         if (ServerConnect()) {
@@ -23,12 +23,12 @@ int main() {
         FILE *fp = fopen(PIDFile, "w");
         if (fp == NULL) {
             perror("main(open PIDFile)");
-            return -1;
+            return 1;
         }
         if (fprintf(fp, "%d", serverPID) < 0) {
             fclose(fp);
             perror("main(write pid to PIDFile)");
-            return -1;
+            return 1;
         }
         fclose(fp);
     }

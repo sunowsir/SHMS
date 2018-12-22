@@ -44,6 +44,6 @@
 #define USER_WARN 205
 
 #define CONF_SERVER "/etc/SHMS-server/server.conf"
-#define CONF_MASTER "./master.conf"
+#define CONF_MASTER "/etc/SHMS-master/master.conf"
 
 #endif
