@@ -14,7 +14,7 @@ int masterConnect() {
 
     char *threadNum = getConf("threadNum", CONF_MASTER);
     if (threadNum == NULL) {
-        printf("master.conf error : don't have threadNum.\n");
+        perror("master.conf error (don't have threadNum)");
         return 1;
     }
     int MaxNum = StrtoInt(threadNum);

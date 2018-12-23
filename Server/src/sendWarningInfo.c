@@ -15,13 +15,13 @@ int sendWarningInfo(char *sendInfo) {
     
     char *MasterIP = getConf("MasterIP", CONF_SERVER);
     if (MasterIP == NULL) {
-        printf("server.conf \033[1;31merror\033[0m : don't have MasterIP\n");
+        perror("server.conf error (don't have MasterIP)");
         return -1;
     }
     
     char *strMasterWPort = getConf("MasterWPort", CONF_SERVER);
     if (strMasterWPort == NULL) {
-        printf("server.conf \033[1;31merror\033[0m : don't have MasterWPort\n");
+        perror("server.conf (error don't have MasterWPort)");
         return -1;
     }
     int MasterWPort = StrtoInt(strMasterWPort);

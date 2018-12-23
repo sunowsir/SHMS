@@ -1,7 +1,7 @@
 [Unit]
 Description=SHMS-Master -- Monitoring terminal of server health monitoring system.
 Documentation=https://github.com/sunowsir/Simple-Socket
-After=
+After=syslog.target network.target remote-fs.target nss-lookup.target
  
 [Service]
 Type=foking

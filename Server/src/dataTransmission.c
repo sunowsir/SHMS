@@ -8,11 +8,36 @@
 
 #include "../include/dataTransmission.h"
 
+int sendDataString(int sockFd, int dataSize, char *sendData) {
+       
+    int nowDataSize = dataSize;
+    char *nowDataStrStarPos = &sendData[0];
+    
+    while (nowDataSize > 0) {
+        int sendDataSize;
+        nowDataSize = (int)strlen(nowDataStrStarPos);
+        sendDataSize = (TRANS_MAX < nowDataSize ? TRANS_MAX: nowDataSize);
+        
+        if (send(sockFd, nowDataStrStarPos, sizeof(char) *sendDataSize, 0) < 0)  {
+            perror("dataTransmission.c (send Data)");
+            return -1;
+        }
+        nowDataStrStarPos += sendDataSize;
+    }
+    
+    /* 释放sendData字符串空间 */
+    
+    if (sendData != NULL) {
+        free(sendData);
+    }
+    
+    return 0;
+}
+
 int dataTransmission(int sockFd) {
     signal(SIGPIPE, SIG_IGN);
     
     /* 传输6个脚本的数据 */
-    printf("===Send data===\n");
 
     for (int i = 0; i < 6; i++) {
         /* 通过接收标识码调用getScriptRunInfo.c获取一段指定长度的字符串  */
@@ -23,19 +48,17 @@ int dataTransmission(int sockFd) {
             perror("dataTransmission.c (recvRet)");
             return -1;
         } else if (dataType < 100 || dataType > 105) {
-            printf("dataType \033[1;31merror\033[0m\n");
+            perror("recv dataType error");
             sendClose(sockFd);
             return 0;
         }
-        
-        printf("recv dataType : %d\n", dataType);
         
         /* 获取即将发送的字符串 */
         
         signal(SIGPIPE, SIG_DFL);
         char *sendData = getScriptRunInfo(dataType);
         if (sendData == NULL) {
-            printf("getScriptRunInfo() \033[1;31mrun error\033[0m\n");
+            perror("getScriptRunInfo() run error");
             return -1;
         }
         signal(SIGPIPE, SIG_IGN);
@@ -43,30 +66,19 @@ int dataTransmission(int sockFd) {
         /* 发送字符串长度 */
         
         int dataSize = (int)strlen(sendData) + 5;
-        printf("Send dataSize: %d\n", dataSize);
         if (send(sockFd, &dataSize, sizeof(int), 0) < 0) {
             perror("dataTransmission.c (send dataSize)");
             return -1;
         }
         
-        printf("\033[1;32mAlready send dataSize\033[0m\n");
+        sleep(1);
         
         /* 发送字符串 */
-        printf("send data : <%s>\n", sendData);
         
-        if (send(sockFd, sendData, sizeof(char) * (int)strlen(sendData), 0) < 0)  {
-            perror("dataTransmission.c (send Data)");
+        if (sendDataString(sockFd, dataSize, sendData) == -1) {
             return -1;
         }
-        if (sendData != NULL) {
-            free(sendData);
-        }
-        
-        printf("\033[1;32mAlready send data\033[0m\n");
-        
-        sleep(1);
     }
-    printf("\n");
     
     return 0;
 }

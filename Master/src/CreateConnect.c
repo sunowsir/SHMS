@@ -20,7 +20,7 @@ void *startListen(void *None) {
     
     char *localIP = getConf("localIP", CONF_MASTER);
     if (localIP == NULL) {
-        printf("\033[1;31mmaster.conf error : don't have localIP.\033[0m\n");
+        perror("master.conf error (don't have localIP)");
         return NULL;
     }
 
@@ -28,7 +28,7 @@ void *startListen(void *None) {
     
     char *strLocalPort = getConf("localPort", CONF_MASTER);
     if (strLocalPort == NULL) {
-        printf("\033[1;31mmaster.conf error : don't have localPort.\033[0m\n");
+        perror("master.conf error (don't have localPort)");
         free(localIP);
         return NULL;
     }
@@ -39,7 +39,7 @@ void *startListen(void *None) {
     
     char *strConnectMax = getConf("connectMax", CONF_MASTER);
     if (strConnectMax == NULL) {
-        printf("\033[1;31mmaster.conf error : don't have connectMax.\033[0m\n");
+        perror("master.conf error (don't have connectMax)");
         free(localIP);
         return NULL;
     }
@@ -63,8 +63,7 @@ void *startListen(void *None) {
             nowConnectNum += arg.list[i]->length;
             minLenList = (arg.list[i]->length < minLenList->length ? arg.list[i] : minLenList);
         }
-        printf("Now connect total : %d\n", nowConnectNum);
-
+        
         if (nowConnectNum >= connectMax) {
             sleep(1);
             continue;
@@ -78,7 +77,6 @@ void *startListen(void *None) {
         }
         char IP[20] = {'0'};
         sockGetFromIP(IP, (struct sockaddr_in *)&addrSon);
-        printf("Server %s already connect to Master!\n", IP);
         
         /* 将新建连接插入链表 */
         

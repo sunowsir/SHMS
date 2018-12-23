@@ -15,7 +15,7 @@ void *getWarningInfo() {
     
     char *localIP = getConf("localIP", CONF_MASTER);
     if (localIP == NULL) {
-        printf("\033[1;31mmaster.conf error : don't have localIP.\033[0m\n");
+        perror("master.conf error (don't have localIP)");
         exit(1);
     }
 
@@ -23,7 +23,7 @@ void *getWarningInfo() {
     
     char *strLocalWPort = getConf("localWPort", CONF_MASTER);
     if (strLocalWPort == NULL) {
-        printf("\033[1;31mmaster.conf error : don't have locaWPort.\033[0m\n");
+        perror("master.conf error (don't have locaWPort)");
         exit(1);
     }
     int localWPort = StrtoInt(strLocalWPort);
@@ -40,7 +40,7 @@ void *getWarningInfo() {
     while (1) {
         int sockSon = accept(sockFd, (struct sockaddr *)&addrSon, &addrSonLen);
         if (sockSon < 0) {
-            printf("getWarningInfo.c accept \033[1;31merror\033[0m\n");
+            perror("getWarningInfo.c accept error");
             return NULL;
         }
         
@@ -55,7 +55,7 @@ void *getWarningInfo() {
         
         char *logPath = getConf("logPath", CONF_MASTER);
         if (logPath == NULL) {
-            printf("\033[1;31mmaster.conf error : don't have logPath.\033[0m\n");
+            perror("master.conf error (don't have logPath)");
         }
         if (logPath[(int)strlen(logPath) - 1] == '/') {
             logPath[(int)strlen(logPath) - 1] = '\0';
@@ -67,7 +67,7 @@ void *getWarningInfo() {
         strcat(logPath, "/warning.log");
         free(logPath);
         if (writePiLog(logpath, warning) == 1) {
-            printf("getWarningInfo.c: writePiLog error\n");
+            perror("getWarningInfo.c (writePiLog error)");
             return NULL;
         }
         

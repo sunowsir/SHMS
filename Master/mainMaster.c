@@ -14,6 +14,13 @@ int main() {
         perror("main(Fork)");
         return 1;
     } else if (masterPID == 0) {
+                
+        /* 重定向错误信息到运行日志 */
+        if (freopen(RUN_LOG_MASTER, "a", stderr) == NULL) {
+            perror("main (freopen)");
+            exit(1);
+        }
+        
         if (masterConnect()) {
             perror("masterConnect error!");
             return 1;

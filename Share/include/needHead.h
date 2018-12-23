@@ -43,7 +43,17 @@
 #define SYS_WARN 204
 #define USER_WARN 205
 
+/* 配置文件路径 */
+
 #define CONF_SERVER "/etc/SHMS-server/server.conf"
 #define CONF_MASTER "/etc/SHMS-master/master.conf"
+
+/* 程序运行日志路径 */
+#define RUN_LOG_SERVER "/var/log/SHMS-server/SHMS-Server.log"
+#define RUN_LOG_MASTER "/var/log/SHMS-master/SHMS-Master.log"
+
+/* 每次最大发送长度 */
+
+#define TRANS_MAX 1024
 
 #endif

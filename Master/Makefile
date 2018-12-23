@@ -59,13 +59,15 @@ ${BUILD_DIR}Write_Pi_Log.o : ${SHARE_CODE_DIR}Write_Pi_Log.c ${SHARE_HEAD_DIR}Wr
 install : 
 	mkdir /opt/SHMS-master/
 	mkdir /etc/SHMS-master/
+	mkdir /var/log/SHMS-master/
+	touch /var/log/SHMS-master/SHMS-Master.log
 	touch /etc/SHMS-master/master.pid
 	cp ./Master /opt/SHMS-master/
 	cp ./master.conf /etc/SHMS-master/
 	cp ./SHMS-master.init /opt/SHMS-master/
-	cp ./SHMS-Master.service /usr/lib/systemd/system/
+	cp ./SHMS-Master.service /etc/systemd/system/
 	chmod 755 /opt/SHMS-master/SHMS-master.init
-	chmod 754 /usr/lib/systemd/system/SHMS-Master.service
+	chmod 754 /etc/systemd/system/SHMS-Master.service
 	systemctl daemon-reload
 	systemctl enable SHMS-Master.service
 	systemctl start SHMS-Master.service
@@ -73,8 +75,9 @@ install :
 uninstall : 
 	rm -rf /opt/SHMS-master/
 	rm -rf /etc/SHMS-master/
+	rm -rf /var/log/SHMS-master/
 	systemctl stop SHMS-Master.service
-	rm -rf /usr/lib/systemd/system/SHMS-Master.service
+	rm -rf /etc/systemd/system/SHMS-Master.service
 
 clean : 
 	rm -rf Master ${MASTER_RELY}

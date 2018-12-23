@@ -9,10 +9,8 @@
 #include "../include/dataTransmission.h" 
 
 int recvData(int sockFd, char *logPath) {
-    printf("===recvData===\n");
     
     for (int i = 0; i < 6; i++) {
-        printf("\n");
         
         int dataType = 100 + i;
         
@@ -20,8 +18,6 @@ int recvData(int sockFd, char *logPath) {
             perror("recvData (send INFO)");
             return -1;
         }
-        
-        printf("Send dataType(%d)\n", dataType);
         
         /* receive dataSize. */
         
@@ -34,27 +30,13 @@ int recvData(int sockFd, char *logPath) {
         } else if (recvRet == 0) {
             break;
         } else if (dataSize <= 0) {
-            printf("dataSize num error\n");
+            perror("dataSize error");
             return -1;
         } else if (dataSize == CLOSE_NOW) {
             return 0;
         }
         
-        printf("Receive dataSize(%d)\n", dataSize);
-        
         /* receive data. */
-        
-        char *data = (char *)calloc(sizeof(char), (dataSize + 10));
-        recvRet = recv(sockFd, data, sizeof(char) * (dataSize + 5), 0);
-        if (recvRet == -1) {
-            perror("recvData (recv data)");
-            return -1;
-        } else if (!strcmp(data, "NULL")) {
-            printf("recvData(): receive data is NULL\n");
-            free(data);
-            continue;
-        }
-        printf("Receive data: {%s}\n", data);
         
         char logFile[MAXBUFF] = {'0'};
         strcpy(logFile, logPath);
@@ -80,19 +62,39 @@ int recvData(int sockFd, char *logPath) {
             } break;
         }
         
-        /* 将数据写入日志文件 */
-        printf("Write data to log file\n");
+        int nowDataSize = dataSize;
         
-        if (writePiLog(logFile, data) == 1) {
-            free(data);
-            return -1;
-        }
-        
-        if (data != NULL) {
-            free(data);
+        while (nowDataSize > 0) {
+            int recvDataSize = (TRANS_MAX < nowDataSize ? 
+                                TRANS_MAX : nowDataSize);
+            nowDataSize -= recvDataSize;
+            
+            char *recvData = (char *)calloc(sizeof(char), (recvDataSize));
+            recvRet = recv(sockFd, recvData, sizeof(char) * (recvDataSize), 0);
+            if (recvRet == -1) {
+                perror("recvData (recv data)");
+                return -1;
+            } else if (!strcmp(recvData, "NULL")) {
+                perror("recvData() (receive data is NULL)");
+                free(recvData);
+                continue;
+            }
+            
+            /* 将数据写入日志文件 */
+            
+            if (writePiLog(logFile, recvData) == 1) {
+                free(recvData);
+                return -1;
+            }
+            
+            /* 释放data字符串空间 */
+            
+            if (recvData != NULL) {
+                free(recvData);
+            }
         }
     }
-    printf("\n");
+    
     return 0;
 }
 
@@ -103,7 +105,7 @@ void *dataTransmission(void *arg) {
     
     char *templogPath = getConf("logPath", CONF_MASTER);
     if (templogPath == NULL) {
-        printf("\033[1;31mmaster.conf error : don't have logPath.\033[0m\n");
+        perror("master.conf error (don't have logPath)");
     }
     if (templogPath[(int)strlen(templogPath) - 1] == '/') {
         templogPath[(int)strlen(templogPath) - 1] = '\0';
@@ -126,8 +128,6 @@ void *dataTransmission(void *arg) {
         strcat(logpath, "/");
         strcat(logpath, currentNode->IP);
         
-        printf("mkdir(%s)\n", logpath);
-        
         char Cmd[MAXBUFF] = {'0'};
         strcpy(Cmd, "mkdir ");
         strcat(Cmd, logpath);
@@ -140,13 +140,12 @@ void *dataTransmission(void *arg) {
         /* 读取套接字sockFd，进行数据传输 */
         
         if (recvData(currentNode->sockFd, logpath) == -1) {
-            printf("\033[1;31mrecvData error!\033[0m");
+            perror("recvData error");
             break;
         }
         
         /* 断开连接 */
         
-        printf("Have a connect already close!\n");
         linkErase(list, currentNode);
         
         if (currentNode->next == NULL) {

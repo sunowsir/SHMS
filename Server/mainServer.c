@@ -9,12 +9,20 @@
 #include "./include/mainServer.h"
 
 int main() {
+    
     pid_t serverPID = fork();
     if (serverPID < 0) {
         perror("main(Fork)");
         return 1;
     }
     else if (serverPID == 0) {
+        
+        /* 重定向错误信息到运行日志 */
+        if (freopen(RUN_LOG_SERVER, "a", stderr) == NULL) {
+            perror("main (freopen)");
+            exit(1);
+        }
+        
         if (ServerConnect()) {
             printf("ServerConnect \033[1;31merror\033[0m\n");
         }

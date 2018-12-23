@@ -24,7 +24,7 @@ void *heartBeat() {
     
     char *strMasterMaxConnectNum = getConf("MasterMaxConnectNum", CONF_SERVER);
     if (strMasterMaxConnectNum == NULL) {
-        printf("server.conf \033[1;31merror\033[0m : don't have MasterMaxConnectNum\n");
+        perror("server.conf error (don't have MasterMaxConnectNum)");
         return NULL;
     }
     MasterMaxConnectNum = StrtoInt(strMasterMaxConnectNum);
@@ -36,13 +36,13 @@ void *heartBeat() {
     
     char *MasterIP = getConf("MasterIP", CONF_SERVER);
     if (MasterIP == NULL) {
-        printf("server.conf \033[1;31merror\033[0m : don't have MasterIP\n");
+        perror("server.conf error (don't have MasterIP)");
         return NULL;
     }
     
     char *strMasterPort = getConf("MasterPort", CONF_SERVER);
     if (strMasterPort == NULL) {
-        printf("server.conf \033[1;31merror\033[0m : don't have MasterPort\n");
+        perror("server.conf (error don't have MasterPort)");
         return NULL;
     }
     int MasterPort = StrtoInt(strMasterPort);
@@ -65,15 +65,11 @@ void *heartBeat() {
         
         int sockFd = sockClient(IP, Port);
         if (sockFd != -1) {
-            printf("Connect %s:%d success.\n", IP, Port);
             dataTransmission(sockFd);
-            printf("\033[1;32mData sent to complete\033[0m\n");
-            printf("Disconnect %s:%d.\n", IP, Port);
         } else {
-            printf("Connect %s:%d false.\n", IP, Port);
+            perror("Connect false");
         }
         close(sockFd);
-        printf("\n");
     }
     return NULL;
 }

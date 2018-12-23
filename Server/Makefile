@@ -63,13 +63,15 @@ ${BUILD_DIR}/Write_Pi_Log.o : ${SHARE_CODE_DIR}/Write_Pi_Log.c ${SHARE_HEAD_DIR}
 install : 
 	mkdir /opt/SHMS-server/ 
 	mkdir /etc/SHMS-server/
+	mkdir /var/log/SHMS-server/
+	touch /var/log/SHMS-server/SHMS-Server.log
 	touch /etc/SHMS-server/server.pid
 	cp ./Server /opt/SHMS-server/ 
 	cp ./server.conf /etc/SHMS-server/
 	cp ./SHMS-server.init /opt/SHMS-server/ 
-	cp ./SHMS-Server.service /usr/lib/systemd/system/
+	cp ./SHMS-Server.service /etc/systemd/system/
 	chmod 755 /opt/SHMS-server/SHMS-server.init 
-	chmod 754 /usr/lib/systemd/system/SHMS-Server.service
+	chmod 754 /etc/systemd/system/SHMS-Server.service
 	systemctl daemon-reload
 	systemctl enable SHMS-Server.service
 	systemctl start SHMS-Server.service 
@@ -77,8 +79,9 @@ install :
 uninstall :
 	rm -rf /opt/SHMS-server/
 	rm -rf /etc/SHMS-server/
+	rm -rf /var/log/SHMS-server/
 	systemctl stop SHMS-Server.service
-	rm -rf /usr/lib/systemd/system/SHMS-Server.service
+	rm -rf /etc/systemd/system/SHMS-Server.service
 
 clean : 
 	rm -rf Server ${SERVER_RELY}

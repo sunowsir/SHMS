@@ -48,7 +48,7 @@ int RunAndSave(char *logFile, char *ScriptFile, int sleepTime, int monitorWarnin
             
             if (strstr(runRes, "warning") != NULL) {
                 if (sendWarningInfo(runRes)) {
-                    printf("sendWarningInfo \033[1;31merror\033[0m\n");
+                    perror("sendWarningInfo error");
                     break;
                 }
             }
@@ -68,7 +68,7 @@ void *monitorHealth(void *arg) {
     
     char *logPath = getConf("logPath", CONF_SERVER);
     if (logPath == NULL) {
-        printf("server.conf \033[31;merror\033[0m don't have logPath.\n");
+        perror("server.conf (error don't have logPath)");
         return NULL;
     }
     if (logPath[(int)strlen(logPath) - 1] == '/') {
@@ -79,7 +79,7 @@ void *monitorHealth(void *arg) {
 
     char *ScriptPath = getConf("ScriptPath", CONF_SERVER);
     if (ScriptPath == NULL) {
-        printf("server.conf \033[31;merror\033[0m don't have ScriptPath.\n");
+        perror("server.conf error (don't have ScriptPath)");
         return NULL;
     }
     if (ScriptPath[(int)strlen(ScriptPath) - 1] == '/') {
@@ -128,7 +128,6 @@ void *monitorHealth(void *arg) {
         } break;
     }
     
-    printf("%s >> %s\n", ScriptFile, logFile);
     
     if (RunAndSave(logFile, ScriptFile, sleepTime, monitorWarning) == -1) {
         return NULL;

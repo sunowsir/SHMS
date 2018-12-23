@@ -1,16 +1,14 @@
 #! /bin/bash
 
-pid="$(cat /etc/SHMS-master/master.pid)";
-
 case ${1} in
     "start")
         /opt/SHMS-master/Master;
     ;;
     "stop")
-        kill ${pid}
+        kill $(cat /etc/SHMS-master/master.pid);
     ;;
     "restart")
-        kill ${pid};
+        kill $(cat /etc/SHMS-master/master.pid);
         sleep 1;
         /opt/SHMS-master/Master;
     ;;

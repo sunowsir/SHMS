@@ -86,14 +86,5 @@ int search(LinkList *list, /* const char *IP */int sockFd) {
     return 1;
 }
 
-// void output(LinkList *l) {
-//     printf("[%.2d] ", l->length);
-//     LinkNode *output_node = l->head.next;
-//     while (output_node) {
-//         printf(" %d -> ", output_node->data);
-//         output_node = output_node->next;
-//     }
-//     printf(" NULL\n");
-//     return ;
-// }
+
 

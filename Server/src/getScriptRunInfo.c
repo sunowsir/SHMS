@@ -8,11 +8,11 @@
 
 #include "../include/getScriptRunInfo.h"
 
-/*  读取指定类型日志信息  */
+/*  读取指定类型日志信息 */
 
 char *getScriptRunInfo(int Signifier) {
     if (Signifier < 100 || Signifier > 105) {
-        printf("getScriptRunInfo(): Signifier \033[1;31merror\033[0m\n");
+        perror("getScriptRunInfo() (Signifier error)");
         return NULL;
     }
     
@@ -20,7 +20,7 @@ char *getScriptRunInfo(int Signifier) {
     
     char *logPath = getConf("logPath", CONF_SERVER);
     if (logPath == NULL) {
-        printf("server.conf \033[31;merror\033[0m don't have logPath.\n");
+        perror("server.conf (error don't have logPath)");
         return NULL;
     }
     if (logPath[(int)strlen(logPath) - 1] == '/') {
@@ -31,7 +31,7 @@ char *getScriptRunInfo(int Signifier) {
     
     char *ScriptPath = getConf("ScriptPath", CONF_SERVER);
     if (ScriptPath == NULL) {
-        printf("server.conf \033[31;merror\033[0m don't have ScriptPath.\n");
+        perror("server.conf (error don't have ScriptPath)");
         return NULL;
     }
     if (ScriptPath[(int)strlen(ScriptPath) - 1] == '/') {
