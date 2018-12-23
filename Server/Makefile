@@ -6,8 +6,8 @@ FATHER_DIR=$(shell echo `cd ../ && pwd`)
 BUILD_DIR=${NOW_DIR}/Build
 HEAD_DIR=${NOW_DIR}/include
 CODE_DIR=${NOW_DIR}/src
-SHARE_HEAD_DIR=${FATHER_DIR}/Share/include/
-SHARE_CODE_DIR=${FATHER_DIR}/Share/src/
+SHARE_HEAD_DIR=${FATHER_DIR}/Share/include
+SHARE_CODE_DIR=${FATHER_DIR}/Share/src
 
 SERVER_RELY = \
 			${BUILD_DIR}/Write_Pi_Log.o \
