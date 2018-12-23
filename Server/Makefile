@@ -2,8 +2,8 @@ CC=gcc
 CFLAGS=-g -Wall -o 
 
 NOW_DIR=$(shell pwd)
+FATHER_DIR=$(shell echo `cd ../ && pwd`)
 BUILD_DIR=$(shell echo `[ ! -d ${NOW_DIR}/Build ] && mkdir ${NOW_DIR}/Build; echo "${NOW_DIR}/Build"`)
-BUILD_DIR=${NOW_DIR}/Build
 HEAD_DIR=${NOW_DIR}/include
 CODE_DIR=${NOW_DIR}/src
 SHARE_HEAD_DIR=${FATHER_DIR}/Share/include
@@ -77,18 +77,23 @@ install :
 	systemctl start SHMS-Server.service 
 
 update : 
-	make uninstall
-	cp ${NOW_DIR}/server.conf ../../
-	cp ../Master/master.conf ../../
-	cd ../../ 
-	rm -rf ./SHMS/
 	git clone https://github.com/sunowsir/SHMS.git
-	cd ${NOW_DIR}
-	mv ../../server.conf ${NOW_DIR}
-	mv ../../master.conf ../Master/
-	make clean 
+	rm -rf ./Build/*
+	rm -rf ../Share/*
+	mv ./SHMS/Share/* ../Share/
+	rm -rf ./include/* 
+	mv ./SHMS/Server/include/* ./include/
+	rm -rf ./src/* 
+	mv ./SHMS/Server/src/* ./src/
+	rm -rf ./script/*
+	mv ./SHMS/Server/script/* ./script/
+	mv ./SHMS/Server/mainServer.c ./
+	mv ./SHMS/Server/SHMS-* ./
+	rm -rf ./SHMS/
+	make clean
 	make 
-	make install 
+	make uninstall
+	make install
 
 uninstall :
 	rm -rf /opt/SHMS-server/
