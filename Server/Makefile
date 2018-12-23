@@ -2,8 +2,8 @@ CC=gcc
 CFLAGS=-g -Wall -o 
 
 NOW_DIR=$(shell pwd)
-FATHER_DIR=$(shell echo `cd ../ && pwd`)
 BUILD_DIR=$(shell echo `[ ! -d ${NOW_DIR}/Build ] && mkdir ${NOW_DIR}/Build; echo "${NOW_DIR}/Build"`)
+BUILD_DIR=${NOW_DIR}/Build
 HEAD_DIR=${NOW_DIR}/include
 CODE_DIR=${NOW_DIR}/src
 SHARE_HEAD_DIR=${FATHER_DIR}/Share/include
