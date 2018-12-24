@@ -8,7 +8,7 @@ retStr="";
 function getString() {
     local _logFile=${1};
     local _line="$(cat "${_logFile}" | wc -l)";
-    if [[ ${_line} -lt 10 ]];
+    if [[ ${_line} -lt 5 ]];
     then
         return 0;
     fi
