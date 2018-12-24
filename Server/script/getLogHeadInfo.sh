@@ -8,26 +8,34 @@ retStr="";
 function getString() {
     local _logFile=${1};
     local _line="$(cat "${_logFile}" | wc -l)";
-    if [[ ${_line} -lt 5 ]];
+    if [[ ${_line} -lt 1 ]];
     then
         return 0;
     fi
-    local needRetLine="$(awk -v line=${_line}'
-    {
-        if (line < 5) {
-            printf("%d", line);
-        } else if (line <= 10) {
-            printf("%d", 5 + ((line - 5) / 2);
-        } else if (line <= 20) {
-            printf("%d", line / 3 * 2);
-        } else {
-            printf("%d", 20);
-        }
-    }
-    ')";
+    
+    local needRetLine="";
+    
+    if [[ ${_line} -lt 10 ]];
+    then
+        needRetLine=${_line};
+    elif [[ ${_line} -lt 20 ]];
+    then
+        needRetLine=$((${_line} / 3 * 2));
+    fi
+    
     local _retWord="$(cat "${_logFile}" | head -${needRetLine})";
-    local _remainLog="$(cat ${_logFile} | tail -$((${_line} - ${needRetLine})))";
-    echo "${_remainLog}" > ${_logFile};
+    local _remainLine="";
+    
+    if [[ ${_line} -eq ${needRetLine} ]];
+    then
+        _remainLine=0
+    else
+        let "_remainLine=${_line} - ${needRetLine}"
+    fi
+    echo "needRetLine:${needRetLine}"
+    echo "_remainLine:${_remainLine}"
+    
+    echo "$(cat ${_logFile} | tail -${_remainLine})" > ${_logFile};
     retStr="${_retWord}";
     
     if [[ "${retStr}x" == "x" ]];
