@@ -19,7 +19,6 @@
   重启服务：sudo systemctl restart SHMS-Master.service
 
 *  更新：
-
   sudo make update
 
 * 卸载：sudo make uninstall
