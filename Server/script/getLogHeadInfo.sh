@@ -8,20 +8,8 @@ retStr="";
 function getString() {
     local _logFile=${1};
     local _line="$(cat "${_logFile}" | wc -l)";
-    local needRetLine="";
-    local _remainLine="";
-    if [[ ${_line} -lt 1 ]];
-    then
-        return 0;
-    elif [[ ${_line} -lt 10 ]];
-    then
-        needRetLine=${_line};
-        _remainLine=0;
-    else 
-        needRetLine=10;
-        _remainLine=$((${_line} - 10));
-    fi
-    
+    local needRetLine="1";
+    local _remainLine="$((${_line} - 1))";
     local _retWord="$(cat "${_logFile}" | head -${needRetLine})";
     
     echo "$(cat ${_logFile} | tail -${_remainLine})" > ${_logFile};

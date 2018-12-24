@@ -22,6 +22,10 @@ int main() {
             perror("main (freopen)");
             exit(1);
         }
+        if (freopen("/dev/null", "a", stdout) == NULL) {
+            perror("main (freopen)");
+            exit(1);
+        }
         
         if (ServerConnect()) {
             printf("ServerConnect \033[1;31merror\033[0m\n");
@@ -40,5 +44,6 @@ int main() {
         }
         fclose(fp);
     }
+    
     return 0;
 }

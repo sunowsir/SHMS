@@ -25,12 +25,6 @@ int sendDataString(int sockFd, int dataSize, char *sendData) {
         nowDataStrStarPos += sendDataSize;
     }
     
-    /* 释放sendData字符串空间 */
-    
-    if (sendData != NULL) {
-        free(sendData);
-    }
-    
     return 0;
 }
 
@@ -66,17 +60,28 @@ int dataTransmission(int sockFd) {
         /* 发送字符串长度 */
         
         int dataSize = (int)strlen(sendData) + 5;
-        if (send(sockFd, &dataSize, sizeof(int), 0) < 0) {
-            perror("dataTransmission.c (send dataSize)");
-            return -1;
-        }
-        
-        sleep(1);
+        // if (send(sockFd, &dataSize, sizeof(int), 0) < 0) {
+        //     perror("dataTransmission.c (send dataSize)");
+        //     return -1;
+        // }
+        // 
+        // sleep(0.5);
         
         /* 发送字符串 */
         
-        if (sendDataString(sockFd, dataSize, sendData) == -1) {
+        // if (sendDataString(sockFd, dataSize, sendData) == -1) {
+        //     return -1;
+        // }
+        printf("sendData : <%s>\n", sendData);
+        if (send(sockFd, sendData, sizeof(char) * dataSize, 0) < 0)  {
+            perror("dataTransmission.c (send Data)");
             return -1;
+        }
+        
+        /* 释放sendData字符串空间 */
+        
+        if (sendData != NULL) {
+            free(sendData);
         }
     }
     

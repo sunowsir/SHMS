@@ -79,6 +79,7 @@ char *getScriptRunInfo(int Signifier) {
     FILE *fp = popen(Cmd, "r");
     fgets(tempData, sizeof(char) * MAXBUFF, fp);
     pclose(fp);
+    printf("tempData <%s>\n", tempData);
 
     /* 将获得的数据返回 */
 

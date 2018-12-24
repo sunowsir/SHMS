@@ -13,7 +13,8 @@ int MasterMaxConnectNum;
 void sleepSometime() {
     srand(time(0));
     
-    double sleepTime=fabs((double)(rand() % MasterMaxConnectNum) / 100.0) + 1;
+    double sleepTime=fabs((double)(rand() % MasterMaxConnectNum + MasterMaxConnectNum) / 100.0);
+    printf("sleepTime:(%f)\n", sleepTime);
     sleep (sleepTime);
     return ;
 }

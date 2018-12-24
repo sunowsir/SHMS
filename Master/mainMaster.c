@@ -21,6 +21,11 @@ int main() {
             exit(1);
         }
         
+        if (freopen("/dev/null", "a", stdout) == NULL) {
+            perror("main (freopen)");
+            exit(1);
+        }
+        
         if (masterConnect()) {
             perror("masterConnect error!");
             return 1;
@@ -38,7 +43,8 @@ int main() {
             return 1;
         }
         fclose(fp);
-
+    
     }
+    
     return 0;
 }

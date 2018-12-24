@@ -21,20 +21,20 @@ int recvData(int sockFd, char *logPath) {
         
         /* receive dataSize. */
         
-        int dataSize = 0;
-        int recvRet = 1;
-        recvRet = recv(sockFd, &dataSize, sizeof(int), 0);
-        if(recvRet == -1) {
-            perror("recvData (recv dataSize)");
-            return -1;
-        } else if (recvRet == 0) {
-            break;
-        } else if (dataSize <= 0) {
-            perror("dataSize error");
-            return -1;
-        } else if (dataSize == CLOSE_NOW) {
-            return 0;
-        }
+        int dataSize = MAXBUFF;
+        // int recvRet = 1;
+        // recvRet = recv(sockFd, &dataSize, sizeof(int), 0);
+        // if(recvRet == -1) {
+        //     perror("recvData (recv dataSize)");
+        //     return -1;
+        // } else if (recvRet == 0) {
+        //     break;
+        // } else if (dataSize <= 0) {
+        //     perror("dataSize error");
+        //     return -1;
+        // } else if (dataSize == CLOSE_NOW) {
+        //     return 0;
+        // }
         
         /* receive data. */
         
@@ -62,30 +62,22 @@ int recvData(int sockFd, char *logPath) {
             } break;
         }
         
-        int nowDataSize, recvDataSize;
-        char Data[TRANS_MAX] = {'\0'};
-        nowDataSize = dataSize;
+        char Data[MAXBUFF] = {'0'};
         
-        while (nowDataSize > 0) {
-            recvDataSize = (TRANS_MAX < nowDataSize ? 
-                            TRANS_MAX : nowDataSize);
-            nowDataSize -= recvDataSize;
-            
-            memset(Data, '\0', sizeof(Data));
-            if (recv(sockFd, Data, sizeof(char) * (recvDataSize), 0)) {
-                perror("recvData (recv data)");
-                return -1;
-            } else if (!strcmp(Data, "NULL")) {
-                perror("recvData() (receive data is NULL)");
-                continue;
-            }
-            /* 将数据写入日志文件 */
-            
-            if (writePiLog(logFile, Data) == 1) {
-                return -1;
-            }
-            
+        if (recv(sockFd, Data, sizeof(char) * (dataSize), 0) < 0) {
+            perror("recvData (recv data)");
+            return -1;
+        } else if (!strcmp(Data, "NULL")) {
+            perror("recvData() (receive data is NULL)");
+            continue;
         }
+        printf("receive Data : <%s>\n", Data);
+        /* 将数据写入日志文件 */
+        
+        if (writePiLog(logFile, Data) == 1) {
+            return -1;
+        }
+
     }
     
     return 0;
