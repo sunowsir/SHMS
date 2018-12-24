@@ -78,22 +78,15 @@ int recvData(int sockFd, char *logPath) {
                 return -1;
             } else if (!strcmp(recvData, "NULL")) {
                 perror("recvData() (receive data is NULL)");
-                free(recvData);
                 continue;
             }
             
             /* 将数据写入日志文件 */
             
             if (writePiLog(logFile, recvData) == 1) {
-                free(recvData);
                 return -1;
             }
             
-            /* 释放data字符串空间 */
-            
-            if (recvData != NULL) {
-                free(recvData);
-            }
         }
     }
     
