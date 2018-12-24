@@ -40,7 +40,7 @@ int dataTransmission(int sockFd) {
     /* 传输6个脚本的数据 */
 
     for (int i = 0; i < 6; i++) {
-        /* 通过接收标识码调用getScriptRunInfo.c获取一段指定长度的字符串  */
+        /* 接收标识码  */
         
         int recvRet, dataType;
         recvRet = recv(sockFd, &dataType, sizeof(int), 0);
