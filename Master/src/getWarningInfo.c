@@ -34,8 +34,8 @@ void *getWarningInfo() {
     
     int sockFd, sockSon;
     struct sockaddr_in addrSon;
-    char IP[20] = {'0'};
-    char warning[MAXBUFF] = {'0'};
+    char IP[20] = {'\0'};
+    char warning[MAXBUFF] = {'\0'};
     
     sockFd = sockServer(localIP, localWPort);
     socklen_t addrSonLen = sizeof(addrSon);
@@ -48,10 +48,10 @@ void *getWarningInfo() {
             return NULL;
         }
         
-        memset(IP, '0', sizeof(IP));
+        memset(IP, '\0', sizeof(IP));
         sockGetFromIP(IP, (struct sockaddr_in *)&addrSon);
         
-        memset(warning, '0', sizeof(warning));
+        memset(warning, '\0', sizeof(warning));
         if (recv(sockSon, warning, MAXBUFF, 0) == -1) {
             perror("getWarningInfo.c recv");
             continue;

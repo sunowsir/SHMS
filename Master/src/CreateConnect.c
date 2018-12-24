@@ -50,7 +50,7 @@ void *startListen(void *None) {
     
     int sockFd, sockSon;
     struct sockaddr_in addrSon;
-    char IP[20] = {'0'};
+    char IP[20] = {'\0'};
     
     sockFd = sockServer(localIP, localPort);
     socklen_t addrSonLen = sizeof(addrSon);
@@ -78,7 +78,7 @@ void *startListen(void *None) {
         if (sockSon < 0) {
             break;
         }
-        memset(IP, '0', sizeof(IP));
+        memset(IP, '\0', sizeof(IP));
         sockGetFromIP(IP, (struct sockaddr_in *)&addrSon);
         
         /* 将新建连接插入链表 */

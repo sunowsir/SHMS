@@ -38,7 +38,7 @@ int recvData(int sockFd, char *logPath) {
         
         /* receive data. */
         
-        char logFile[MAXBUFF] = {'0'};
+        char logFile[MAXBUFF] = {'\0'};
         strcpy(logFile, logPath);
         
         switch (dataType) {
@@ -63,7 +63,7 @@ int recvData(int sockFd, char *logPath) {
         }
         
         int nowDataSize, recvDataSize;
-        char recvData[TRANS_MAX] = {'0'};
+        char Data[TRANS_MAX] = {'\0'};
         nowDataSize = dataSize;
         
         while (nowDataSize > 0) {
@@ -71,19 +71,17 @@ int recvData(int sockFd, char *logPath) {
                             TRANS_MAX : nowDataSize);
             nowDataSize -= recvDataSize;
             
-            memset(recvData, '0', sizeof(recvData));
-            recvRet = recv(sockFd, recvData, sizeof(char) * (recvDataSize), 0);
-            if (recvRet == -1) {
+            memset(Data, '\0', sizeof(Data));
+            if (recv(sockFd, Data, sizeof(char) * (recvDataSize), 0)) {
                 perror("recvData (recv data)");
                 return -1;
-            } else if (!strcmp(recvData, "NULL")) {
+            } else if (!strcmp(Data, "NULL")) {
                 perror("recvData() (receive data is NULL)");
                 continue;
             }
-            
             /* 将数据写入日志文件 */
             
-            if (writePiLog(logFile, recvData) == 1) {
+            if (writePiLog(logFile, Data) == 1) {
                 return -1;
             }
             
@@ -105,7 +103,7 @@ void *dataTransmission(void *arg) {
     if (templogPath[(int)strlen(templogPath) - 1] == '/') {
         templogPath[(int)strlen(templogPath) - 1] = '\0';
     }
-    char logPath[MAXBUFF] = {'0'};
+    char logPath[MAXBUFF] = {'\0'};
     strcpy(logPath, templogPath);
     free(templogPath);
     
@@ -114,18 +112,18 @@ void *dataTransmission(void *arg) {
     while (list->head.next == NULL) sleep(1);
     LinkNode *currentNode = list->head.next;
     
-    char logpath[MAXBUFF] = {'0'};
-    char Cmd[MAXBUFF] = {'0'};
+    char logpath[MAXBUFF] = {'\0'};
+    char Cmd[MAXBUFF] = {'\0'};
     while (1) {
         while (list->length == 0) sleep(1);
         
-        memset(logpath, '0', sizeof(logpath));
+        memset(logpath, '\0', sizeof(logpath));
         strcpy(logpath, logPath);
         
         strcat(logpath, "/");
         strcat(logpath, currentNode->IP);
         
-        memset(Cmd, '0', sizeof(Cmd));
+        memset(Cmd, '\0', sizeof(Cmd));
         strcpy(Cmd, "mkdir ");
         strcat(Cmd, logpath);
         strcat(Cmd, " 2> /dev/null");
