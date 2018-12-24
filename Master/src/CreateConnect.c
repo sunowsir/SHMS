@@ -48,8 +48,11 @@ void *startListen(void *None) {
 
     /* 开启监听，等待服务器端连入*/
     
-    int sockFd = sockServer(localIP, localPort);
+    int sockFd, sockSon;
     struct sockaddr_in addrSon;
+    char IP[20] = {'0'};
+    
+    sockFd = sockServer(localIP, localPort);
     socklen_t addrSonLen = sizeof(addrSon);
     free(localIP);
     
@@ -71,11 +74,11 @@ void *startListen(void *None) {
         
         /* 调用accept接受连入 */
         
-        int sockSon = accept(sockFd, (struct sockaddr *)&addrSon, &addrSonLen);
+        sockSon = accept(sockFd, (struct sockaddr *)&addrSon, &addrSonLen);
         if (sockSon < 0) {
             break;
         }
-        char IP[20] = {'0'};
+        memset(IP, '0', sizeof(IP));
         sockGetFromIP(IP, (struct sockaddr_in *)&addrSon);
         
         /* 将新建连接插入链表 */

@@ -62,14 +62,16 @@ int recvData(int sockFd, char *logPath) {
             } break;
         }
         
-        int nowDataSize = dataSize;
+        int nowDataSize, recvDataSize;
+        char recvData[TRANS_MAX] = {'0'};
+        nowDataSize = dataSize;
         
         while (nowDataSize > 0) {
-            int recvDataSize = (TRANS_MAX < nowDataSize ? 
-                                TRANS_MAX : nowDataSize);
+            recvDataSize = (TRANS_MAX < nowDataSize ? 
+                            TRANS_MAX : nowDataSize);
             nowDataSize -= recvDataSize;
             
-            char *recvData = (char *)calloc(sizeof(char), (recvDataSize));
+            memset(recvData, '0', sizeof(recvData));
             recvRet = recv(sockFd, recvData, sizeof(char) * (recvDataSize), 0);
             if (recvRet == -1) {
                 perror("recvData (recv data)");
@@ -119,16 +121,18 @@ void *dataTransmission(void *arg) {
     while (list->head.next == NULL) sleep(1);
     LinkNode *currentNode = list->head.next;
     
+    char logpath[MAXBUFF] = {'0'};
+    char Cmd[MAXBUFF] = {'0'};
     while (1) {
         while (list->length == 0) sleep(1);
         
-        char logpath[MAXBUFF] = {'0'};
+        memset(logpath, '0', sizeof(logpath));
         strcpy(logpath, logPath);
         
         strcat(logpath, "/");
         strcat(logpath, currentNode->IP);
         
-        char Cmd[MAXBUFF] = {'0'};
+        memset(Cmd, '0', sizeof(Cmd));
         strcpy(Cmd, "mkdir ");
         strcat(Cmd, logpath);
         strcat(Cmd, " 2> /dev/null");

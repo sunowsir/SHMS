@@ -32,22 +32,26 @@ void *getWarningInfo() {
     
     /* 开启紧急监听，等待服务器端连入*/
     
-    int sockFd = sockServer(localIP, localWPort);
+    int sockFd, sockSon;
     struct sockaddr_in addrSon;
+    char IP[20] = {'0'};
+    char warning[MAXBUFF] = {'0'};
+    
+    sockFd = sockServer(localIP, localWPort);
     socklen_t addrSonLen = sizeof(addrSon);
     free(localIP);
 
     while (1) {
-        int sockSon = accept(sockFd, (struct sockaddr *)&addrSon, &addrSonLen);
+        sockSon = accept(sockFd, (struct sockaddr *)&addrSon, &addrSonLen);
         if (sockSon < 0) {
             perror("getWarningInfo.c accept error");
             return NULL;
         }
         
-        char IP[20] = {'0'};
+        memset(IP, '0', sizeof(IP));
         sockGetFromIP(IP, (struct sockaddr_in *)&addrSon);
         
-        char warning[MAXBUFF] = {'0'};
+        memset(warning, '0', sizeof(warning));
         if (recv(sockSon, warning, MAXBUFF, 0) == -1) {
             perror("getWarningInfo.c recv");
             continue;
@@ -65,7 +69,9 @@ void *getWarningInfo() {
         strcat(logpath, "/");
         strcat(logpath, IP);
         strcat(logPath, "/warning.log");
+        
         free(logPath);
+        
         if (writePiLog(logpath, warning) == 1) {
             perror("getWarningInfo.c (writePiLog error)");
             return NULL;
