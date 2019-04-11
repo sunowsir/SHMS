@@ -76,23 +76,6 @@ install :
 	systemctl enable SHMS-Master.service
 	systemctl start SHMS-Master.service
 
-update : 
-	git clone https://github.com/sunowsir/SHMS.git
-	make clean
-	rm -rf ../../Share/*
-	mv ./SHMS/Share/* ../../Share/
-	rm -rf ../include/* 
-	mv ./SHMS/Master/include/* ../include/
-	rm -rf ../src/* 
-	mv ./SHMS/Master/src/* ../src/
-	mv ./SHMS/Master/mainMaster.c ../
-	mv ./SHMS/Master/SHMS-* ../
-	rm -rf ./SHMS/
-	make clean
-	make 
-	make uninstall
-	make install
-	
 uninstall : 
 	rm -rf /opt/SHMS-master/
 	rm -rf /etc/SHMS-master/
