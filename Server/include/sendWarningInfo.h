@@ -9,10 +9,10 @@
 #ifndef _SENDWARNINGINFO_H
 #define _SENDWARNINGINFO_H
 
-#include "../../Share/include/needHead.h"
-#include "../../Share/include/sockFrame.h"
-#include "../../Share/include/Get_conf.h"
-#include "../../Share/include/StrtoInt.h"
+#include "needHead.h"
+#include "sockFrame.h"
+#include "Get_conf.h"
+#include "StrtoInt.h"
 
 /* return : success(0) or false(-1)  */
 

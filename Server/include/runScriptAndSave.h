@@ -9,10 +9,10 @@
 #ifndef _RUNSCRIPTANDSAVE_H
 #define _RUNSCRIPTANDSAVE_H
 
-#include "./sendWarningInfo.h"
-#include "../../Share/include/needHead.h"
-#include "../../Share/include/Get_conf.h"
-#include "../../Share/include/Write_Pi_Log.h"
+#include "sendWarningInfo.h"
+#include "needHead.h"
+#include "Get_conf.h"
+#include "Write_Pi_Log.h"
 
 /* return : success(0), false(-1)  */
 

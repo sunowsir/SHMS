@@ -9,11 +9,11 @@
 #ifndef _GETWARNINGINFO_H
 #define _GETWARNINGINFO_H
 
-#include "../../Share/include/needHead.h"
-#include "../../Share/include/Get_conf.h"
-#include "../../Share/include/StrtoInt.h"
-#include "../../Share/include/Write_Pi_Log.h"
-#include "../../Share/include/sockFrame.h"
+#include "needHead.h"
+#include "Get_conf.h"
+#include "StrtoInt.h"
+#include "Write_Pi_Log.h"
+#include "sockFrame.h"
 
 void *getWarningInfo();
 

@@ -6,7 +6,7 @@
 * Created Time: 2018年11月13日 星期二 21时43分43秒
 */
 
-#include "../include/mainMaster.h"
+#include "mainMaster.h"
 
 int masterConnect() {
 

@@ -6,7 +6,7 @@
  * Created Time: 2018年11月25日 星期日 16时35分52秒
  */
 
-#include "../include/getScriptRunInfo.h"
+#include "getScriptRunInfo.h"
 
 /*  读取指定类型日志信息 */
 

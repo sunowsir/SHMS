@@ -6,7 +6,7 @@
 * Created Time: 2018年11月14日 星期三 17时35分43秒
 */
 
-#include "../include/dataTransmission.h" 
+#include "dataTransmission.h" 
 
 int recvData(int sockFd, char *logPath) {
     

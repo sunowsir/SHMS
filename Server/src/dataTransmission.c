@@ -6,7 +6,7 @@
  * Created Time: 2018年11月23日 星期五 18时58分10秒
  */
 
-#include "../include/dataTransmission.h"
+#include "dataTransmission.h"
 
 int sendDataString(int sockFd, int dataSize, char *sendData) {
        

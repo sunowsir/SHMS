@@ -6,7 +6,7 @@
 * Created Time: 2018年11月13日 星期二 20时33分34秒
 */
 
-#include "./include/mainMaster.h"
+#include "mainMaster.h"
 
 int main() {
     pid_t masterPID = fork();

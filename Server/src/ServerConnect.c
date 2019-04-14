@@ -6,7 +6,7 @@
  * Created Time: 2018年11月23日 星期五 16时22分03秒
  */
 
-#include "../include/mainServer.h"
+#include "mainServer.h"
 
 int ServerConnect() {
     /* 运行六个脚本采集数据保存到日志 */

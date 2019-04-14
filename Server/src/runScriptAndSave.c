@@ -6,7 +6,7 @@
  * Created Time: 2018年12月18日 星期二 13时44分45秒
  */
 
-#include "../include/runScriptAndSave.h"
+#include "runScriptAndSave.h"
 
 int RunAndSave(char *logFile, char *ScriptFile, int sleepTime, int monitorWarning) {
     while (1) {

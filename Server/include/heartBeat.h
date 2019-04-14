@@ -9,11 +9,11 @@
 #ifndef _HEARTBEAT_H
 #define _HEARTBEAT_H
 
-#include "./dataTransmission.h"
-#include "../../Share/include/StrtoInt.h"
-#include "../../Share/include/Get_conf.h"
-#include "../../Share/include/needHead.h"
-#include "../../Share/include/sockFrame.h"
+#include "dataTransmission.h"
+#include "StrtoInt.h"
+#include "Get_conf.h"
+#include "needHead.h"
+#include "sockFrame.h"
 
 void *heartBeat();
 

@@ -9,10 +9,10 @@
 #ifndef _DATATRANSMISSION_H
 #define _DATATRANSMISSION_H
 
-#include "./getScriptRunInfo.h"
-#include "../../Share/include/needHead.h"
-#include "../../Share/include/Get_conf.h"
-#include "../../Share/include/sockFrame.h"
+#include "getScriptRunInfo.h"
+#include "needHead.h"
+#include "Get_conf.h"
+#include "sockFrame.h"
 
 /* return : success(0), false(-1) */
 

@@ -6,7 +6,7 @@
 * Created Time: 2018年11月16日 星期五 16时37分43秒
 */
 
-#include "../include/CreateConnect.h"
+#include "CreateConnect.h"
 
 typedef struct args {
     LinkList **list;

@@ -6,7 +6,7 @@
  * Created Time: 2018年12月11日 星期二 20时04分50秒
  */
 
-#include "../include/getWarningInfo.h"
+#include "getWarningInfo.h"
 
 void *getWarningInfo() { 
     signal(SIGPIPE, SIG_IGN);

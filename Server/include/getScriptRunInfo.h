@@ -9,8 +9,8 @@
 #ifndef _GETSCRIPTRUNINFO_H
 #define _GETSCRIPTRUNINFO_H
 
-#include "../../Share/include/needHead.h"
-#include "../../Share/include/Get_conf.h"
+#include "needHead.h"
+#include "Get_conf.h"
 
 /* The space pointed to by the character pointer returned by this function needs to call ‘free’ release. If the fetch fails, it returns ‘NULL’.  */
 

@@ -9,11 +9,11 @@
 #ifndef _CREATECONNECT_H
 #define _CREATECONNECT_H
 
-#include "./LinkList.h"
-#include "../../Share/include/StrtoInt.h"
-#include "../../Share/include/Get_conf.h"
-#include "../../Share/include/needHead.h"
-#include "../../Share/include/sockFrame.h"
+#include "LinkList.h"
+#include "StrtoInt.h"
+#include "Get_conf.h"
+#include "needHead.h"
+#include "sockFrame.h"
 
 /* return : success(0), false(-1).  */
 

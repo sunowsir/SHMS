@@ -6,7 +6,7 @@
 * Created Time: 2018年11月16日 星期五 10时14分53秒
 */
 
-#include "../include/LinkList.h"
+#include "LinkList.h"
 
 LinkList *linkInit() {
     LinkList *p = (LinkList *)malloc(sizeof(LinkList));

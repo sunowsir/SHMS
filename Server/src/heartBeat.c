@@ -6,7 +6,7 @@
  * Created Time: 2018年11月23日 星期五 16时31分40秒
  */
 
-#include "../include/heartBeat.h"
+#include "heartBeat.h"
 
 int MasterMaxConnectNum;
 

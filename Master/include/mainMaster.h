@@ -9,13 +9,13 @@
 #ifndef _MAINMASTER_H
 #define _MAINMASTER_H
 
-#include "./LinkList.h"
-#include "./CreateConnect.h"
-#include "./getWarningInfo.h"
-#include "./dataTransmission.h"
-#include "../../Share/include/needHead.h"
-#include "../../Share/include/Get_conf.h"
-#include "../../Share/include/StrtoInt.h"
+#include "LinkList.h"
+#include "CreateConnect.h"
+#include "getWarningInfo.h"
+#include "dataTransmission.h"
+#include "needHead.h"
+#include "Get_conf.h"
+#include "StrtoInt.h"
 
 int masterConnect();
 

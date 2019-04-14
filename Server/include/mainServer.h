@@ -9,9 +9,9 @@
 #ifndef _MAINSERVER_H
 #define _MAINSERVER_H
 
-#include "./heartBeat.h"
-#include "./runScriptAndSave.h"
-#include "../../Share/include/needHead.h"
+#include "heartBeat.h"
+#include "runScriptAndSave.h"
+#include "needHead.h"
 
 
 /* return : success(0), false(-1). */

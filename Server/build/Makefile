@@ -1,5 +1,5 @@
 CC 			= gcc
-CFLAGS 		= -g -Wall -I include 
+CFLAGS 		= -g -Wall -I ../include/ -I ../../Share/include/
 VPATH 		= ../:../src/:../../Share/src/:../include/:../../Share/include/
 SERVER_RELY = \
 			Write_Pi_Log.o \
