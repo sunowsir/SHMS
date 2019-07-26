@@ -1,8 +1,7 @@
 CC 		= gcc
-CFLAGS 	= -g -Wall -I ../include/ -I ../../Share/include/
-VPATH 	= ../:../src:../include/:../../Share/src/:../../Share/include/
-
-MASTER_RELY = \
+CFLAGS 		= -g -Wall -I ../include/ -I ../../Share/include/
+VPATH 		= ../:../src:../include/:../../Share/src/:../../Share/include/
+MASTER_RELY 	= \
 			Write_Pi_Log.o \
 			sockFrame.o \
 			Get_conf.o \
