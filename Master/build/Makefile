@@ -83,7 +83,7 @@ uninstall :
 	rm -rf /etc/systemd/system/SHMS-Master.service
 
 clean : 
-	@echo "[\033[1;32mClean\033[0m] Clear compile file"
+	@echo "[\033[1;32mClean\033[0m] Clean compile file"
 	@rm -rf Master ${MASTER_RELY}
 
 
