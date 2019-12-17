@@ -9,8 +9,9 @@ MASTER_RELY = \
 			Write_Pi_Log.o
 
 libShared.so : ${MASTER_RELY}
-	@echo "[\033[1;32mmake\033[0m] [LIB] libShared.so"
+	@echo "[\033[1;32mmake\033[0m] [LIB] libShared.so => ../"
 	@${CC} -shared ${CFLAGS} ${MASTER_RELY} -l pthread -o libShared.so 
+	@cp ./libShared.so ../
 
 sockFrame.o : sockFrame.c sockFrame.h
 	@echo "[\033[1;32mbuild\033[0m] [CC] sockFrame.c"
