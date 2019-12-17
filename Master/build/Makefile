@@ -1,7 +1,7 @@
-CC 		= gcc
-CFLAGS 		= -g -Wall -I ../include/ -I ../../Share/include/
+CC 			= gcc
+CFLAGS 		= -g -Wall -I ../include/ -I ../../Share/include/ 
 VPATH 		= ../:../src:../include/:../../Share/src/:../../Share/include/
-MASTER_RELY 	= \
+MASTER_RELY = \
 			Write_Pi_Log.o \
 			sockFrame.o \
 			Get_conf.o \
@@ -15,7 +15,7 @@ MASTER_RELY 	= \
 
 Master : ${MASTER_RELY}
 	@echo "[\033[1;32mLinking\033[0m] Master"
-	@${CC} ${CFLAGS} ${MASTER_RELY} -lpthread -o Master 
+	@${CC} ${CFLAGS} ${MASTER_RELY} -l pthread -o Master 
 
 mainMaster.o : mainMaster.c mainMaster.h 
 	@echo "[\033[1;32mBuilding\033[0m] [CC] mainMaster.c"
@@ -23,15 +23,15 @@ mainMaster.o : mainMaster.c mainMaster.h
 
 masterConnect.o : masterConnect.c mainMaster.h
 	@echo "[\033[1;32mBuilding\033[0m] [CC] masterConnect.c"
-	@${CC} -c ${CFLAGS} -lpthread $<
+	@${CC} -c ${CFLAGS} -l pthread $<
 
 getWarningInfo.o : getWarningInfo.c getWarningInfo.h
 	@echo "[\033[1;32mBuilding\033[0m] [CC] getWarningInfo.c"
-	@${CC} -c ${CFLAGS} -lpthread $<
+	@${CC} -c ${CFLAGS} -l pthread $<
 
 CreateConnect.o : CreateConnect.c CreateConnect.h 
 	@echo "[\033[1;32mBuilding\033[0m] [CC] CreateConnect.c"
-	@${CC} -c ${CFLAGS} -lpthread $<
+	@${CC} -c ${CFLAGS} -l pthread $<
 
 dataTransmission.o : dataTransmission.c dataTransmission.h 
 	@echo "[\033[1;32mBuilding\033[0m] [CC] dataTransmission.c"
