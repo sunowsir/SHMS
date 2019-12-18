@@ -1,61 +1,57 @@
 CC 			= gcc
-CFLAGS 		= -g -Wall -I ../include/ -I ../../Share/include/ 
-VPATH 		= ../:../src:../include/:../../Share/src/:../../Share/include/
+
+PROPATH 	= ../..
+
+TARGET 		= Master
+
+CFLAGS 		= -g -Wall 
+
+CCFLAGS 	= -c -fPIC -g -Wall
+
+LIBPATH 	= -L ${PROPATH}/lib
+
+LIBS 		= -lpthread -lShared
+
+INCPATH 	= -I ../include -I ${PROPATH}/lib/include
+
+VPATH 		= ..:../src:../include:${PROPATH}/lib/include
+
 MASTER_RELY = \
-			Write_Pi_Log.o \
-			sockFrame.o \
-			Get_conf.o \
-			StrtoInt.o \
-			LinkList.o \
 			CreateConnect.o \
 			dataTransmission.o \
 			masterConnect.o \
 			getWarningInfo.o \
 			mainMaster.o 
 
-Master : ${MASTER_RELY}
+
+
+
+
+${TARGET} : ${MASTER_RELY}
 	@echo "[\033[1;32mLinking\033[0m] Master"
-	@${CC} ${CFLAGS} ${MASTER_RELY} -l pthread -o Master 
+	@${CC} ${CFLAGS} -o ${TARGET} ${MASTER_RELY} ${LIBPATH} ${LIBS}
 
 mainMaster.o : mainMaster.c mainMaster.h 
 	@echo "[\033[1;32mBuilding\033[0m] [CC] mainMaster.c"
-	@${CC} -c ${CFLAGS} $<
+	@${CC} ${CCFLAGS} ${INCPATH} $<
 
 masterConnect.o : masterConnect.c mainMaster.h
 	@echo "[\033[1;32mBuilding\033[0m] [CC] masterConnect.c"
-	@${CC} -c ${CFLAGS} -l pthread $<
+	@${CC} ${CCFLAGS} ${INCPATH} $<
 
 getWarningInfo.o : getWarningInfo.c getWarningInfo.h
 	@echo "[\033[1;32mBuilding\033[0m] [CC] getWarningInfo.c"
-	@${CC} -c ${CFLAGS} -l pthread $<
+	@${CC} ${CCFLAGS} ${INCPATH} $<
 
 CreateConnect.o : CreateConnect.c CreateConnect.h 
 	@echo "[\033[1;32mBuilding\033[0m] [CC] CreateConnect.c"
-	@${CC} -c ${CFLAGS} -l pthread $<
+	@${CC} ${CCFLAGS} ${INCPATH} $<
 
 dataTransmission.o : dataTransmission.c dataTransmission.h 
 	@echo "[\033[1;32mBuilding\033[0m] [CC] dataTransmission.c"
-	@${CC} -c ${CFLAGS} $< 
+	@${CC} ${CCFLAGS} ${INCPATH}  $< 
 
-LinkList.o : LinkList.c LinkList.h
-	@echo "[\033[1;32mBuilding\033[0m] [CC] LinkList.c"
-	@${CC} -c ${CFLAGS} $<
 
-Get_conf.o : Get_conf.c Get_conf.h
-	@echo "[\033[1;32mBuilding\033[0m] [CC] Get_conf.c"
-	@${CC} -c ${CFLAGS} $<
-
-StrtoInt.o : StrtoInt.c StrtoInt.h
-	@echo "[\033[1;32mBuilding\033[0m] [CC] StrtoInt.c"
-	@${CC} -c ${CFLAGS} $<
-
-sockFrame.o : sockFrame.c sockFrame.h
-	@echo "[\033[1;32mBuilding\033[0m] [CC] sockFrame.c"
-	@${CC} -c ${CFLAGS} $<
-
-Write_Pi_Log.o : Write_Pi_Log.c Write_Pi_Log.h
-	@echo "[\033[1;32mBuilding\033[0m] [CC] Write_Pi_Log.c"
-	@${CC} -c ${CFLAGS} $<
 
 .PHONY: clean install uninstall
 
@@ -84,6 +80,6 @@ uninstall :
 
 clean : 
 	@echo "[\033[1;32mClean\033[0m] Clean compile file"
-	@rm -rf Master ${MASTER_RELY}
+	@rm -rf ${TARGET} ${MASTER_RELY}
 
 

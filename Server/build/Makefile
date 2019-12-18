@@ -6,7 +6,7 @@ TARGET 		= Server
 
 CFLAGS 		= -g -Wall
 
-CCFLAGS 	= -g -Wall -fPIC
+CCFLAGS 	= -c -fPIC -g -Wall
 
 LIBPATH 	= -L ${PROPATH}/lib
 
@@ -35,31 +35,34 @@ ${TARGET} : ${SERVER_RELY}
 
 mainServer.o : mainServer.c mainServer.h 
 	@echo "[\033[1;32mBuilding\033[0m] [CC] mainServer.c"
-	@${CC} -c ${CCFLAGS} ${INCPATH} $<
+	@${CC} ${CCFLAGS} ${INCPATH} $<
 
 sendWarningInfo.o : sendWarningInfo.c sendWarningInfo.h 
 	@echo "[\033[1;32mBuilding\033[0m] [CC] sendWarningInfo.c"
-	@${CC} -c ${CCFLAGS} ${INCPATH} $<
+	@${CC} ${CCFLAGS} ${INCPATH} $<
 
 getScriptRunInfo.o : getScriptRunInfo.c getScriptRunInfo.h 
 	@echo "[\033[1;32mBuilding\033[0m] [CC] getScriptRunInfo.c"
-	@${CC} -c ${CCFLAGS} ${INCPATH} $<
+	@${CC} ${CCFLAGS} ${INCPATH} $<
 
 ServerConnect.o : ServerConnect.c mainServer.h
 	@echo "[\033[1;32mBuilding\033[0m] [CC] ServerConnect.c"
-	@${CC} -c ${CCFLAGS} ${INCPATH} $<
+	@${CC} ${CCFLAGS} ${INCPATH} $<
 
 runScriptAndSave.o : runScriptAndSave.c runScriptAndSave.h
 	@echo "[\033[1;32mBuilding\033[0m] [CC] runScriptAndSave.c"
-	@${CC} -c ${CCFLAGS} ${INCPATH} $<
+	@${CC} ${CCFLAGS} ${INCPATH} $<
 
 dataTransmission.o : dataTransmission.c dataTransmission.h 
 	@echo "[\033[1;32mBuilding\033[0m] [CC] dataTransmission.c"
-	@${CC} -c ${CCFLAGS} ${INCPATH} $<
+	@${CC} ${CCFLAGS} ${INCPATH} $<
 
 heartBeat.o : heartBeat.c heartBeat.h
 	@echo "[\033[1;32mBuilding\033[0m] [CC] heartBeat.c"
-	@${CC} -c ${CCFLAGS} ${INCPATH} $<
+	@${CC} ${CCFLAGS} ${INCPATH} $<
+
+
+
 
 .PHONY: clean install uninstall
 
