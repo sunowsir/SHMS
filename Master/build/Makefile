@@ -1,3 +1,7 @@
+# author	: sunowsir
+# project	: server health master service
+# file 		: master makefile
+
 CC 			= gcc
 
 PROPATH 	= ../..
@@ -10,7 +14,7 @@ CCFLAGS 	= -c -fPIC -g -Wall
 
 LIBPATH 	= -L ${PROPATH}/lib
 
-LIBS 		= -lpthread -lShared
+LIBS 		= -l pthread -l shared
 
 INCPATH 	= -I ../include -I ${PROPATH}/lib/include
 
@@ -80,6 +84,6 @@ uninstall :
 
 clean : 
 	@echo "[\033[1;32mClean\033[0m] Clean compile file"
-	@rm -rf ${TARGET} ${MASTER_RELY}
+	@-rm -rf ${TARGET} ${MASTER_RELY}
 
 
