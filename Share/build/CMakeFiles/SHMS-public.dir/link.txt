@@ -1,0 +1,2 @@
+/usr/bin/ar qc libSHMS-public.a  CMakeFiles/SHMS-public.dir/src/Get_conf.c.o CMakeFiles/SHMS-public.dir/src/StrtoInt.c.o CMakeFiles/SHMS-public.dir/src/sockFrame.c.o CMakeFiles/SHMS-public.dir/src/Write_Pi_Log.c.o
+/usr/bin/ranlib libSHMS-public.a

@@ -1,0 +1,3 @@
+/home/sunowsir/Code/SHMS/Share/build/CMakeFiles/rebuild_cache.dir
+/home/sunowsir/Code/SHMS/Share/build/CMakeFiles/edit_cache.dir
+/home/sunowsir/Code/SHMS/Share/build/CMakeFiles/SHMS-public.dir

@@ -1,0 +1,1 @@
+/usr/bin/cc    CMakeFiles/SHMS-Master.dir/mainMaster.c.o CMakeFiles/SHMS-Master.dir/src/LinkList.c.o CMakeFiles/SHMS-Master.dir/src/CreateConnect.c.o CMakeFiles/SHMS-Master.dir/src/masterConnect.c.o CMakeFiles/SHMS-Master.dir/src/getWarningInfo.c.o CMakeFiles/SHMS-Master.dir/src/dataTransmission.c.o  -o SHMS-Master  -lpthread lib/libSHMS.a -lpthread 

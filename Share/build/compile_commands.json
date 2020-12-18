@@ -1,0 +1,22 @@
+[
+{
+  "directory": "/home/sunowsir/Code/SHMS/Share/build",
+  "command": "/usr/bin/cc     -Wall -std=c++11 -l pthread -o CMakeFiles/SHMS-public.dir/src/Get_conf.c.o   -c /home/sunowsir/Code/SHMS/Share/src/Get_conf.c",
+  "file": "/home/sunowsir/Code/SHMS/Share/src/Get_conf.c"
+},
+{
+  "directory": "/home/sunowsir/Code/SHMS/Share/build",
+  "command": "/usr/bin/cc     -Wall -std=c++11 -l pthread -o CMakeFiles/SHMS-public.dir/src/StrtoInt.c.o   -c /home/sunowsir/Code/SHMS/Share/src/StrtoInt.c",
+  "file": "/home/sunowsir/Code/SHMS/Share/src/StrtoInt.c"
+},
+{
+  "directory": "/home/sunowsir/Code/SHMS/Share/build",
+  "command": "/usr/bin/cc     -Wall -std=c++11 -l pthread -o CMakeFiles/SHMS-public.dir/src/sockFrame.c.o   -c /home/sunowsir/Code/SHMS/Share/src/sockFrame.c",
+  "file": "/home/sunowsir/Code/SHMS/Share/src/sockFrame.c"
+},
+{
+  "directory": "/home/sunowsir/Code/SHMS/Share/build",
+  "command": "/usr/bin/cc     -Wall -std=c++11 -l pthread -o CMakeFiles/SHMS-public.dir/src/Write_Pi_Log.c.o   -c /home/sunowsir/Code/SHMS/Share/src/Write_Pi_Log.c",
+  "file": "/home/sunowsir/Code/SHMS/Share/src/Write_Pi_Log.c"
+}
+]
