@@ -1,52 +1,52 @@
 [
 {
-  "directory": "/home/sunowsir/Code/SHMS/Master/build",
-  "command": "/usr/bin/cc  -I/home/sunowsir/Code/SHMS/Master/include -I/home/sunowsir/Code/SHMS/Master/lib/include    -g -Wall -o CMakeFiles/SHMS-Master.dir/mainMaster.c.o   -c /home/sunowsir/Code/SHMS/Master/mainMaster.c",
-  "file": "/home/sunowsir/Code/SHMS/Master/mainMaster.c"
+  "directory": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/build",
+  "command": "/usr/bin/cc  -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/include -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/lib/include   -g -Wall -o CMakeFiles/SHMS-Master.dir/mainMaster.c.o -c /home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/mainMaster.c",
+  "file": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/mainMaster.c"
 },
 {
-  "directory": "/home/sunowsir/Code/SHMS/Master/build",
-  "command": "/usr/bin/cc  -I/home/sunowsir/Code/SHMS/Master/include -I/home/sunowsir/Code/SHMS/Master/lib/include    -g -Wall -o CMakeFiles/SHMS-Master.dir/src/LinkList.c.o   -c /home/sunowsir/Code/SHMS/Master/src/LinkList.c",
-  "file": "/home/sunowsir/Code/SHMS/Master/src/LinkList.c"
+  "directory": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/build",
+  "command": "/usr/bin/cc  -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/include -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/lib/include   -g -Wall -o CMakeFiles/SHMS-Master.dir/src/LinkList.c.o -c /home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/src/LinkList.c",
+  "file": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/src/LinkList.c"
 },
 {
-  "directory": "/home/sunowsir/Code/SHMS/Master/build",
-  "command": "/usr/bin/cc  -I/home/sunowsir/Code/SHMS/Master/include -I/home/sunowsir/Code/SHMS/Master/lib/include    -g -Wall -o CMakeFiles/SHMS-Master.dir/src/CreateConnect.c.o   -c /home/sunowsir/Code/SHMS/Master/src/CreateConnect.c",
-  "file": "/home/sunowsir/Code/SHMS/Master/src/CreateConnect.c"
+  "directory": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/build",
+  "command": "/usr/bin/cc  -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/include -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/lib/include   -g -Wall -o CMakeFiles/SHMS-Master.dir/src/CreateConnect.c.o -c /home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/src/CreateConnect.c",
+  "file": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/src/CreateConnect.c"
 },
 {
-  "directory": "/home/sunowsir/Code/SHMS/Master/build",
-  "command": "/usr/bin/cc  -I/home/sunowsir/Code/SHMS/Master/include -I/home/sunowsir/Code/SHMS/Master/lib/include    -g -Wall -o CMakeFiles/SHMS-Master.dir/src/masterConnect.c.o   -c /home/sunowsir/Code/SHMS/Master/src/masterConnect.c",
-  "file": "/home/sunowsir/Code/SHMS/Master/src/masterConnect.c"
+  "directory": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/build",
+  "command": "/usr/bin/cc  -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/include -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/lib/include   -g -Wall -o CMakeFiles/SHMS-Master.dir/src/masterConnect.c.o -c /home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/src/masterConnect.c",
+  "file": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/src/masterConnect.c"
 },
 {
-  "directory": "/home/sunowsir/Code/SHMS/Master/build",
-  "command": "/usr/bin/cc  -I/home/sunowsir/Code/SHMS/Master/include -I/home/sunowsir/Code/SHMS/Master/lib/include    -g -Wall -o CMakeFiles/SHMS-Master.dir/src/getWarningInfo.c.o   -c /home/sunowsir/Code/SHMS/Master/src/getWarningInfo.c",
-  "file": "/home/sunowsir/Code/SHMS/Master/src/getWarningInfo.c"
+  "directory": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/build",
+  "command": "/usr/bin/cc  -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/include -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/lib/include   -g -Wall -o CMakeFiles/SHMS-Master.dir/src/getWarningInfo.c.o -c /home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/src/getWarningInfo.c",
+  "file": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/src/getWarningInfo.c"
 },
 {
-  "directory": "/home/sunowsir/Code/SHMS/Master/build",
-  "command": "/usr/bin/cc  -I/home/sunowsir/Code/SHMS/Master/include -I/home/sunowsir/Code/SHMS/Master/lib/include    -g -Wall -o CMakeFiles/SHMS-Master.dir/src/dataTransmission.c.o   -c /home/sunowsir/Code/SHMS/Master/src/dataTransmission.c",
-  "file": "/home/sunowsir/Code/SHMS/Master/src/dataTransmission.c"
+  "directory": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/build",
+  "command": "/usr/bin/cc  -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/include -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/lib/include   -g -Wall -o CMakeFiles/SHMS-Master.dir/src/dataTransmission.c.o -c /home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/src/dataTransmission.c",
+  "file": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/src/dataTransmission.c"
 },
 {
-  "directory": "/home/sunowsir/Code/SHMS/Master/build/lib",
-  "command": "/usr/bin/cc  -I/home/sunowsir/Code/SHMS/Master/include -I/home/sunowsir/Code/SHMS/Master/lib/include    -g -Wall -g -Wall -o CMakeFiles/SHMS.dir/src/Get_conf.c.o   -c /home/sunowsir/Code/SHMS/Master/lib/src/Get_conf.c",
-  "file": "/home/sunowsir/Code/SHMS/Master/lib/src/Get_conf.c"
+  "directory": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/build/lib",
+  "command": "/usr/bin/cc  -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/include -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/lib/include   -g -Wall -g -Wall -o CMakeFiles/SHMS.dir/src/Get_conf.c.o -c /home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/lib/src/Get_conf.c",
+  "file": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/lib/src/Get_conf.c"
 },
 {
-  "directory": "/home/sunowsir/Code/SHMS/Master/build/lib",
-  "command": "/usr/bin/cc  -I/home/sunowsir/Code/SHMS/Master/include -I/home/sunowsir/Code/SHMS/Master/lib/include    -g -Wall -g -Wall -o CMakeFiles/SHMS.dir/src/StrtoInt.c.o   -c /home/sunowsir/Code/SHMS/Master/lib/src/StrtoInt.c",
-  "file": "/home/sunowsir/Code/SHMS/Master/lib/src/StrtoInt.c"
+  "directory": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/build/lib",
+  "command": "/usr/bin/cc  -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/include -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/lib/include   -g -Wall -g -Wall -o CMakeFiles/SHMS.dir/src/StrtoInt.c.o -c /home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/lib/src/StrtoInt.c",
+  "file": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/lib/src/StrtoInt.c"
 },
 {
-  "directory": "/home/sunowsir/Code/SHMS/Master/build/lib",
-  "command": "/usr/bin/cc  -I/home/sunowsir/Code/SHMS/Master/include -I/home/sunowsir/Code/SHMS/Master/lib/include    -g -Wall -g -Wall -o CMakeFiles/SHMS.dir/src/sockFrame.c.o   -c /home/sunowsir/Code/SHMS/Master/lib/src/sockFrame.c",
-  "file": "/home/sunowsir/Code/SHMS/Master/lib/src/sockFrame.c"
+  "directory": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/build/lib",
+  "command": "/usr/bin/cc  -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/include -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/lib/include   -g -Wall -g -Wall -o CMakeFiles/SHMS.dir/src/sockFrame.c.o -c /home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/lib/src/sockFrame.c",
+  "file": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/lib/src/sockFrame.c"
 },
 {
-  "directory": "/home/sunowsir/Code/SHMS/Master/build/lib",
-  "command": "/usr/bin/cc  -I/home/sunowsir/Code/SHMS/Master/include -I/home/sunowsir/Code/SHMS/Master/lib/include    -g -Wall -g -Wall -o CMakeFiles/SHMS.dir/src/Write_Pi_Log.c.o   -c /home/sunowsir/Code/SHMS/Master/lib/src/Write_Pi_Log.c",
-  "file": "/home/sunowsir/Code/SHMS/Master/lib/src/Write_Pi_Log.c"
+  "directory": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/build/lib",
+  "command": "/usr/bin/cc  -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/include -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/lib/include   -g -Wall -g -Wall -o CMakeFiles/SHMS.dir/src/Write_Pi_Log.c.o -c /home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/lib/src/Write_Pi_Log.c",
+  "file": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Master/lib/src/Write_Pi_Log.c"
 }
 ]

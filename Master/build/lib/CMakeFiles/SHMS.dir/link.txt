@@ -1,2 +1,2 @@
-/usr/bin/ar qc libSHMS.a  CMakeFiles/SHMS.dir/src/Get_conf.c.o CMakeFiles/SHMS.dir/src/StrtoInt.c.o CMakeFiles/SHMS.dir/src/sockFrame.c.o CMakeFiles/SHMS.dir/src/Write_Pi_Log.c.o
+/usr/bin/ar qc libSHMS.a CMakeFiles/SHMS.dir/src/Get_conf.c.o CMakeFiles/SHMS.dir/src/StrtoInt.c.o CMakeFiles/SHMS.dir/src/sockFrame.c.o CMakeFiles/SHMS.dir/src/Write_Pi_Log.c.o
 /usr/bin/ranlib libSHMS.a

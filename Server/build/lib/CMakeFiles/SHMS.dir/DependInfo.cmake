@@ -4,10 +4,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/sunowsir/Code/SHMS/Server/lib/src/Get_conf.c" "/home/sunowsir/Code/SHMS/Server/build/lib/CMakeFiles/SHMS.dir/src/Get_conf.c.o"
-  "/home/sunowsir/Code/SHMS/Server/lib/src/StrtoInt.c" "/home/sunowsir/Code/SHMS/Server/build/lib/CMakeFiles/SHMS.dir/src/StrtoInt.c.o"
-  "/home/sunowsir/Code/SHMS/Server/lib/src/Write_Pi_Log.c" "/home/sunowsir/Code/SHMS/Server/build/lib/CMakeFiles/SHMS.dir/src/Write_Pi_Log.c.o"
-  "/home/sunowsir/Code/SHMS/Server/lib/src/sockFrame.c" "/home/sunowsir/Code/SHMS/Server/build/lib/CMakeFiles/SHMS.dir/src/sockFrame.c.o"
+  "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/lib/src/Get_conf.c" "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/build/lib/CMakeFiles/SHMS.dir/src/Get_conf.c.o"
+  "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/lib/src/StrtoInt.c" "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/build/lib/CMakeFiles/SHMS.dir/src/StrtoInt.c.o"
+  "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/lib/src/Write_Pi_Log.c" "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/build/lib/CMakeFiles/SHMS.dir/src/Write_Pi_Log.c.o"
+  "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/lib/src/sockFrame.c" "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/build/lib/CMakeFiles/SHMS.dir/src/sockFrame.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

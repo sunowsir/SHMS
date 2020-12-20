@@ -1,6 +1,6 @@
-/home/sunowsir/Code/SHMS/Server/build/CMakeFiles/rebuild_cache.dir
-/home/sunowsir/Code/SHMS/Server/build/CMakeFiles/edit_cache.dir
-/home/sunowsir/Code/SHMS/Server/build/CMakeFiles/SHMS-Server.dir
-/home/sunowsir/Code/SHMS/Server/build/lib/CMakeFiles/rebuild_cache.dir
-/home/sunowsir/Code/SHMS/Server/build/lib/CMakeFiles/edit_cache.dir
-/home/sunowsir/Code/SHMS/Server/build/lib/CMakeFiles/SHMS.dir
+/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/build/CMakeFiles/rebuild_cache.dir
+/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/build/CMakeFiles/edit_cache.dir
+/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/build/CMakeFiles/SHMS-Server.dir
+/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/build/lib/CMakeFiles/rebuild_cache.dir
+/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/build/lib/CMakeFiles/edit_cache.dir
+/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/build/lib/CMakeFiles/SHMS.dir

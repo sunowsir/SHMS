@@ -110,31 +110,31 @@ arpa/inet.h
 ./needHead.h
 ../lib/include/needHead.h
 
-/home/sunowsir/Code/SHMS/Server/mainServer.c
+/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/mainServer.c
 mainServer.h
-/home/sunowsir/Code/SHMS/Server/mainServer.h
+/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/mainServer.h
 
-/home/sunowsir/Code/SHMS/Server/src/ServerConnect.c
+/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/src/ServerConnect.c
 mainServer.h
-/home/sunowsir/Code/SHMS/Server/src/mainServer.h
+/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/src/mainServer.h
 
-/home/sunowsir/Code/SHMS/Server/src/dataTransmission.c
+/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/src/dataTransmission.c
 dataTransmission.h
-/home/sunowsir/Code/SHMS/Server/src/dataTransmission.h
+/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/src/dataTransmission.h
 
-/home/sunowsir/Code/SHMS/Server/src/getScriptRunInfo.c
+/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/src/getScriptRunInfo.c
 getScriptRunInfo.h
-/home/sunowsir/Code/SHMS/Server/src/getScriptRunInfo.h
+/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/src/getScriptRunInfo.h
 
-/home/sunowsir/Code/SHMS/Server/src/heartBeat.c
+/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/src/heartBeat.c
 heartBeat.h
-/home/sunowsir/Code/SHMS/Server/src/heartBeat.h
+/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/src/heartBeat.h
 
-/home/sunowsir/Code/SHMS/Server/src/runScriptAndSave.c
+/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/src/runScriptAndSave.c
 runScriptAndSave.h
-/home/sunowsir/Code/SHMS/Server/src/runScriptAndSave.h
+/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/src/runScriptAndSave.h
 
-/home/sunowsir/Code/SHMS/Server/src/sendWarningInfo.c
+/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/src/sendWarningInfo.c
 sendWarningInfo.h
-/home/sunowsir/Code/SHMS/Server/src/sendWarningInfo.h
+/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/src/sendWarningInfo.h
 

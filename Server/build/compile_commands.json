@@ -1,57 +1,57 @@
 [
 {
-  "directory": "/home/sunowsir/Code/SHMS/Server/build",
-  "command": "/usr/bin/cc  -I/home/sunowsir/Code/SHMS/Server/include -I/home/sunowsir/Code/SHMS/Server/lib/include    -g -Wall -o CMakeFiles/SHMS-Server.dir/mainServer.c.o   -c /home/sunowsir/Code/SHMS/Server/mainServer.c",
-  "file": "/home/sunowsir/Code/SHMS/Server/mainServer.c"
+  "directory": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/build",
+  "command": "/usr/bin/cc  -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/include -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/lib/include   -g -Wall -o CMakeFiles/SHMS-Server.dir/mainServer.c.o -c /home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/mainServer.c",
+  "file": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/mainServer.c"
 },
 {
-  "directory": "/home/sunowsir/Code/SHMS/Server/build",
-  "command": "/usr/bin/cc  -I/home/sunowsir/Code/SHMS/Server/include -I/home/sunowsir/Code/SHMS/Server/lib/include    -g -Wall -o CMakeFiles/SHMS-Server.dir/src/heartBeat.c.o   -c /home/sunowsir/Code/SHMS/Server/src/heartBeat.c",
-  "file": "/home/sunowsir/Code/SHMS/Server/src/heartBeat.c"
+  "directory": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/build",
+  "command": "/usr/bin/cc  -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/include -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/lib/include   -g -Wall -o CMakeFiles/SHMS-Server.dir/src/heartBeat.c.o -c /home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/src/heartBeat.c",
+  "file": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/src/heartBeat.c"
 },
 {
-  "directory": "/home/sunowsir/Code/SHMS/Server/build",
-  "command": "/usr/bin/cc  -I/home/sunowsir/Code/SHMS/Server/include -I/home/sunowsir/Code/SHMS/Server/lib/include    -g -Wall -o CMakeFiles/SHMS-Server.dir/src/ServerConnect.c.o   -c /home/sunowsir/Code/SHMS/Server/src/ServerConnect.c",
-  "file": "/home/sunowsir/Code/SHMS/Server/src/ServerConnect.c"
+  "directory": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/build",
+  "command": "/usr/bin/cc  -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/include -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/lib/include   -g -Wall -o CMakeFiles/SHMS-Server.dir/src/ServerConnect.c.o -c /home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/src/ServerConnect.c",
+  "file": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/src/ServerConnect.c"
 },
 {
-  "directory": "/home/sunowsir/Code/SHMS/Server/build",
-  "command": "/usr/bin/cc  -I/home/sunowsir/Code/SHMS/Server/include -I/home/sunowsir/Code/SHMS/Server/lib/include    -g -Wall -o CMakeFiles/SHMS-Server.dir/src/sendWarningInfo.c.o   -c /home/sunowsir/Code/SHMS/Server/src/sendWarningInfo.c",
-  "file": "/home/sunowsir/Code/SHMS/Server/src/sendWarningInfo.c"
+  "directory": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/build",
+  "command": "/usr/bin/cc  -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/include -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/lib/include   -g -Wall -o CMakeFiles/SHMS-Server.dir/src/sendWarningInfo.c.o -c /home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/src/sendWarningInfo.c",
+  "file": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/src/sendWarningInfo.c"
 },
 {
-  "directory": "/home/sunowsir/Code/SHMS/Server/build",
-  "command": "/usr/bin/cc  -I/home/sunowsir/Code/SHMS/Server/include -I/home/sunowsir/Code/SHMS/Server/lib/include    -g -Wall -o CMakeFiles/SHMS-Server.dir/src/dataTransmission.c.o   -c /home/sunowsir/Code/SHMS/Server/src/dataTransmission.c",
-  "file": "/home/sunowsir/Code/SHMS/Server/src/dataTransmission.c"
+  "directory": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/build",
+  "command": "/usr/bin/cc  -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/include -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/lib/include   -g -Wall -o CMakeFiles/SHMS-Server.dir/src/dataTransmission.c.o -c /home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/src/dataTransmission.c",
+  "file": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/src/dataTransmission.c"
 },
 {
-  "directory": "/home/sunowsir/Code/SHMS/Server/build",
-  "command": "/usr/bin/cc  -I/home/sunowsir/Code/SHMS/Server/include -I/home/sunowsir/Code/SHMS/Server/lib/include    -g -Wall -o CMakeFiles/SHMS-Server.dir/src/getScriptRunInfo.c.o   -c /home/sunowsir/Code/SHMS/Server/src/getScriptRunInfo.c",
-  "file": "/home/sunowsir/Code/SHMS/Server/src/getScriptRunInfo.c"
+  "directory": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/build",
+  "command": "/usr/bin/cc  -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/include -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/lib/include   -g -Wall -o CMakeFiles/SHMS-Server.dir/src/getScriptRunInfo.c.o -c /home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/src/getScriptRunInfo.c",
+  "file": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/src/getScriptRunInfo.c"
 },
 {
-  "directory": "/home/sunowsir/Code/SHMS/Server/build",
-  "command": "/usr/bin/cc  -I/home/sunowsir/Code/SHMS/Server/include -I/home/sunowsir/Code/SHMS/Server/lib/include    -g -Wall -o CMakeFiles/SHMS-Server.dir/src/runScriptAndSave.c.o   -c /home/sunowsir/Code/SHMS/Server/src/runScriptAndSave.c",
-  "file": "/home/sunowsir/Code/SHMS/Server/src/runScriptAndSave.c"
+  "directory": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/build",
+  "command": "/usr/bin/cc  -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/include -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/lib/include   -g -Wall -o CMakeFiles/SHMS-Server.dir/src/runScriptAndSave.c.o -c /home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/src/runScriptAndSave.c",
+  "file": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/src/runScriptAndSave.c"
 },
 {
-  "directory": "/home/sunowsir/Code/SHMS/Server/build/lib",
-  "command": "/usr/bin/cc  -I/home/sunowsir/Code/SHMS/Server/include -I/home/sunowsir/Code/SHMS/Server/lib/include    -g -Wall -g -Wall -o CMakeFiles/SHMS.dir/src/Get_conf.c.o   -c /home/sunowsir/Code/SHMS/Server/lib/src/Get_conf.c",
-  "file": "/home/sunowsir/Code/SHMS/Server/lib/src/Get_conf.c"
+  "directory": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/build/lib",
+  "command": "/usr/bin/cc  -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/include -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/lib/include   -g -Wall -g -Wall -o CMakeFiles/SHMS.dir/src/Get_conf.c.o -c /home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/lib/src/Get_conf.c",
+  "file": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/lib/src/Get_conf.c"
 },
 {
-  "directory": "/home/sunowsir/Code/SHMS/Server/build/lib",
-  "command": "/usr/bin/cc  -I/home/sunowsir/Code/SHMS/Server/include -I/home/sunowsir/Code/SHMS/Server/lib/include    -g -Wall -g -Wall -o CMakeFiles/SHMS.dir/src/StrtoInt.c.o   -c /home/sunowsir/Code/SHMS/Server/lib/src/StrtoInt.c",
-  "file": "/home/sunowsir/Code/SHMS/Server/lib/src/StrtoInt.c"
+  "directory": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/build/lib",
+  "command": "/usr/bin/cc  -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/include -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/lib/include   -g -Wall -g -Wall -o CMakeFiles/SHMS.dir/src/StrtoInt.c.o -c /home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/lib/src/StrtoInt.c",
+  "file": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/lib/src/StrtoInt.c"
 },
 {
-  "directory": "/home/sunowsir/Code/SHMS/Server/build/lib",
-  "command": "/usr/bin/cc  -I/home/sunowsir/Code/SHMS/Server/include -I/home/sunowsir/Code/SHMS/Server/lib/include    -g -Wall -g -Wall -o CMakeFiles/SHMS.dir/src/sockFrame.c.o   -c /home/sunowsir/Code/SHMS/Server/lib/src/sockFrame.c",
-  "file": "/home/sunowsir/Code/SHMS/Server/lib/src/sockFrame.c"
+  "directory": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/build/lib",
+  "command": "/usr/bin/cc  -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/include -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/lib/include   -g -Wall -g -Wall -o CMakeFiles/SHMS.dir/src/sockFrame.c.o -c /home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/lib/src/sockFrame.c",
+  "file": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/lib/src/sockFrame.c"
 },
 {
-  "directory": "/home/sunowsir/Code/SHMS/Server/build/lib",
-  "command": "/usr/bin/cc  -I/home/sunowsir/Code/SHMS/Server/include -I/home/sunowsir/Code/SHMS/Server/lib/include    -g -Wall -g -Wall -o CMakeFiles/SHMS.dir/src/Write_Pi_Log.c.o   -c /home/sunowsir/Code/SHMS/Server/lib/src/Write_Pi_Log.c",
-  "file": "/home/sunowsir/Code/SHMS/Server/lib/src/Write_Pi_Log.c"
+  "directory": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/build/lib",
+  "command": "/usr/bin/cc  -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/include -I/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/lib/include   -g -Wall -g -Wall -o CMakeFiles/SHMS.dir/src/Write_Pi_Log.c.o -c /home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/lib/src/Write_Pi_Log.c",
+  "file": "/home/sunowsir/Code/1.GitHub/1.MyPorject/SHMS/Server/lib/src/Write_Pi_Log.c"
 }
 ]
